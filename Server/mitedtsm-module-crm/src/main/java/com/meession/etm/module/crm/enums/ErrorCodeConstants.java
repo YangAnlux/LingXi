@@ -96,6 +96,11 @@ public interface ErrorCodeConstants {
     ErrorCode BUSINESS_STATUS_DELETE_FAIL_USED = new ErrorCode(1_020_010_002, "已经被使用的商机状态组，无法进行删除");
     ErrorCode BUSINESS_STATUS_NOT_EXISTS = new ErrorCode(1_020_010_003, "商机状态不存在");
 
+    // ========== 工单管理 1_020_011_000 ==========
+    // 2023级软4蔡磊202305566515,2026年7月14日
+    ErrorCode WORK_ORDER_NOT_EXISTS = new ErrorCode(1_020_011_000, "工单不存在");
+    ErrorCode WORK_ORDER_DELETE_FAIL = new ErrorCode(1_020_011_001, "删除工单失败");
+
     // ========== 客户公海规则设置 1_020_012_000 ==========
     ErrorCode CUSTOMER_LIMIT_CONFIG_NOT_EXISTS = new ErrorCode(1_020_012_001, "客户限制配置不存在");
 
