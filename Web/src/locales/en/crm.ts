@@ -832,5 +832,37 @@ export default {
     count: 'Count',
     amount: 'Amount',
     ratio: 'Ratio'
+  },
+  // 2023级软4蔡磊202305566515,2026年7月14日
+  workorder: {
+    id: 'ID',
+    title: 'Work Order Title',
+    type: 'Type',
+    priority: 'Priority',
+    status: 'Status',
+    customerId: 'Customer ID',
+    customerName: 'Customer Name',
+    assigneeId: 'Assignee',
+    assigneeName: 'Assignee',
+    slaDeadline: 'SLA Deadline',
+    isSlaBreached: 'SLA Status',
+    slaBreached: 'Breached',
+    slaNormal: 'Normal',
+    content: 'Content',
+    solution: 'Solution',
+    resolvedTime: 'Resolved Time',
+    createTime: 'Create Time',
+    creatorName: 'Creator',
+    titlePlaceholder: 'Enter work order title',
+    typePlaceholder: 'Enter work order type',
+    assigneePlaceholder: 'Enter assignee ID',
+    statusPending: 'Pending',
+    statusProcessing: 'Processing',
+    statusResolved: 'Resolved',
+    statusReturned: 'Returned',
+    priorityLow: 'Low',
+    priorityNormal: 'Normal',
+    priorityHigh: 'High',
+    priorityUrgent: 'Urgent'
   }
 }

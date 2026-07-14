@@ -832,5 +832,37 @@ export default {
     count: '数量',
     amount: '金额',
     ratio: '占比'
+  },
+  // 2023级软4蔡磊202305566515,2026年7月14日
+  workorder: {
+    id: '编号',
+    title: '工单标题',
+    type: '工单类型',
+    priority: '优先级',
+    status: '状态',
+    customerId: '客户编号',
+    customerName: '客户名称',
+    assigneeId: '处理人',
+    assigneeName: '处理人',
+    slaDeadline: 'SLA截止时间',
+    isSlaBreached: 'SLA状态',
+    slaBreached: '已超时',
+    slaNormal: '正常',
+    content: '工单内容',
+    solution: '解决方案',
+    resolvedTime: '完结时间',
+    createTime: '创建时间',
+    creatorName: '创建人',
+    titlePlaceholder: '请输入工单标题',
+    typePlaceholder: '请输入工单类型',
+    assigneePlaceholder: '请输入处理人编号',
+    statusPending: '待处理',
+    statusProcessing: '处理中',
+    statusResolved: '已完结',
+    statusReturned: '已退回',
+    priorityLow: '低',
+    priorityNormal: '普通',
+    priorityHigh: '高',
+    priorityUrgent: '紧急'
   }
 }

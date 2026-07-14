@@ -832,5 +832,37 @@ export default {
     count: 'العدد',
     amount: 'المبلغ',
     ratio: 'النسبة'
+  },
+  // 2023级软4蔡磊202305566515,2026年7月14日
+  workorder: {
+    id: 'الرقم',
+    title: 'عنوان أمر العمل',
+    type: 'النوع',
+    priority: 'الأولوية',
+    status: 'الحالة',
+    customerId: 'رقم العميل',
+    customerName: 'اسم العميل',
+    assigneeId: 'المعالج',
+    assigneeName: 'المعالج',
+    slaDeadline: 'الموعد النهائي',
+    isSlaBreached: 'حالة SLA',
+    slaBreached: 'متجاوز',
+    slaNormal: 'طبيعي',
+    content: 'المحتوى',
+    solution: 'الحل',
+    resolvedTime: 'وقت الإنجاز',
+    createTime: 'وقت الإنشاء',
+    creatorName: 'المنشئ',
+    titlePlaceholder: 'أدخل عنوان أمر العمل',
+    typePlaceholder: 'أدخل نوع أمر العمل',
+    assigneePlaceholder: 'أدخل رقم المعالج',
+    statusPending: 'قيد الانتظار',
+    statusProcessing: 'قيد المعالجة',
+    statusResolved: 'مكتمل',
+    statusReturned: 'مُعاد',
+    priorityLow: 'منخفض',
+    priorityNormal: 'عادي',
+    priorityHigh: 'عالي',
+    priorityUrgent: 'عاجل'
   }
 }
