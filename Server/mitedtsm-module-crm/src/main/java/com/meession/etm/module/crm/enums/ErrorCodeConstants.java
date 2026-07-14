@@ -103,6 +103,12 @@ public interface ErrorCodeConstants {
     ErrorCode FOLLOW_UP_RECORD_NOT_EXISTS = new ErrorCode(1_020_013_000, "跟进记录不存在");
     ErrorCode FOLLOW_UP_RECORD_DELETE_DENIED = new ErrorCode(1_020_013_001, "删除跟进记录失败，原因：没有权限");
 
-    // ========== 数据统计 1_020_014_000 ==========
+    // [ADD START] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+    // ========== 发票管理 1_020_015_000 ==========
+    ErrorCode INVOICE_NOT_EXISTS = new ErrorCode(1_020_015_000, "发票不存在");
+    ErrorCode INVOICE_INVOICE_NO_EXISTS = new ErrorCode(1_020_015_002, "发票号码已存在");
+    ErrorCode INVOICE_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_003, "创建发票失败，原因：开票金额超出合同剩余可开票金额");
+    ErrorCode INVOICE_UPDATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_004, "更新发票失败，原因：开票金额超出合同剩余可开票金额");
+    // [ADD END] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
 
 }

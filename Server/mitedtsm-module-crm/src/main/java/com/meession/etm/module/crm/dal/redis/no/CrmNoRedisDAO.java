@@ -29,6 +29,13 @@ public class CrmNoRedisDAO {
      */
     public static final String RECEIVABLE_PREFIX = "HK";
 
+    // [ADD START] 发票序号前缀 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+    /**
+     * 发票 {@link com.meession.etm.module.crm.dal.dataobject.invoice.CrmInvoiceDO}
+     */
+    public static final String INVOICE_PREFIX = "FP";
+    // [ADD END] 发票序号前缀 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

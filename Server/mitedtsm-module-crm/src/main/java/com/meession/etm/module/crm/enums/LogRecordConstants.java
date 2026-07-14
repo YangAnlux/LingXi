@@ -160,4 +160,16 @@ public interface LogRecordConstants {
     String CRM_RECEIVABLE_PLAN_DELETE_SUB_TYPE = "删除回款计划";
     String CRM_RECEIVABLE_PLAN_DELETE_SUCCESS = "删除了合同【{getContractById{#receivablePlan.contractId}}】的第【{{#receivablePlan.period}}】期回款计划";
 
+    // [ADD START] CRM_INVOICE 发票 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+    // ======================= CRM_INVOICE 发票 =======================
+
+    String CRM_INVOICE_TYPE = "CRM 发票";
+    String CRM_INVOICE_CREATE_SUB_TYPE = "创建发票";
+    String CRM_INVOICE_CREATE_SUCCESS = "创建了合同【{getContractById{#invoice.contractId}}】的发票，发票号码【{{#invoice.invoiceNo}}】，金额【{{#invoice.amount}}】元";
+    String CRM_INVOICE_UPDATE_SUB_TYPE = "更新发票";
+    String CRM_INVOICE_UPDATE_SUCCESS = "更新了合同【{getContractById{#invoice.contractId}}】的发票【{{#invoice.invoiceNo}}】: {_DIFF{#updateReqVO}}";
+    String CRM_INVOICE_DELETE_SUB_TYPE = "删除发票";
+    String CRM_INVOICE_DELETE_SUCCESS = "删除了合同【{getContractById{#invoice.contractId}}】的发票【{{#invoice.invoiceNo}}】";
+    // [ADD END] CRM_INVOICE 发票 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+
 }

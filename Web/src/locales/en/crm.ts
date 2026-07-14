@@ -464,6 +464,32 @@ export default {
     teamMemberTab: 'Team Members',
     systemInfo: 'System Info'
   },
+  // [ADD START] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+  invoice: {
+    title: 'Invoice Management',
+    no: 'Invoice No.',
+    invoiceNo: 'Invoice Number',
+    customerName: 'Customer Name',
+    contractName: 'Contract Name',
+    amount: 'Invoice Amount',
+    type: 'Invoice Type',
+    status: 'Invoice Status',
+    title_field: 'Invoice Title',
+    taxNo: 'Tax Number',
+    issueDate: 'Issue Date',
+    remark: 'Remark',
+    ownerUserName: 'Owner',
+    creatorName: 'Creator',
+    createTime: 'Create Time',
+    updateTime: 'Update Time',
+    noPlaceholder: 'Enter Invoice No.',
+    invoiceNoPlaceholder: 'Enter Invoice Number',
+    exportFileName: 'Invoice',
+    createInvoice: 'Create Invoice',
+    basicInfoTab: 'Basic Info',
+    operateLogTab: 'Operation Log'
+  },
+  // [ADD END] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
   receivablePlan: {
     title: 'Receivable Plan',
     period: 'Period',

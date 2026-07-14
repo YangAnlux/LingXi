@@ -464,6 +464,32 @@ export default {
     teamMemberTab: '团队成员',
     systemInfo: '系统信息'
   },
+  // [ADD START] 发票国际化 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+  invoice: {
+    title: '发票管理',
+    no: '发票编号',
+    invoiceNo: '发票号码',
+    customerName: '客户名称',
+    contractName: '合同名称',
+    amount: '开票金额',
+    type: '发票类型',
+    status: '发票状态',
+    title_field: '发票抬头',
+    taxNo: '税号',
+    issueDate: '开票日期',
+    remark: '备注',
+    ownerUserName: '负责人',
+    creatorName: '创建人',
+    createTime: '创建时间',
+    updateTime: '更新时间',
+    noPlaceholder: '请输入发票编号',
+    invoiceNoPlaceholder: '请输入发票号码',
+    exportFileName: '发票',
+    createInvoice: '创建发票',
+    basicInfoTab: '详细资料',
+    operateLogTab: '操作日志'
+  },
+  // [ADD END] 发票国际化 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
   receivablePlan: {
     title: '回款计划',
     period: '期数',

@@ -464,6 +464,32 @@ export default {
     teamMemberTab: 'أعضاء الفريق',
     systemInfo: 'معلومات النظام'
   },
+  // [ADD START] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+  invoice: {
+    title: 'إدارة الفواتير',
+    no: 'رقم الفاتورة',
+    invoiceNo: 'رقم الفاتورة',
+    customerName: 'اسم العميل',
+    contractName: 'اسم العقد',
+    amount: 'مبلغ الفاتورة',
+    type: 'نوع الفاتورة',
+    status: 'حالة الفاتورة',
+    title_field: 'عنوان الفاتورة',
+    taxNo: 'الرقم الضريبي',
+    issueDate: 'تاريخ الإصدار',
+    remark: 'ملاحظة',
+    ownerUserName: 'المالك',
+    creatorName: 'المنشئ',
+    createTime: 'وقت الإنشاء',
+    updateTime: 'وقت التحديث',
+    noPlaceholder: 'أدخل رقم الفاتورة',
+    invoiceNoPlaceholder: 'أدخل رقم الفاتورة',
+    exportFileName: 'فاتورة',
+    createInvoice: 'إنشاء فاتورة',
+    basicInfoTab: 'المعلومات الأساسية',
+    operateLogTab: 'سجل العمليات'
+  },
+  // [ADD END] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
   receivablePlan: {
     title: 'خطة المستحقات',
     period: 'الفترة',
