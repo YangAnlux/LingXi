@@ -29,6 +29,7 @@ import pay from './pay'
 import member from './member'
 import mp from './mp'
 import infra from './infra'
+import report from './report'
 // Dictionary translations
 import dict from './dict'
 
@@ -64,6 +65,7 @@ export default {
   member,
   mp,
   infra,
+  report,
   // Dictionary translations
   dict,
   // Avoid warning when menu name is OAuth 2.0

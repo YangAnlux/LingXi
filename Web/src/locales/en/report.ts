@@ -1,0 +1,38 @@
+// 23软2张奎良-202305566305
+export default {
+  workReport: {
+    title: 'Work Report Management',
+    id: 'Report ID',
+    type: 'Report Type',
+    typePlaceholder: 'Please select report type',
+    typeDaily: 'Daily',
+    typeWeekly: 'Weekly',
+    typeMonthly: 'Monthly',
+    titleField: 'Report Title',
+    titlePlaceholder: 'Please enter report title',
+    titleRequired: 'Please enter report title',
+    reportDate: 'Report Date',
+    reportDatePlaceholder: 'Please select report date',
+    reportDateRequired: 'Please select report date',
+    endDate: 'End Date',
+    endDatePlaceholder: 'Please select end date',
+    content: 'Work Content',
+    contentPlaceholder: 'Please enter work content',
+    achievements: 'Achievements',
+    achievementsPlaceholder: 'Please enter achievements',
+    problems: 'Problems',
+    problemsPlaceholder: 'Please enter problems',
+    plan: 'Plan',
+    planPlaceholder: 'Please enter plan',
+    reporterId: 'Reporter ID',
+    reporterName: 'Reporter',
+    reporterNamePlaceholder: 'Please enter reporter name',
+    deptId: 'Department ID',
+    deptName: 'Department',
+    deptNamePlaceholder: 'Please enter department name',
+    status: 'Status',
+    statusPlaceholder: 'Please select status',
+    statusDraft: 'Draft',
+    statusSubmitted: 'Submitted'
+  }
+}

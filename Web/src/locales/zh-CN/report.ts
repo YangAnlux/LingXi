@@ -1,0 +1,38 @@
+// 23软2张奎良-202305566305
+export default {
+  workReport: {
+    title: '工作报表管理',
+    id: '报表编号',
+    type: '报表类型',
+    typePlaceholder: '请选择报表类型',
+    typeDaily: '日报',
+    typeWeekly: '周报',
+    typeMonthly: '月报',
+    titleField: '报表标题',
+    titlePlaceholder: '请输入报表标题',
+    titleRequired: '请输入报表标题',
+    reportDate: '报表日期',
+    reportDatePlaceholder: '请选择报表日期',
+    reportDateRequired: '请选择报表日期',
+    endDate: '周期结束日期',
+    endDatePlaceholder: '请选择周期结束日期',
+    content: '工作内容',
+    contentPlaceholder: '请输入工作内容',
+    achievements: '工作成果',
+    achievementsPlaceholder: '请输入工作成果',
+    problems: '问题与困难',
+    problemsPlaceholder: '请输入问题与困难',
+    plan: '工作计划',
+    planPlaceholder: '请输入工作计划',
+    reporterId: '报告人ID',
+    reporterName: '报告人',
+    reporterNamePlaceholder: '请输入报告人姓名',
+    deptId: '部门ID',
+    deptName: '部门',
+    deptNamePlaceholder: '请输入部门名称',
+    status: '状态',
+    statusPlaceholder: '请选择状态',
+    statusDraft: '草稿',
+    statusSubmitted: '已提交'
+  }
+}
