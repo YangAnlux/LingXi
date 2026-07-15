@@ -161,6 +161,9 @@ const open = async (type: string, id?: number) => {
     if (type === 'update' && id) {
       const data = await CampaignApi.getCampaign(id)
       Object.assign(formData, data)
+      // 后端用 epoch 0 表示未设置时间，转换为空字符串以便日期选择器正常显示
+      if (formData.startTime === 0) formData.startTime = ''
+      if (formData.endTime === 0) formData.endTime = ''
     }
     dialogVisible.value = true
   } finally {

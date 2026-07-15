@@ -85,11 +85,19 @@
           </el-link>
         </template>
       </el-table-column>
-      <el-table-column :label="t('campaign.status')" align="center" min-width="100">
+      <el-table-column :label="t('campaign.status')" align="center" min-width="160">
         <template #default="scope">
-          <el-tag :type="getStatusTagType(scope.row.status)">
-            {{ getStatusLabel(scope.row.status) }}
-          </el-tag>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <el-tag :type="getStatusTagType(scope.row.status)">
+              {{ getStatusLabel(scope.row.status) }}
+            </el-tag>
+            <span v-if="scope.row.startTime" style="font-size: 12px; color: #909399;">
+              {{ t('campaign.startTime') }}: {{ formatDateTime(scope.row.startTime) }}
+            </span>
+            <span v-if="scope.row.endTime" style="font-size: 12px; color: #909399;">
+              {{ t('campaign.endTime') }}: {{ formatDateTime(scope.row.endTime) }}
+            </span>
+          </div>
         </template>
       </el-table-column>
       <el-table-column :label="t('campaign.startTime')" align="center" min-width="180">
@@ -218,8 +226,8 @@ const getStatusTagType = (status: number) => {
 }
 
 const formatDateTime = (value: any) => {
-  if (!value) return ''
-  // 处理后端返回的时间戳（Long类型，毫秒）或字符串
+  // 后端用 epoch 毫秒数 0 表示未设置时间，需要和 null/undefined/空字符串一样处理
+  if (value == null || value === '' || value === 0) return ''
   const d = dayjs(value)
   return d.isValid() ? d.format('YYYY-MM-DD HH:mm:ss') : ''
 }
