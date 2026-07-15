@@ -34,6 +34,9 @@ uploads/*
 # Docker volumes
 docker-compose/data/
 
+# Docker images (should use docker pull / registry instead)
+docker-images/
+
 # Cache
 .cache/
 *.tmp
