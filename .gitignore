@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+**/node_modules/
+.pnpm-store/
+
+# Java build
+**/target/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output
+**/dist/
+**/dist-prod/
+*.log
+
+# Environment
+.env.local
+.env.*.local
+
+# Uploads / temp
+uploads/*
+!uploads/.gitkeep
+
+# Docker volumes
+docker-compose/data/
+
+# Cache
+.cache/
+*.tmp
