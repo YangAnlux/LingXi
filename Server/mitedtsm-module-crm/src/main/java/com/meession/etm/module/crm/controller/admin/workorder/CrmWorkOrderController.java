@@ -55,16 +55,6 @@ public class CrmWorkOrderController {
         return success(true);
     }
 
-    // 2023级软4蔡磊202305566515,2026年7月14日
-    @PutMapping("/transition-status")
-    @Operation(summary = "工单状态流转")
-    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
-    public CommonResult<Boolean> transitionStatusWorkOrder(@RequestParam("id") Long id,
-                                                           @RequestParam("status") String status) {
-        workOrderService.transitionStatus(id, status);
-        return success(true);
-    }
-
     @GetMapping("/get")
     @Operation(summary = "获得工单")
     @Parameter(name = "id", description = "编号", required = true, example = "1024")
@@ -81,6 +71,33 @@ public class CrmWorkOrderController {
         PageResult<CrmWorkOrderDO> pageResult = workOrderService.getWorkOrderPage(pageReqVO);
         List<CrmWorkOrderRespVO> voList = BeanUtils.toBean(pageResult.getList(), CrmWorkOrderRespVO.class);
         return success(new PageResult<>(voList, pageResult.getTotal()));
+    }
+
+    @PutMapping("/process")
+    @Operation(summary = "开始处理工单（待处理/已退回 → 处理中）")
+    @Parameter(name = "id", description = "编号", required = true)
+    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
+    public CommonResult<Boolean> processWorkOrder(@RequestParam("id") Long id) {
+        workOrderService.processWorkOrder(id);
+        return success(true);
+    }
+
+    @PutMapping("/resolve")
+    @Operation(summary = "完结工单（处理中 → 已完结）")
+    @Parameter(name = "id", description = "编号", required = true)
+    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
+    public CommonResult<Boolean> resolveWorkOrder(@RequestParam("id") Long id) {
+        workOrderService.resolveWorkOrder(id);
+        return success(true);
+    }
+
+    @PutMapping("/return")
+    @Operation(summary = "退回工单（处理中 → 已退回）")
+    @Parameter(name = "id", description = "编号", required = true)
+    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
+    public CommonResult<Boolean> returnWorkOrder(@RequestParam("id") Long id) {
+        workOrderService.returnWorkOrder(id);
+        return success(true);
     }
 
 }

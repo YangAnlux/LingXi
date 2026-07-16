@@ -100,7 +100,7 @@ public interface ErrorCodeConstants {
     // 2023级软4蔡磊202305566515,2026年7月14日
     ErrorCode WORK_ORDER_NOT_EXISTS = new ErrorCode(1_020_011_000, "工单不存在");
     ErrorCode WORK_ORDER_DELETE_FAIL = new ErrorCode(1_020_011_001, "删除工单失败");
-    ErrorCode WORK_ORDER_STATUS_ERROR = new ErrorCode(1_020_011_002, "工单状态流转不合法");
+    ErrorCode WORK_ORDER_STATUS_INVALID = new ErrorCode(1_020_011_002, "工单状态流转非法");
 
     // ========== 客户公海规则设置 1_020_012_000 ==========
     ErrorCode CUSTOMER_LIMIT_CONFIG_NOT_EXISTS = new ErrorCode(1_020_012_001, "客户限制配置不存在");

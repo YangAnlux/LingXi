@@ -869,8 +869,14 @@ export default {
     contentPlaceholder: 'Enter work order content',
     titleRequired: 'Title is required',
     priorityRequired: 'Priority is required',
-    transitionProcess: 'Process',
-    transitionResolve: 'Resolve',
-    transitionReturn: 'Return'
+    actionProcess: 'Process',
+    actionResolve: 'Resolve',
+    actionReturn: 'Return',
+    confirmProcess: 'Confirm to start processing?',
+    confirmResolve: 'Confirm to resolve?',
+    confirmReturn: 'Confirm to return?',
+    processSuccess: 'Work order processing started',
+    resolveSuccess: 'Work order resolved',
+    returnSuccess: 'Work order returned'
   }
 }

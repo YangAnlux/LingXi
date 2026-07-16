@@ -53,11 +53,24 @@ public interface CrmWorkOrderService {
     void deleteWorkOrder(Long id);
 
     /**
-     * 工单状态流转
+     * 开始处理工单（待处理/已退回 → 处理中）
      *
-     * @param id           工单编号
-     * @param targetStatus 目标状态
+     * @param id 编号
      */
-    void transitionStatus(Long id, String targetStatus);
+    void processWorkOrder(Long id);
+
+    /**
+     * 完结工单（处理中 → 已完结）
+     *
+     * @param id 编号
+     */
+    void resolveWorkOrder(Long id);
+
+    /**
+     * 退回工单（处理中 → 已退回）
+     *
+     * @param id 编号
+     */
+    void returnWorkOrder(Long id);
 
 }

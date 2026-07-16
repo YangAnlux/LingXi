@@ -127,45 +127,48 @@
         min-width="180"
       />
       <el-table-column align="center" :label="t('workorder.creatorName')" prop="creatorName" min-width="100" />
-      <el-table-column :label="t('common.action')" align="center" min-width="360" fixed="right">
+      <el-table-column :label="t('common.action')" align="center" min-width="340" fixed="right">
         <template #default="scope">
           <el-button
-            type="primary"
-            size="small"
-            :disabled="scope.row.status !== '待处理'"
-            @click="handleTransition(scope.row.id, '处理中')"
-          >
-            {{ t('workorder.transitionProcess') }}
-          </el-button>
-          <el-button
+            v-if="scope.row.status === '待处理' || scope.row.status === '已退回'"
+            link
             type="success"
-            size="small"
-            :disabled="scope.row.status !== '处理中'"
-            @click="handleTransition(scope.row.id, '已完结')"
+            @click="handleProcess(scope.row.id)"
+            v-hasPermi="['crm:work-order:update']"
           >
-            {{ t('workorder.transitionResolve') }}
+            {{ t('workorder.actionProcess') }}
           </el-button>
           <el-button
+            v-if="scope.row.status === '处理中'"
+            link
+            type="success"
+            @click="handleResolve(scope.row.id)"
+            v-hasPermi="['crm:work-order:update']"
+          >
+            {{ t('workorder.actionResolve') }}
+          </el-button>
+          <el-button
+            v-if="scope.row.status === '处理中'"
+            link
             type="warning"
-            size="small"
-            :disabled="scope.row.status !== '处理中'"
-            @click="handleTransition(scope.row.id, '已退回')"
+            @click="handleReturn(scope.row.id)"
+            v-hasPermi="['crm:work-order:update']"
           >
-            {{ t('workorder.transitionReturn') }}
+            {{ t('workorder.actionReturn') }}
           </el-button>
           <el-button
+            link
             type="primary"
-            size="small"
-            plain
             @click="openForm('update', scope.row.id)"
+            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('common.edit') }}
           </el-button>
           <el-button
+            link
             type="danger"
-            size="small"
-            plain
             @click="handleDelete(scope.row.id)"
+            v-hasPermi="['crm:work-order:delete']"
           >
             {{ t('common.delete') }}
           </el-button>
@@ -241,26 +244,40 @@ const handleDelete = async (id: number) => {
   } catch {}
 }
 
+/** 开始处理 */
+const handleProcess = async (id: number) => {
+  try {
+    await message.confirm(t('workorder.confirmProcess'))
+    await WorkOrderApi.processWorkOrder(id)
+    message.success(t('workorder.processSuccess'))
+    await getList()
+  } catch {}
+}
+
+/** 完结工单 */
+const handleResolve = async (id: number) => {
+  try {
+    await message.confirm(t('workorder.confirmResolve'))
+    await WorkOrderApi.resolveWorkOrder(id)
+    message.success(t('workorder.resolveSuccess'))
+    await getList()
+  } catch {}
+}
+
+/** 退回工单 */
+const handleReturn = async (id: number) => {
+  try {
+    await message.confirm(t('workorder.confirmReturn'))
+    await WorkOrderApi.returnWorkOrder(id)
+    message.success(t('workorder.returnSuccess'))
+    await getList()
+  } catch {}
+}
+
 /** 添加/修改操作 */
 const formRef = ref()
 const openForm = (type: string, id?: number) => {
   formRef.value.open(type, id)
-}
-
-// 2023级软4蔡磊202305566515,2026年7月14日
-/** 状态流转操作 */
-const handleTransition = async (id: number, status: string) => {
-  try {
-    const labelMap: Record<string, string> = {
-      '处理中': t('workorder.transitionProcess'),
-      '已完结': t('workorder.transitionResolve'),
-      '已退回': t('workorder.transitionReturn')
-    }
-    await message.confirm(t('common.confirmText', { text: labelMap[status] }))
-    await WorkOrderApi.transitionWorkOrderStatus(id, status)
-    message.success(t('common.success'))
-    await getList()
-  } catch {}
 }
 
 /** 初始化 **/

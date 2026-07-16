@@ -869,8 +869,14 @@ export default {
     contentPlaceholder: '请输入工单内容描述',
     titleRequired: '工单标题不能为空',
     priorityRequired: '优先级不能为空',
-    transitionProcess: '处理',
-    transitionResolve: '完结',
-    transitionReturn: '退回'
+    actionProcess: '开始处理',
+    actionResolve: '完结',
+    actionReturn: '退回',
+    confirmProcess: '确认开始处理该工单？',
+    confirmResolve: '确认完结该工单？',
+    confirmReturn: '确认退回该工单？',
+    processSuccess: '工单已开始处理',
+    resolveSuccess: '工单已完结',
+    returnSuccess: '工单已退回'
   }
 }

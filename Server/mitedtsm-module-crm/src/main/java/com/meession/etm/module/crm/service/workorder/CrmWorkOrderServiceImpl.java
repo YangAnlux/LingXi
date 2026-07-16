@@ -13,7 +13,9 @@ import org.springframework.validation.annotation.Validated;
 
 import static com.meession.etm.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static com.meession.etm.module.crm.enums.ErrorCodeConstants.WORK_ORDER_NOT_EXISTS;
-import static com.meession.etm.module.crm.enums.ErrorCodeConstants.WORK_ORDER_STATUS_ERROR;
+import static com.meession.etm.module.crm.enums.ErrorCodeConstants.WORK_ORDER_STATUS_INVALID;
+
+import java.time.LocalDateTime;
 
 /**
  * 工单 Service 实现类
@@ -89,29 +91,47 @@ public class CrmWorkOrderServiceImpl implements CrmWorkOrderService {
         workOrderMapper.deleteById(id);
     }
 
-    // 2023级软4蔡磊202305566515,2026年7月14日
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void transitionStatus(Long id, String targetStatus) {
+    public void processWorkOrder(Long id) {
         CrmWorkOrderDO workOrder = workOrderMapper.selectById(id);
         if (workOrder == null) {
             throw exception(WORK_ORDER_NOT_EXISTS);
         }
-        String current = workOrder.getStatus();
-        // 待处理 → 处理中
-        if ("处理中".equals(targetStatus) && !"待处理".equals(current)) {
-            throw exception(WORK_ORDER_STATUS_ERROR);
+        // 待处理/已退回 → 处理中
+        if (!"待处理".equals(workOrder.getStatus()) && !"已退回".equals(workOrder.getStatus())) {
+            throw exception(WORK_ORDER_STATUS_INVALID);
+        }
+        workOrderMapper.updateById(new CrmWorkOrderDO().setId(id).setStatus("处理中"));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void resolveWorkOrder(Long id) {
+        CrmWorkOrderDO workOrder = workOrderMapper.selectById(id);
+        if (workOrder == null) {
+            throw exception(WORK_ORDER_NOT_EXISTS);
         }
         // 处理中 → 已完结
-        if ("已完结".equals(targetStatus) && !"处理中".equals(current)) {
-            throw exception(WORK_ORDER_STATUS_ERROR);
+        if (!"处理中".equals(workOrder.getStatus())) {
+            throw exception(WORK_ORDER_STATUS_INVALID);
+        }
+        workOrderMapper.updateById(new CrmWorkOrderDO().setId(id)
+                .setStatus("已完结").setResolvedTime(LocalDateTime.now()));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void returnWorkOrder(Long id) {
+        CrmWorkOrderDO workOrder = workOrderMapper.selectById(id);
+        if (workOrder == null) {
+            throw exception(WORK_ORDER_NOT_EXISTS);
         }
         // 处理中 → 已退回
-        if ("已退回".equals(targetStatus) && !"处理中".equals(current)) {
-            throw exception(WORK_ORDER_STATUS_ERROR);
+        if (!"处理中".equals(workOrder.getStatus())) {
+            throw exception(WORK_ORDER_STATUS_INVALID);
         }
-        workOrder.setStatus(targetStatus);
-        workOrderMapper.updateById(workOrder);
+        workOrderMapper.updateById(new CrmWorkOrderDO().setId(id).setStatus("已退回"));
     }
 
 }

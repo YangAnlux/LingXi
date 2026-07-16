@@ -869,8 +869,14 @@ export default {
     contentPlaceholder: 'أدخل محتوى أمر العمل',
     titleRequired: 'العنوان مطلوب',
     priorityRequired: 'الأولوية مطلوبة',
-    transitionProcess: 'معالجة',
-    transitionResolve: 'إنجاز',
-    transitionReturn: 'إعادة'
+    actionProcess: 'بدء المعالجة',
+    actionResolve: 'إكمال',
+    actionReturn: 'إعادة',
+    confirmProcess: 'تأكيد بدء المعالجة؟',
+    confirmResolve: 'تأكيد الإكمال؟',
+    confirmReturn: 'تأكيد الإعادة؟',
+    processSuccess: 'بدأت معالجة أمر العمل',
+    resolveSuccess: 'تم إكمال أمر العمل',
+    returnSuccess: 'تم إعادة أمر العمل'
   }
 }
