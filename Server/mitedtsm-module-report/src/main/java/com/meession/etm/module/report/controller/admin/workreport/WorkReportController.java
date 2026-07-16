@@ -110,4 +110,33 @@ public class WorkReportController {
         return success(BeanUtils.toBean(pageResult, WorkReportRespVO.class));
     }
 
+    /**
+     * 提交工作报表
+     * 
+     * @param id 报表ID
+     * @return 提交结果
+     */
+    @PutMapping("/submit")
+    @Operation(summary = "提交工作报表")
+    @Parameter(name = "id", description = "编号", required = true)
+    @PreAuthorize("@ss.hasPermission('report:work-report:submit')")
+    public CommonResult<Boolean> submitWorkReport(@RequestParam("id") Long id) {
+        workReportService.submitWorkReport(id);
+        return success(true);
+    }
+
+    /**
+     * 审批工作报表
+     * 
+     * @param approveReqVO 审批请求参数
+     * @return 审批结果
+     */
+    @PutMapping("/approve")
+    @Operation(summary = "审批工作报表")
+    @PreAuthorize("@ss.hasPermission('report:work-report:approve')")
+    public CommonResult<Boolean> approveWorkReport(@Valid @RequestBody WorkReportApproveReqVO approveReqVO) {
+        workReportService.approveWorkReport(approveReqVO);
+        return success(true);
+    }
+
 }

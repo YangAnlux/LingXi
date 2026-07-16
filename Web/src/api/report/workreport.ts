@@ -1,6 +1,5 @@
 // 23软2张奎良-202305566305
 import request from '@/config/axios'
-import type { PageRes } from '@/api/interface'
 
 /**
  * 工作报表 API 接口
@@ -24,7 +23,9 @@ export enum WorkReportType {
  */
 export enum WorkReportStatus {
   DRAFT = 0,
-  SUBMITTED = 1
+  SUBMITTED = 1,
+  APPROVED = 2,
+  REJECTED = 3
 }
 
 /**
@@ -77,7 +78,20 @@ export interface WorkReportRespVO {
   deptId?: number
   deptName?: string
   status: number
+  approverId?: number
+  approverName?: string
+  approveTime?: string
+  approveComment?: string
   createTime: string
+}
+
+/**
+ * 工作报表审批请求参数
+ */
+export interface WorkReportApproveReqVO {
+  id: number
+  status: number
+  approveComment?: string
 }
 
 /**
@@ -128,4 +142,24 @@ export const getWorkReport = (id: number) => {
  */
 export const getWorkReportPage = (params: WorkReportPageReqVO) => {
   return request.get({ url: '/report/work-report/page', params })
+}
+
+/**
+ * 提交工作报表
+ * 
+ * @param id 报表ID
+ * @returns 提交结果
+ */
+export const submitWorkReport = (id: number) => {
+  return request.put({ url: '/report/work-report/submit', params: { id } })
+}
+
+/**
+ * 审批工作报表
+ * 
+ * @param data 审批请求参数
+ * @returns 审批结果
+ */
+export const approveWorkReport = (data: WorkReportApproveReqVO) => {
+  return request.put({ url: '/report/work-report/approve', data })
 }

@@ -210,6 +210,15 @@ const open = async (formType: string, id?: number) => {
   if (id) {
     const data = await WorkReportApi.getWorkReport(id)
     Object.assign(form, data)
+    // 处理日期字段：后端返回数组格式 [year, month, day]，转换为 YYYY-MM-DD 字符串
+    if (Array.isArray(form.reportDate)) {
+      const [year, month, day] = form.reportDate
+      form.reportDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+    }
+    if (Array.isArray(form.endDate)) {
+      const [year, month, day] = form.endDate
+      form.endDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+    }
   }
   // 显示弹窗
   visible.value = true
@@ -251,4 +260,9 @@ watch(() => form.type, (newType) => {
 
 /** 成功回调事件 */
 const emit = defineEmits(['success'])
+
+/** 暴露方法给父组件 */
+defineExpose({
+  open
+})
 </script>

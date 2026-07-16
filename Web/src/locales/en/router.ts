@@ -3,5 +3,6 @@ export default {
   socialLogin: 'Social Login',
   home: 'Home',
   analysis: 'Analysis',
-  workplace: 'Workplace'
+  workplace: 'Workplace',
+  reportTask: 'Task Management'
 }

@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 工作报表 DO
@@ -97,8 +98,28 @@ public class WorkReportDO extends BaseDO {
     /**
      * 状态
      * 
-     * 枚举值：0-草稿，1-已提交
+     * 枚举值：0-草稿，1-已提交，2-已审批，3-已驳回
      */
     private Integer status;
+
+    /**
+     * 审批人ID
+     */
+    private Long approverId;
+
+    /**
+     * 审批人姓名
+     */
+    private String approverName;
+
+    /**
+     * 审批时间
+     */
+    private LocalDateTime approveTime;
+
+    /**
+     * 审批意见
+     */
+    private String approveComment;
 
 }

@@ -99,8 +99,32 @@ public class WorkReportRespVO {
     /**
      * 状态
      */
-    @Schema(description = "状态（0-草稿，1-已提交）", example = "1")
+    @Schema(description = "状态（0-草稿，1-已提交，2-已审批，3-已驳回）", example = "1")
     private Integer status;
+
+    /**
+     * 审批人ID
+     */
+    @Schema(description = "审批人ID", example = "1")
+    private Long approverId;
+
+    /**
+     * 审批人姓名
+     */
+    @Schema(description = "审批人姓名", example = "李四")
+    private String approverName;
+
+    /**
+     * 审批时间
+     */
+    @Schema(description = "审批时间")
+    private LocalDateTime approveTime;
+
+    /**
+     * 审批意见
+     */
+    @Schema(description = "审批意见")
+    private String approveComment;
 
     /**
      * 创建时间

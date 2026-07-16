@@ -694,6 +694,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
       }
     ]
   },
+  
   {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/Error/404.vue'),

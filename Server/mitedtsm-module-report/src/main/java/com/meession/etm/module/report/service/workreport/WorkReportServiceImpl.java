@@ -9,11 +9,16 @@ import com.meession.etm.framework.common.pojo.PageResult;
 import com.meession.etm.framework.common.util.object.BeanUtils;
 import com.meession.etm.module.report.controller.admin.workreport.vo.WorkReportPageReqVO;
 import com.meession.etm.module.report.controller.admin.workreport.vo.WorkReportSaveReqVO;
+import com.meession.etm.module.report.controller.admin.workreport.vo.WorkReportApproveReqVO;
 import com.meession.etm.module.report.dal.dataobject.workreport.WorkReportDO;
 import com.meession.etm.module.report.dal.mysql.workreport.WorkReportMapper;
 
+import java.time.LocalDateTime;
+
 import static com.meession.etm.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static com.meession.etm.module.report.enums.ErrorCodeConstants.WORK_REPORT_NOT_EXISTS;
+import static com.meession.etm.module.report.enums.ErrorCodeConstants.WORK_REPORT_NOT_DRAFT;
+import static com.meession.etm.module.report.enums.ErrorCodeConstants.WORK_REPORT_NOT_SUBMITTED;
 
 /**
  * 工作报表 Service 实现类
@@ -104,6 +109,52 @@ public class WorkReportServiceImpl implements WorkReportService {
         if (workReportMapper.selectById(id) == null) {
             throw exception(WORK_REPORT_NOT_EXISTS);
         }
+    }
+
+    /**
+     * 提交工作报表
+     * 
+     * 将工作报表状态从草稿(0)变更为已提交(1)。
+     * 只有草稿状态的报表才能提交。
+     * 
+     * @param id 报表ID
+     */
+    @Override
+    public void submitWorkReport(Long id) {
+        WorkReportDO workReport = workReportMapper.selectById(id);
+        validateWorkReportExists(id);
+        
+        if (!workReport.getStatus().equals(0)) {
+            throw exception(WORK_REPORT_NOT_DRAFT);
+        }
+        
+        workReport.setStatus(1);
+        workReportMapper.updateById(workReport);
+    }
+
+    /**
+     * 审批工作报表
+     * 
+     * 将工作报表状态从已提交(1)变更为已审批(2)或已驳回(3)。
+     * 只有已提交状态的报表才能审批。
+     * 
+     * @param approveReqVO 审批请求参数
+     */
+    @Override
+    public void approveWorkReport(WorkReportApproveReqVO approveReqVO) {
+        Long id = approveReqVO.getId();
+        WorkReportDO workReport = workReportMapper.selectById(id);
+        validateWorkReportExists(id);
+        
+        if (!workReport.getStatus().equals(1)) {
+            throw exception(WORK_REPORT_NOT_SUBMITTED);
+        }
+        
+        workReport.setStatus(approveReqVO.getStatus());
+        workReport.setApproveComment(approveReqVO.getApproveComment());
+        workReport.setApproveTime(LocalDateTime.now());
+        
+        workReportMapper.updateById(workReport);
     }
 
 }

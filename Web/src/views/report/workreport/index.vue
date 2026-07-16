@@ -7,7 +7,7 @@
       ref="queryFormRef"
       label-width="auto"
     >
-      <el-row :gutter="20">
+      <el-row :gutter="20" justify="center">
         <el-col :span="6">
           <el-form-item :label="t('report.workReport.type')" prop="type">
             <el-select
@@ -66,9 +66,9 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row>
+      <el-row justify="center">
         <el-col :span="24">
-          <el-form-item>
+          <el-form-item class="flex justify-center">
             <el-button @click="handleQuery"><Icon icon="ep:search" />{{ t('common.query') }}</el-button>
             <el-button @click="resetQuery"><Icon icon="ep:refresh" />{{ t('common.reset') }}</el-button>
             <el-button
@@ -149,7 +149,7 @@
         :formatter="dateFormatter"
         min-width="180"
       />
-      <el-table-column :label="t('common.operation')" align="center" min-width="160">
+      <el-table-column :label="t('common.operation')" align="center" min-width="280">
         <template #default="scope">
           <div class="flex items-center justify-center">
             <el-button
@@ -157,8 +157,36 @@
               link
               @click="openForm('update', scope.row.id)"
               v-hasPermi="['report:work-report:update']"
+              v-if="scope.row.status === WorkReportStatus.DRAFT"
             >
               <Icon icon="ep:edit" />{{ t('action.edit') }}
+            </el-button>
+            <el-button
+              type="success"
+              link
+              @click="handleSubmit(scope.row.id)"
+              v-hasPermi="['report:work-report:submit']"
+              v-if="scope.row.status === WorkReportStatus.DRAFT"
+            >
+              <Icon icon="ep:send" />{{ t('report.workReport.submit') }}
+            </el-button>
+            <el-button
+              type="primary"
+              link
+              @click="handleApprove(scope.row, true)"
+              v-hasPermi="['report:work-report:approve']"
+              v-if="scope.row.status === WorkReportStatus.SUBMITTED"
+            >
+              <Icon icon="ep:check" />{{ t('report.workReport.approve') }}
+            </el-button>
+            <el-button
+              type="danger"
+              link
+              @click="handleApprove(scope.row, false)"
+              v-hasPermi="['report:work-report:approve']"
+              v-if="scope.row.status === WorkReportStatus.SUBMITTED"
+            >
+              <Icon icon="ep:close" />{{ t('report.workReport.reject') }}
             </el-button>
             <el-button
               type="danger"
@@ -188,6 +216,7 @@ import { dateFormatter } from '@/utils/formatTime'
 import { WorkReportType, WorkReportStatus } from '@/api/report/workreport'
 import * as WorkReportApi from '@/api/report/workreport'
 import WorkReportForm from './WorkReportForm.vue'
+import { ElMessageBox } from 'element-plus'
 
 /** 组件名称 */
 defineOptions({ name: 'WorkReport' })
@@ -225,7 +254,9 @@ const typeOptions = [
 /** 报表状态选项 */
 const statusOptions = [
   { label: t('report.workReport.statusDraft'), value: WorkReportStatus.DRAFT },
-  { label: t('report.workReport.statusSubmitted'), value: WorkReportStatus.SUBMITTED }
+  { label: t('report.workReport.statusSubmitted'), value: WorkReportStatus.SUBMITTED },
+  { label: t('report.workReport.statusApproved'), value: WorkReportStatus.APPROVED },
+  { label: t('report.workReport.statusRejected'), value: WorkReportStatus.REJECTED }
 ]
 
 /**
@@ -275,6 +306,10 @@ const getStatusLabel = (status: number) => {
       return t('report.workReport.statusDraft')
     case WorkReportStatus.SUBMITTED:
       return t('report.workReport.statusSubmitted')
+    case WorkReportStatus.APPROVED:
+      return t('report.workReport.statusApproved')
+    case WorkReportStatus.REJECTED:
+      return t('report.workReport.statusRejected')
     default:
       return '-'
   }
@@ -329,6 +364,51 @@ const handleDelete = async (id: number) => {
     await message.delConfirm()
     await WorkReportApi.deleteWorkReport(id)
     message.success(t('common.delSuccess'))
+    await getList()
+  } catch {}
+}
+
+/**
+ * 提交工作报表
+ * @param id 报表ID
+ */
+const handleSubmit = async (id: number) => {
+  try {
+    await message.confirm(t('report.workReport.submitConfirm'))
+    await WorkReportApi.submitWorkReport(id)
+    message.success(t('report.workReport.submitSuccess'))
+    await getList()
+  } catch {}
+}
+
+/**
+ * 审批工作报表
+ * @param row 报表数据
+ * @param isApprove 是否通过
+ */
+const handleApprove = async (row: any, isApprove: boolean) => {
+  try {
+    const title = isApprove ? t('report.workReport.approve') : t('report.workReport.reject')
+    const confirmMsg = isApprove ? t('report.workReport.approveConfirm') : t('report.workReport.rejectConfirm')
+    const successMsg = isApprove ? t('report.workReport.approveSuccess') : t('report.workReport.rejectSuccess')
+    
+    const { value: comment } = await ElMessageBox.prompt(
+      confirmMsg,
+      title,
+      {
+        inputType: 'textarea',
+        inputPlaceholder: t('report.workReport.approveCommentPlaceholder'),
+        confirmButtonText: t('common.confirm'),
+        cancelButtonText: t('common.cancel')
+      }
+    )
+    
+    await WorkReportApi.approveWorkReport({
+      id: row.id,
+      status: isApprove ? WorkReportStatus.APPROVED : WorkReportStatus.REJECTED,
+      approveComment: comment
+    })
+    message.success(successMsg)
     await getList()
   } catch {}
 }

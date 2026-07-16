@@ -2,6 +2,7 @@
 package com.meession.etm.module.report.service.workreport;
 
 import com.meession.etm.framework.common.pojo.PageResult;
+import com.meession.etm.module.report.controller.admin.workreport.vo.WorkReportApproveReqVO;
 import com.meession.etm.module.report.controller.admin.workreport.vo.WorkReportPageReqVO;
 import com.meession.etm.module.report.controller.admin.workreport.vo.WorkReportSaveReqVO;
 import com.meession.etm.module.report.dal.dataobject.workreport.WorkReportDO;
@@ -54,5 +55,19 @@ public interface WorkReportService {
      * @return 分页结果
      */
     PageResult<WorkReportDO> getWorkReportPage(WorkReportPageReqVO pageReqVO);
+
+    /**
+     * 提交工作报表
+     * 
+     * @param id 报表ID
+     */
+    void submitWorkReport(Long id);
+
+    /**
+     * 审批工作报表
+     * 
+     * @param approveReqVO 审批请求参数
+     */
+    void approveWorkReport(WorkReportApproveReqVO approveReqVO);
 
 }
