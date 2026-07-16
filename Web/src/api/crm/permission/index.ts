@@ -34,7 +34,10 @@ export enum BizTypeEnum {
   CRM_CONTRACT = 5, // 合同
   CRM_PRODUCT = 6, // 产品
   CRM_RECEIVABLE = 7, // 回款
-  CRM_RECEIVABLE_PLAN = 8 // 回款计划
+  CRM_RECEIVABLE_PLAN = 8, // 回款计划
+  // [ADD START] 发票业务类型 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+  CRM_INVOICE = 9 // 发票
+  // [ADD END] 发票业务类型 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
 }
 
 /**

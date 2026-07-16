@@ -81,7 +81,7 @@
     <el-table v-loading="loading" :data="list" :show-overflow-tooltip="true" :stripe="true" :table-layout="'auto'">
       <el-table-column align="center" fixed="left" :label="t('invoice.no')" prop="no" min-width="180">
         <template #default="scope">
-          <el-link :underline="false" type="primary">
+          <el-link :underline="false" type="primary" @click="openDetail(scope.row.id)">
             {{ scope.row.no }}
           </el-link>
         </template>
@@ -157,6 +157,10 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 表单弹窗 -->
+    <!-- [ADD START] 发票表单弹窗引用 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14 -->
+    <InvoiceForm ref="formRef" @success="getList" />
+    <!-- [ADD END] 发票表单弹窗引用 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14 -->
     <!-- 分页 -->
     <Pagination
       v-model:limit="queryParams.pageSize"
@@ -171,6 +175,9 @@ import { DICT_TYPE } from '@/utils/dict'
 import { dateFormatter } from '@/utils/formatTime'
 import download from '@/utils/download'
 import * as InvoiceApi from '@/api/crm/invoice'
+// [ADD START] 导入表单组件 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+import InvoiceForm from './InvoiceForm.vue'
+// [ADD END] 导入表单组件 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
 import * as CustomerApi from '@/api/crm/customer'
 import { erpPriceTableColumnFormatter } from '@/utils'
 
@@ -216,9 +223,16 @@ const resetQuery = () => {
 }
 
 /** 添加/修改操作 */
-const openForm = (_type: string, _id?: number) => {
-  // TODO: Day 2 实现表单弹窗
-  message.info(t('common.comingSoon'))
+// [MODIFY] Day2 实现表单弹窗 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+const formRef = ref()
+const openForm = (type: string, id?: number) => {
+  formRef.value.open(type, id)
+}
+
+/** 查看详情 */
+const { push } = useRouter()
+const openDetail = (id: number) => {
+  push({ name: 'CrmInvoiceDetail', params: { id } })
 }
 
 /** 删除按钮操作 */
