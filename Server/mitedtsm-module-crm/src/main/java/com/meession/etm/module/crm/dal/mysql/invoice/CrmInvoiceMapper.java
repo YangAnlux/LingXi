@@ -31,6 +31,7 @@ public interface CrmInvoiceMapper extends BaseMapperX<CrmInvoiceDO> {
 
     default PageResult<CrmInvoiceDO> selectPage(CrmInvoicePageReqVO pageReqVO) {
         return selectPage(pageReqVO, new LambdaQueryWrapperX<CrmInvoiceDO>()
+                .eqIfPresent(CrmInvoiceDO::getNo, pageReqVO.getNo())
                 .eqIfPresent(CrmInvoiceDO::getInvoiceNo, pageReqVO.getInvoiceNo())
                 .eqIfPresent(CrmInvoiceDO::getCustomerId, pageReqVO.getCustomerId())
                 .eqIfPresent(CrmInvoiceDO::getContractId, pageReqVO.getContractId())

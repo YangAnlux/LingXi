@@ -16,6 +16,9 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class CrmInvoicePageReqVO extends PageParam {
 
+    @Schema(description = "发票编号")
+    private String no;
+
     @Schema(description = "发票号码")
     private String invoiceNo;
 

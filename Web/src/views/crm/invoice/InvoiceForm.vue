@@ -138,8 +138,8 @@
       </el-row>
     </el-form>
     <template #footer>
-      <el-button :disabled="formLoading" type="primary" @click="submitForm">{{ t('dialog.confirm') }}</el-button>
-      <el-button @click="dialogVisible = false">{{ t('dialog.cancel') }}</el-button>
+      <el-button :disabled="formLoading" type="primary" @click="submitForm">{{ t('common.confirm') }}</el-button>
+      <el-button @click="dialogVisible = false">{{ t('common.cancel') }}</el-button>
     </template>
   </Dialog>
   <!-- [ADD END] 发票表单弹窗 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14 -->

@@ -106,9 +106,23 @@ public interface ErrorCodeConstants {
     // [ADD START] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
     // ========== 发票管理 1_020_015_000 ==========
     ErrorCode INVOICE_NOT_EXISTS = new ErrorCode(1_020_015_000, "发票不存在");
+    ErrorCode INVOICE_NO_EXISTS = new ErrorCode(1_020_015_001, "生成发票序列号重复，请重试");
     ErrorCode INVOICE_INVOICE_NO_EXISTS = new ErrorCode(1_020_015_002, "发票号码已存在");
     ErrorCode INVOICE_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_003, "创建发票失败，原因：开票金额超出合同剩余可开票金额");
     ErrorCode INVOICE_UPDATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_004, "更新发票失败，原因：开票金额超出合同剩余可开票金额");
+    ErrorCode INVOICE_DELETE_FAIL_IS_ISSUED = new ErrorCode(1_020_015_005, "删除发票失败，原因：已开票的发票不能删除");
+    // [MODIFY] 已开票发票校验用别名 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // 原始: INVOICE_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT, ServiceImpl 引用为 INVOICE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT
+    ErrorCode INVOICE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT = new ErrorCode(1_020_015_003, "创建发票失败，原因：开票金额超出合同剩余可开票金额");
+    // [ADD START] 发票状态不允许更新 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    ErrorCode INVOICE_UPDATE_FAIL_STATUS_NOT_PENDING = new ErrorCode(1_020_015_006, "更新发票失败，原因：发票不是待开票状态");
+    // [ADD END] 发票状态不允许更新 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
     // [ADD END] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+
+    // [ADD START] 费用 1_020_016_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // ========== 费用管理 1_020_016_000 ==========
+    ErrorCode EXPENSE_NOT_EXISTS = new ErrorCode(1_020_016_000, "费用不存在");
+    ErrorCode EXPENSE_NO_EXISTS = new ErrorCode(1_020_016_001, "生成费用序列号重复，请重试");
+    // [ADD END] 费用 1_020_016_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
 
 }

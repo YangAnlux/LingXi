@@ -11,6 +11,7 @@
           <el-descriptions-item :label="t('invoice.no')">{{ invoice.no }}</el-descriptions-item>
           <el-descriptions-item :label="t('invoice.invoiceNo')">{{ invoice.invoiceNo }}</el-descriptions-item>
           <el-descriptions-item :label="t('invoice.customerName')">{{ invoice.customerName }}</el-descriptions-item>
+          <el-descriptions-item :label="t('invoice.contractNo')">{{ invoice.contract?.no }}</el-descriptions-item>
           <el-descriptions-item :label="t('invoice.contractName')">{{ invoice.contractName || invoice.contract?.name }}</el-descriptions-item>
           <el-descriptions-item :label="t('invoice.amount')">{{ erpPriceInputFormatter(invoice.amount) }}</el-descriptions-item>
           <el-descriptions-item :label="t('invoice.type')">

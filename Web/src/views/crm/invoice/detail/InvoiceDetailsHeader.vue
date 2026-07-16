@@ -20,6 +20,9 @@
       <el-descriptions-item :label="t('invoice.customerName')">
         {{ invoice.customerName }}
       </el-descriptions-item>
+      <el-descriptions-item :label="t('invoice.contractNo')">
+        {{ invoice.contract?.no }}
+      </el-descriptions-item>
       <el-descriptions-item :label="t('invoice.contractName')">
         {{ invoice.contractName || invoice.contract?.name }}
       </el-descriptions-item>

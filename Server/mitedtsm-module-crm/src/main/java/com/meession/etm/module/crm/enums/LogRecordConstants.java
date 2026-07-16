@@ -172,4 +172,15 @@ public interface LogRecordConstants {
     String CRM_INVOICE_DELETE_SUCCESS = "删除了合同【{getContractById{#invoice.contractId}}】的发票【{{#invoice.invoiceNo}}】";
     // [ADD END] CRM_INVOICE 发票 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
 
+    // [ADD START] CRM_EXPENSE 费用 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // ======================= CRM_EXPENSE 费用 =======================
+    String CRM_EXPENSE_TYPE = "CRM 费用";
+    String CRM_EXPENSE_CREATE_SUB_TYPE = "创建费用";
+    String CRM_EXPENSE_CREATE_SUCCESS = "创建了费用【{{#expense.no}}】，类型【{{#expense.type}}】，金额【{{#expense.amount}}】元";
+    String CRM_EXPENSE_UPDATE_SUB_TYPE = "更新费用";
+    String CRM_EXPENSE_UPDATE_SUCCESS = "更新了费用【{{#expense.no}}】：{_DIFF{#updateReqVO}}";
+    String CRM_EXPENSE_DELETE_SUB_TYPE = "删除费用";
+    String CRM_EXPENSE_DELETE_SUCCESS = "删除了费用【{{#expense.no}}】";
+    // [ADD END] CRM_EXPENSE 费用 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+
 }
