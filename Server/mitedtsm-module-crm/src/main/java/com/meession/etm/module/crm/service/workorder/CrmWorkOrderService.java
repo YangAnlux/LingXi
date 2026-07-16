@@ -52,4 +52,12 @@ public interface CrmWorkOrderService {
      */
     void deleteWorkOrder(Long id);
 
+    /**
+     * 工单状态流转
+     *
+     * @param id           工单编号
+     * @param targetStatus 目标状态
+     */
+    void transitionStatus(Long id, String targetStatus);
+
 }

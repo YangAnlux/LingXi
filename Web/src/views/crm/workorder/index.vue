@@ -127,7 +127,7 @@
         min-width="180"
       />
       <el-table-column align="center" :label="t('workorder.creatorName')" prop="creatorName" min-width="100" />
-      <el-table-column :label="t('common.action')" align="center" min-width="120" fixed="right">
+      <el-table-column :label="t('common.action')" align="center" min-width="200" fixed="right">
         <template #default="scope">
           <el-button
             link
@@ -136,6 +136,33 @@
             v-hasPermi="['crm:work-order:update']"
           >
             {{ t('common.edit') }}
+          </el-button>
+          <el-button
+            v-if="scope.row.status === '待处理'"
+            link
+            type="success"
+            @click="handleTransition(scope.row.id, '处理中')"
+            v-hasPermi="['crm:work-order:update']"
+          >
+            {{ t('workorder.transitionProcess') }}
+          </el-button>
+          <el-button
+            v-if="scope.row.status === '处理中'"
+            link
+            type="success"
+            @click="handleTransition(scope.row.id, '已完结')"
+            v-hasPermi="['crm:work-order:update']"
+          >
+            {{ t('workorder.transitionResolve') }}
+          </el-button>
+          <el-button
+            v-if="scope.row.status === '处理中'"
+            link
+            type="warning"
+            @click="handleTransition(scope.row.id, '已退回')"
+            v-hasPermi="['crm:work-order:update']"
+          >
+            {{ t('workorder.transitionReturn') }}
           </el-button>
           <el-button
             link
@@ -221,6 +248,22 @@ const handleDelete = async (id: number) => {
 const formRef = ref()
 const openForm = (type: string, id?: number) => {
   formRef.value.open(type, id)
+}
+
+// 2023级软4蔡磊202305566515,2026年7月14日
+/** 状态流转操作 */
+const handleTransition = async (id: number, status: string) => {
+  try {
+    const labelMap: Record<string, string> = {
+      '处理中': t('workorder.transitionProcess'),
+      '已完结': t('workorder.transitionResolve'),
+      '已退回': t('workorder.transitionReturn')
+    }
+    await message.confirm(t('common.confirmText', { text: labelMap[status] }))
+    await WorkOrderApi.transitionWorkOrderStatus(id, status)
+    message.success(t('common.success'))
+    await getList()
+  } catch {}
 }
 
 /** 初始化 **/

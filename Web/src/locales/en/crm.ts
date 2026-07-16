@@ -868,6 +868,9 @@ export default {
     statusPlaceholder: 'Select status',
     contentPlaceholder: 'Enter work order content',
     titleRequired: 'Title is required',
-    priorityRequired: 'Priority is required'
+    priorityRequired: 'Priority is required',
+    transitionProcess: 'Process',
+    transitionResolve: 'Resolve',
+    transitionReturn: 'Return'
   }
 }

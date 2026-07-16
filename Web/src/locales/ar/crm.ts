@@ -868,6 +868,9 @@ export default {
     statusPlaceholder: 'اختر الحالة',
     contentPlaceholder: 'أدخل محتوى أمر العمل',
     titleRequired: 'العنوان مطلوب',
-    priorityRequired: 'الأولوية مطلوبة'
+    priorityRequired: 'الأولوية مطلوبة',
+    transitionProcess: 'معالجة',
+    transitionResolve: 'إنجاز',
+    transitionReturn: 'إعادة'
   }
 }

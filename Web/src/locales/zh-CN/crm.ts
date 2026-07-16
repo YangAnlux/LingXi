@@ -868,6 +868,9 @@ export default {
     statusPlaceholder: '请选择状态',
     contentPlaceholder: '请输入工单内容描述',
     titleRequired: '工单标题不能为空',
-    priorityRequired: '优先级不能为空'
+    priorityRequired: '优先级不能为空',
+    transitionProcess: '处理',
+    transitionResolve: '完结',
+    transitionReturn: '退回'
   }
 }

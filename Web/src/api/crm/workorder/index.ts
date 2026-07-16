@@ -45,3 +45,9 @@ export const updateWorkOrder = async (data: WorkOrderVO) => {
 export const deleteWorkOrder = async (id: number) => {
   return await request.delete({ url: `/crm/work-order/delete?id=` + id })
 }
+
+// 2023级软4蔡磊202305566515,2026年7月14日
+// 工单状态流转
+export const transitionWorkOrderStatus = async (id: number, status: string) => {
+  return await request.put({ url: `/crm/work-order/transition-status`, params: { id, status } })
+}

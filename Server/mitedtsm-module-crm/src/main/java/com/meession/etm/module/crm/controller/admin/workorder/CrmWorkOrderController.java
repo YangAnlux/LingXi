@@ -55,6 +55,16 @@ public class CrmWorkOrderController {
         return success(true);
     }
 
+    // 2023级软4蔡磊202305566515,2026年7月14日
+    @PutMapping("/transition-status")
+    @Operation(summary = "工单状态流转")
+    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
+    public CommonResult<Boolean> transitionStatusWorkOrder(@RequestParam("id") Long id,
+                                                           @RequestParam("status") String status) {
+        workOrderService.transitionStatus(id, status);
+        return success(true);
+    }
+
     @GetMapping("/get")
     @Operation(summary = "获得工单")
     @Parameter(name = "id", description = "编号", required = true, example = "1024")

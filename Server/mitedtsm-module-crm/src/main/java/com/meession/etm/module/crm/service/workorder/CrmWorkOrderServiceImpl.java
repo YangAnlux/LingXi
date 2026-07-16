@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 
 import static com.meession.etm.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static com.meession.etm.module.crm.enums.ErrorCodeConstants.WORK_ORDER_NOT_EXISTS;
+import static com.meession.etm.module.crm.enums.ErrorCodeConstants.WORK_ORDER_STATUS_ERROR;
 
 /**
  * 工单 Service 实现类
@@ -86,6 +87,31 @@ public class CrmWorkOrderServiceImpl implements CrmWorkOrderService {
             throw exception(WORK_ORDER_NOT_EXISTS);
         }
         workOrderMapper.deleteById(id);
+    }
+
+    // 2023级软4蔡磊202305566515,2026年7月14日
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void transitionStatus(Long id, String targetStatus) {
+        CrmWorkOrderDO workOrder = workOrderMapper.selectById(id);
+        if (workOrder == null) {
+            throw exception(WORK_ORDER_NOT_EXISTS);
+        }
+        String current = workOrder.getStatus();
+        // 待处理 → 处理中
+        if ("处理中".equals(targetStatus) && !"待处理".equals(current)) {
+            throw exception(WORK_ORDER_STATUS_ERROR);
+        }
+        // 处理中 → 已完结
+        if ("已完结".equals(targetStatus) && !"处理中".equals(current)) {
+            throw exception(WORK_ORDER_STATUS_ERROR);
+        }
+        // 处理中 → 已退回
+        if ("已退回".equals(targetStatus) && !"处理中".equals(current)) {
+            throw exception(WORK_ORDER_STATUS_ERROR);
+        }
+        workOrder.setStatus(targetStatus);
+        workOrderMapper.updateById(workOrder);
     }
 
 }
