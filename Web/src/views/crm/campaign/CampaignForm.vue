@@ -116,6 +116,7 @@
 import { ref, reactive, computed } from 'vue'
 import * as CampaignApi from '@/api/crm/campaign'
 import { getSimpleUserList } from '@/api/system/user'
+import dayjs from 'dayjs'
 
 defineOptions({ name: 'CampaignForm' })
 
@@ -161,9 +162,18 @@ const open = async (type: string, id?: number) => {
     if (type === 'update' && id) {
       const data = await CampaignApi.getCampaign(id)
       Object.assign(formData, data)
-      // 后端用 epoch 0 表示未设置时间，转换为空字符串以便日期选择器正常显示
-      if (formData.startTime === 0) formData.startTime = ''
-      if (formData.endTime === 0) formData.endTime = ''
+      // 后端返回 epoch 毫秒数：0 表示未设置时间，>0 为有效时间
+      // 日期选择器 value-format="YYYY-MM-DD HH:mm:ss" 需要字符串格式
+      if (formData.startTime && formData.startTime !== 0) {
+        formData.startTime = dayjs(formData.startTime).format('YYYY-MM-DD HH:mm:ss')
+      } else {
+        formData.startTime = ''
+      }
+      if (formData.endTime && formData.endTime !== 0) {
+        formData.endTime = dayjs(formData.endTime).format('YYYY-MM-DD HH:mm:ss')
+      } else {
+        formData.endTime = ''
+      }
     }
     dialogVisible.value = true
   } finally {
@@ -197,11 +207,23 @@ const submitForm = async () => {
   try {
     await formRef.value.validate()
     formLoading.value = true
+    // 将格式化日期字符串转为 epoch 毫秒数，后端 Jackson 期望 Long 类型
+    const data = { ...formData }
+    if (data.startTime && typeof data.startTime === 'string') {
+      data.startTime = dayjs(data.startTime).valueOf()
+    } else if (data.startTime === '' || data.startTime == null) {
+      data.startTime = null
+    }
+    if (data.endTime && typeof data.endTime === 'string') {
+      data.endTime = dayjs(data.endTime).valueOf()
+    } else if (data.endTime === '' || data.endTime == null) {
+      data.endTime = null
+    }
     if (formType.value === 'create') {
-      await CampaignApi.createCampaign(formData)
+      await CampaignApi.createCampaign(data)
       message.success(t('common.addSuccess'))
     } else {
-      await CampaignApi.updateCampaign(formData)
+      await CampaignApi.updateCampaign(data)
       message.success(t('common.editSuccess'))
     }
     dialogVisible.value = false

@@ -26,6 +26,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -115,6 +117,15 @@ public class CrmCampaignController {
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertListByFlatMap(list,
                 campaign -> Stream.of(NumberUtils.parseLong(campaign.getCreator()), campaign.getOwnerUserId())));
         return BeanUtils.toBean(list, CrmCampaignRespVO.class, campaignVO -> {
+            // 将 epoch 0 时间（表示未设置）转为 null，避免导出/列表显示 "1970/01/01 08:00:00"
+            if (campaignVO.getStartTime() != null
+                    && campaignVO.getStartTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() < 86400000L) {
+                campaignVO.setStartTime(null);
+            }
+            if (campaignVO.getEndTime() != null
+                    && campaignVO.getEndTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() < 86400000L) {
+                campaignVO.setEndTime(null);
+            }
             MapUtils.findAndThen(userMap, NumberUtils.parseLong(campaignVO.getCreator()),
                     user -> campaignVO.setCreatorName(user.getNickname()));
             MapUtils.findAndThen(userMap, campaignVO.getOwnerUserId(),

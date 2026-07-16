@@ -2,6 +2,7 @@ package com.meession.etm.module.crm.controller.admin.campaign.vo.campaign;
 
 import com.meession.etm.framework.excel.core.annotations.DictFormat;
 import com.meession.etm.framework.excel.core.convert.DictConvert;
+import com.meession.etm.framework.excel.core.convert.LocalDateTimeConverter;
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,11 +32,11 @@ public class CrmCampaignRespVO {
     private Integer status;
 
     @Schema(description = "开始时间", example = "2023-01-01 00:00:00")
-    @ExcelProperty("开始时间")
+    @ExcelProperty(value = "开始时间", converter = LocalDateTimeConverter.class)
     private LocalDateTime startTime;
 
     @Schema(description = "结束时间", example = "2023-01-31 23:59:59")
-    @ExcelProperty("结束时间")
+    @ExcelProperty(value = "结束时间", converter = LocalDateTimeConverter.class)
     private LocalDateTime endTime;
 
     @Schema(description = "活动预算(元)", example = "10000.00")
@@ -75,11 +76,11 @@ public class CrmCampaignRespVO {
     private String creatorName;
 
     @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("创建时间")
+    @ExcelProperty(value = "创建时间", converter = LocalDateTimeConverter.class)
     private LocalDateTime createTime;
 
     @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @ExcelProperty("更新时间")
+    @ExcelProperty(value = "更新时间", converter = LocalDateTimeConverter.class)
     private LocalDateTime updateTime;
 
 }
