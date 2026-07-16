@@ -224,6 +224,7 @@ export default {
     discountPercent: '整单折扣（%）',
     dealTime: '预计成交日期',
     remark: '备注',
+    competitor: '竞争对手',
     ownerUserId: '负责人',
     ownerUserName: '负责人',
     ownerUserDeptName: '所属部门',
@@ -243,6 +244,7 @@ export default {
     statusTypePlaceholder: '请选择商机状态组',
     dealTimePlaceholder: '选择预计成交日期',
     remarkPlaceholder: '请输入备注',
+    competitorPlaceholder: '请输入竞争对手',
     // 验证消息
     nameRequired: '商机名称不能为空',
     customerIdRequired: '客户不能为空',
@@ -274,6 +276,8 @@ export default {
     productNo: '条码',
     productUnit: '单位',
     productPrice: '价格（元）',
+    discount: '折扣(%)',
+    discountUnit: '%',
     businessPrice: '售价（元）',
     count: '数量',
     total: '合计',
@@ -704,8 +708,13 @@ export default {
       dynamicView: '动态视角',
       // 表格字段
       stage: '阶段',
+      percent: '阶段占比',
       businessCount: '商机数',
       businessTotalPrice: '商机总金额(元)',
+      avgPrice: '平均金额(元)',
+      stageDistribution: '阶段分布',
+      amountSummary: '金额汇总',
+      businessReport: '商机报表',
       // 漏斗数据
       customer: '客户',
       business: '商机',

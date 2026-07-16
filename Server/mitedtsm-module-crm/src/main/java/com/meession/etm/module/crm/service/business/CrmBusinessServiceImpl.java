@@ -243,7 +243,7 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
         // 1.5 校验状态只能向前流转（不能回退）
         if (reqVO.getStatusId() != null && business.getStatusId() != null) {
             CrmBusinessStatusDO currentStatus = businessStatusService.getBusinessStatus(business.getStatusId());
-            if (status.getSort() < currentStatus.getSort()) {
+            if (status != null && currentStatus != null && status.getSort() < currentStatus.getSort()) {
                 throw exception(BUSINESS_UPDATE_STATUS_FAIL_BACKWARD);
             }
         }

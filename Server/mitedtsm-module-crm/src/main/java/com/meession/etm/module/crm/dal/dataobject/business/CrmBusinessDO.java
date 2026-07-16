@@ -112,4 +112,9 @@ public class CrmBusinessDO extends BaseDO {
      */
     private String remark;
 
+    /**
+     * 竞争对手
+     */
+    private String competitor;
+
 }

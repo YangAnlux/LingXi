@@ -24,7 +24,7 @@ import static com.meession.etm.framework.common.pojo.CommonResult.success;
 
 @Tag(name = "管理后台 - CRM 销售漏斗")
 @RestController
-@RequestMapping("/crm/statistics-funnel")
+@RequestMapping("/admin-api/crm/statistics-funnel")
 @Validated
 public class CrmStatisticsFunnelController {
 
@@ -34,29 +34,36 @@ public class CrmStatisticsFunnelController {
     @GetMapping("/get-funnel-summary")
     @Operation(summary = "获取销售漏斗统计数据", description = "用于【销售漏斗】页面的【销售漏斗分析】")
     @PreAuthorize("@ss.hasPermission('crm:statistics-funnel:query')")
-    public CommonResult<CrmStatisticFunnelSummaryRespVO> getFunnelSummary(@Valid CrmStatisticsFunnelReqVO reqVO) {
+    public CommonResult<CrmStatisticFunnelSummaryRespVO> getFunnelSummary(@Valid CrmStatisticsFunnelStatReqVO reqVO) {
         return success(funnelService.getFunnelSummary(reqVO));
     }
 
     @GetMapping("/get-business-summary-by-end-status")
     @Operation(summary = "获取商机结束状态统计", description = "用于【销售漏斗】页面的【销售漏斗分析】")
     @PreAuthorize("@ss.hasPermission('crm:statistics-funnel:query')")
-    public CommonResult<List<CrmStatisticsBusinessSummaryByEndStatusRespVO>> getBusinessSummaryByEndStatus(@Valid CrmStatisticsFunnelReqVO reqVO) {
+    public CommonResult<List<CrmStatisticsBusinessSummaryByEndStatusRespVO>> getBusinessSummaryByEndStatus(@Valid CrmStatisticsFunnelStatReqVO reqVO) {
         return success(funnelService.getBusinessSummaryByEndStatus(reqVO));
     }
 
     @GetMapping("/get-business-summary-by-date")
     @Operation(summary = "获取新增商机分析(按日期)", description = "用于【销售漏斗】页面")
     @PreAuthorize("@ss.hasPermission('crm:statistics-funnel:query')")
-    public CommonResult<List<CrmStatisticsBusinessSummaryByDateRespVO>> getBusinessSummaryByDate(@Valid CrmStatisticsFunnelReqVO reqVO) {
+    public CommonResult<List<CrmStatisticsBusinessSummaryByDateRespVO>> getBusinessSummaryByDate(@Valid CrmStatisticsFunnelStatReqVO reqVO) {
         return success(funnelService.getBusinessSummaryByDate(reqVO));
     }
 
     @GetMapping("/get-business-inversion-rate-summary-by-date")
     @Operation(summary = "获取商机转化率分析(按日期)", description = "用于【销售漏斗】页面")
     @PreAuthorize("@ss.hasPermission('crm:statistics-funnel:query')")
-    public CommonResult<List<CrmStatisticsBusinessInversionRateSummaryByDateRespVO>> getBusinessInversionRateSummaryByDate(@Valid CrmStatisticsFunnelReqVO reqVO) {
+    public CommonResult<List<CrmStatisticsBusinessInversionRateSummaryByDateRespVO>> getBusinessInversionRateSummaryByDate(@Valid CrmStatisticsFunnelStatReqVO reqVO) {
         return success(funnelService.getBusinessInversionRateSummaryByDate(reqVO));
+    }
+
+    @GetMapping("/get-business-summary-by-status")
+    @Operation(summary = "获取商机阶段统计", description = "用于【销售漏斗】页面的【销售漏斗分析】")
+    @PreAuthorize("@ss.hasPermission('crm:statistics-funnel:query')")
+    public CommonResult<List<CrmStatisticsBusinessSummaryByStatusRespVO>> getBusinessSummaryByStatus(@Valid CrmStatisticsFunnelStatReqVO reqVO) {
+        return success(funnelService.getBusinessSummaryByStatus(reqVO));
     }
 
     @GetMapping("/get-business-page-by-date")

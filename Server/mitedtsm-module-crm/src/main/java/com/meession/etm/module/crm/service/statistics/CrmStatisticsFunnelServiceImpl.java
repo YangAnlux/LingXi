@@ -43,15 +43,13 @@ public class CrmStatisticsFunnelServiceImpl implements CrmStatisticsFunnelServic
     private DeptApi deptApi;
 
     @Override
-    public CrmStatisticFunnelSummaryRespVO getFunnelSummary(CrmStatisticsFunnelReqVO reqVO) {
-        // 1. 获得用户编号数组
+    public CrmStatisticFunnelSummaryRespVO getFunnelSummary(CrmStatisticsFunnelStatReqVO reqVO) {
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
             return null;
         }
         reqVO.setUserIds(userIds);
 
-        // 2. 获得漏斗数据
         Long customerCount = funnelMapper.selectCustomerCountByDate(reqVO);
         Long businessCount = funnelMapper.selectBusinessCountByDateAndEndStatus(reqVO, null);
         Long businessWinCount = funnelMapper.selectBusinessCountByDateAndEndStatus(reqVO, CrmBusinessEndStatusEnum.WIN.getStatus());
@@ -59,28 +57,22 @@ public class CrmStatisticsFunnelServiceImpl implements CrmStatisticsFunnelServic
     }
 
     @Override
-    public List<CrmStatisticsBusinessSummaryByEndStatusRespVO> getBusinessSummaryByEndStatus(CrmStatisticsFunnelReqVO reqVO) {
-        // 1. 获得用户编号数组
+    public List<CrmStatisticsBusinessSummaryByEndStatusRespVO> getBusinessSummaryByEndStatus(CrmStatisticsFunnelStatReqVO reqVO) {
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
         }
-
-        // 2. 获得统计数据
         return funnelMapper.selectBusinessSummaryListGroupByEndStatus(reqVO);
     }
 
     @Override
-    public List<CrmStatisticsBusinessSummaryByDateRespVO> getBusinessSummaryByDate(CrmStatisticsFunnelReqVO reqVO) {
-        // 1. 获得用户编号数组
+    public List<CrmStatisticsBusinessSummaryByDateRespVO> getBusinessSummaryByDate(CrmStatisticsFunnelStatReqVO reqVO) {
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
         }
 
-        // 2. 按天统计，获取分项统计数据
         List<CrmStatisticsBusinessSummaryByDateRespVO> businessSummaryList = funnelMapper.selectBusinessSummaryGroupByDate(reqVO);
-        // 3. 按照日期间隔，合并数据
         List<LocalDateTime[]> timeRanges = LocalDateTimeUtils.getDateRangeList(reqVO.getTimes()[0], reqVO.getTimes()[1], reqVO.getInterval());
         return convertList(timeRanges, times -> {
             Long businessCreateCount = businessSummaryList.stream()
@@ -97,16 +89,13 @@ public class CrmStatisticsFunnelServiceImpl implements CrmStatisticsFunnelServic
     }
 
     @Override
-    public List<CrmStatisticsBusinessInversionRateSummaryByDateRespVO> getBusinessInversionRateSummaryByDate(CrmStatisticsFunnelReqVO reqVO) {
-        // 1. 获得用户编号数组
+    public List<CrmStatisticsBusinessInversionRateSummaryByDateRespVO> getBusinessInversionRateSummaryByDate(CrmStatisticsFunnelStatReqVO reqVO) {
         reqVO.setUserIds(getUserIds(reqVO));
         if (CollUtil.isEmpty(reqVO.getUserIds())) {
             return Collections.emptyList();
         }
 
-        // 2. 按天统计，获取分项统计数据
         List<CrmStatisticsBusinessInversionRateSummaryByDateRespVO> businessSummaryList = funnelMapper.selectBusinessInversionRateSummaryByDate(reqVO);
-        // 3. 按照日期间隔，合并数据
         List<LocalDateTime[]> timeRanges = LocalDateTimeUtils.getDateRangeList(reqVO.getTimes()[0], reqVO.getTimes()[1], reqVO.getInterval());
         return convertList(timeRanges, times -> {
             Long businessCount = businessSummaryList.stream()
@@ -122,6 +111,15 @@ public class CrmStatisticsFunnelServiceImpl implements CrmStatisticsFunnelServic
     }
 
     @Override
+    public List<CrmStatisticsBusinessSummaryByStatusRespVO> getBusinessSummaryByStatus(CrmStatisticsFunnelStatReqVO reqVO) {
+        reqVO.setUserIds(getUserIds(reqVO));
+        if (CollUtil.isEmpty(reqVO.getUserIds())) {
+            return Collections.emptyList();
+        }
+        return funnelMapper.selectBusinessSummaryGroupByStatus(reqVO);
+    }
+
+    @Override
     public PageResult<CrmBusinessDO> getBusinessPageByDate(CrmStatisticsFunnelReqVO pageVO) {
         // 1. 获得用户编号数组
         pageVO.setUserIds(getUserIds(pageVO));
@@ -132,22 +130,21 @@ public class CrmStatisticsFunnelServiceImpl implements CrmStatisticsFunnelServic
         return businessService.getBusinessPageByDate(pageVO);
     }
 
-    /**
-     * 获取用户编号数组。如果用户编号为空, 则获得部门下的用户编号数组，包括子部门的所有用户编号
-     *
-     * @param reqVO 请求参数
-     * @return 用户编号数组
-     */
-    private List<Long> getUserIds(CrmStatisticsFunnelReqVO reqVO) {
-        // 情况一：选中某个用户
+    private List<Long> getUserIds(CrmStatisticsFunnelStatReqVO reqVO) {
         if (ObjUtil.isNotNull(reqVO.getUserId())) {
             return ListUtil.of(reqVO.getUserId());
         }
-        // 情况二：选中某个部门
-        // 2.1 获得部门列表
         List<Long> deptIds = convertList(deptApi.getChildDeptList(reqVO.getDeptId()), DeptRespDTO::getId);
         deptIds.add(reqVO.getDeptId());
-        // 2.2 获得用户编号
+        return convertList(adminUserApi.getUserListByDeptIds(deptIds), AdminUserRespDTO::getId);
+    }
+
+    private List<Long> getUserIds(CrmStatisticsFunnelReqVO reqVO) {
+        if (ObjUtil.isNotNull(reqVO.getUserId())) {
+            return ListUtil.of(reqVO.getUserId());
+        }
+        List<Long> deptIds = convertList(deptApi.getChildDeptList(reqVO.getDeptId()), DeptRespDTO::getId);
+        deptIds.add(reqVO.getDeptId());
         return convertList(adminUserApi.getUserListByDeptIds(deptIds), AdminUserRespDTO::getId);
     }
 

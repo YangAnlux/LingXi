@@ -95,6 +95,10 @@ public class CrmBusinessRespVO {
     @ExcelProperty("备注")
     private String remark;
 
+    @Schema(description = "竞争对手", example = "竞争对手公司")
+    @ExcelProperty("竞争对手")
+    private String competitor;
+
     @Schema(description = "创建人", example = "1024")
     @ExcelProperty("创建人")
     private String creator;

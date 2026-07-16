@@ -108,6 +108,9 @@
           :query-params="queryParams"
         />
       </el-tab-pane>
+      <el-tab-pane :label="t('funnel.businessReport')" lazy name="businessReportRef">
+        <BusinessReport ref="businessReportRef" :query-params="queryParams" />
+      </el-tab-pane>
     </el-tabs>
   </el-col>
 </template>
@@ -121,40 +124,39 @@ import { defaultProps, handleTree } from '@/utils/tree'
 import FunnelBusiness from './components/FunnelBusiness.vue'
 import BusinessSummary from './components/BusinessSummary.vue'
 import BusinessInversionRateSummary from './components/BusinessInversionRateSummary.vue'
+import BusinessReport from './components/BusinessReport.vue'
 import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
 
 defineOptions({ name: 'CrmStatisticsFunnel' })
 
-const { t } = useI18n('crm.statistics') // 国际化
+const { t } = useI18n('crm.statistics')
 
 const queryParams = reactive({
-  interval: 2, // WEEK, 周
+  interval: 2,
   deptId: useUserStore().getUser.deptId,
   userId: undefined,
   times: [
-    // 默认显示最近一周的数据
     formatDate(beginOfDay(new Date(new Date().getTime() - 3600 * 1000 * 24 * 7))),
     formatDate(endOfDay(new Date(new Date().getTime() - 3600 * 1000 * 24)))
   ]
 })
 
-const queryFormRef = ref() // 搜索的表单
-const deptList = ref<Tree[]>([]) // 部门树形结构
-const userList = ref<UserApi.UserVO[]>([]) // 全量用户清单
+const queryFormRef = ref()
+const deptList = ref<Tree[]>([])
+const userList = ref<UserApi.UserVO[]>([])
 
-/** 根据选择的部门筛选员工清单 */
 const userListByDeptId = computed(() =>
   queryParams.deptId
     ? userList.value.filter((u: UserApi.UserVO) => u.deptId === queryParams.deptId)
     : []
 )
 
-const activeTab = ref('funnelRef') // 活跃标签
-const funnelRef = ref() // 销售漏斗
-const businessSummaryRef = ref() // 新增商机分析
-const businessInversionRateSummaryRef = ref() // 商机转化率分析
+const activeTab = ref('funnelRef')
+const funnelRef = ref()
+const businessSummaryRef = ref()
+const businessInversionRateSummaryRef = ref()
+const businessReportRef = ref()
 
-/** 搜索按钮操作 */
 const handleQuery = () => {
   switch (activeTab.value) {
     case 'funnelRef':
@@ -166,21 +168,21 @@ const handleQuery = () => {
     case 'businessInversionRateSummaryRef':
       businessInversionRateSummaryRef.value?.loadData?.()
       break
+    case 'businessReportRef':
+      businessReportRef.value?.loadData?.()
+      break
   }
 }
 
-/** 当 activeTab 改变时，刷新当前活动的 tab */
 watch(activeTab, () => {
   handleQuery()
 })
 
-/** 重置按钮操作 */
 const resetQuery = () => {
   queryFormRef.value.resetFields()
   handleQuery()
 }
 
-/** 初始化 */
 onMounted(async () => {
   deptList.value = handleTree(await DeptApi.getSimpleDeptList())
   userList.value = handleTree(await UserApi.getSimpleUserList())

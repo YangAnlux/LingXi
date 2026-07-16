@@ -84,4 +84,27 @@
         GROUP BY time
     </select>
 
+    <select id="selectBusinessSummaryGroupByStatus"
+        resultType="com.meession.etm.module.crm.controller.admin.statistics.vo.funnel.CrmStatisticsBusinessSummaryByStatusRespVO">
+    SELECT
+        bs.id AS statusTypeId,
+        bs.name AS statusName,
+        bs.percent AS percent,
+        bs.sort AS sort,
+        COUNT(b.id) AS businessCount,
+        SUM(b.total_price) AS totalPrice
+    FROM crm_business b
+    LEFT JOIN crm_business_status bs ON b.status_id = bs.id
+    WHERE b.deleted = 0
+    AND b.end_status IS NULL
+    AND b.owner_user_id IN
+    <foreach collection="userIds" item="userId" open="(" close=")" separator=",">
+        #{userId}
+    </foreach>
+    AND b.create_time BETWEEN #{times[0],javaType=java.time.LocalDateTime} AND
+    #{times[1],javaType=java.time.LocalDateTime}
+    GROUP BY bs.id, bs.name, bs.percent, bs.sort
+    ORDER BY bs.sort ASC
+    </select>
+
 </mapper>

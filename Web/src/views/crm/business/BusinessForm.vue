@@ -85,6 +85,13 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-form-item :label="t('crm.business.competitor')" prop="competitor">
+            <el-input v-model="formData.competitor" :placeholder="t('crm.business.competitorPlaceholder')" />
+          </el-form-item>
+        </el-col>
+      </el-row>
       <!-- 子表的表单 -->
       <ContentWrap>
         <el-tabs v-model="subTabsName" class="-mt-15px -mb-10px">
@@ -166,6 +173,7 @@ const formData = ref({
   totalProductPrice: undefined,
   totalPrice: undefined,
   remark: undefined,
+  competitor: undefined,
   products: [],
   contactId: undefined,
   customerDefault: false

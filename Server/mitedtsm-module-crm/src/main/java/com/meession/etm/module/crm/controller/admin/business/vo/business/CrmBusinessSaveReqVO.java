@@ -62,6 +62,10 @@ public class CrmBusinessSaveReqVO {
     @DiffLogField(name = "备注")
     private String remark;
 
+    @Schema(description = "竞争对手", example = "竞争对手公司")
+    @DiffLogField(name = "竞争对手")
+    private String competitor;
+
     @Schema(description = "联系人编号", example = "110")
     private Long contactId; // 使用场景，在【联系人详情】添加商机时，如果需要关联两者，需要传递 contactId 字段
 

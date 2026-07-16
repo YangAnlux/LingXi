@@ -34,7 +34,6 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
                    target: env.VITE_BASE_URL,
                    ws: false,
                    changeOrigin: true,
-                   rewrite: (path) => path.replace(new RegExp(`^/admin-api`), ''),
                  },
                  '/api': {
                    target: 'http://localhost:8080',
