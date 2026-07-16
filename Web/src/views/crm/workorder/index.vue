@@ -127,11 +127,12 @@
         min-width="180"
       />
       <el-table-column align="center" :label="t('workorder.creatorName')" prop="creatorName" min-width="100" />
-      <el-table-column :label="t('common.action')" align="center" min-width="200" fixed="right">
+      <el-table-column :label="t('common.action')" align="center" min-width="280" fixed="right">
         <template #default="scope">
           <el-button
             link
             type="primary"
+            size="small"
             @click="openForm('update', scope.row.id)"
             v-hasPermi="['crm:work-order:update']"
           >
@@ -141,6 +142,7 @@
             v-if="scope.row.status === '待处理'"
             link
             type="success"
+            size="small"
             @click="handleTransition(scope.row.id, '处理中')"
             v-hasPermi="['crm:work-order:update']"
           >
@@ -150,6 +152,7 @@
             v-if="scope.row.status === '处理中'"
             link
             type="success"
+            size="small"
             @click="handleTransition(scope.row.id, '已完结')"
             v-hasPermi="['crm:work-order:update']"
           >
@@ -159,6 +162,7 @@
             v-if="scope.row.status === '处理中'"
             link
             type="warning"
+            size="small"
             @click="handleTransition(scope.row.id, '已退回')"
             v-hasPermi="['crm:work-order:update']"
           >
@@ -167,6 +171,7 @@
           <el-button
             link
             type="danger"
+            size="small"
             @click="handleDelete(scope.row.id)"
             v-hasPermi="['crm:work-order:delete']"
           >
