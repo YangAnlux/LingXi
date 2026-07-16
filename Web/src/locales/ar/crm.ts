@@ -863,6 +863,11 @@ export default {
     priorityLow: 'منخفض',
     priorityNormal: 'عادي',
     priorityHigh: 'عالي',
-    priorityUrgent: 'عاجل'
+    priorityUrgent: 'عاجل',
+    priorityPlaceholder: 'اختر الأولوية',
+    statusPlaceholder: 'اختر الحالة',
+    contentPlaceholder: 'أدخل محتوى أمر العمل',
+    titleRequired: 'العنوان مطلوب',
+    priorityRequired: 'الأولوية مطلوبة'
   }
 }

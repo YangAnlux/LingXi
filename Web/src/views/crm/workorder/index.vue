@@ -156,11 +156,14 @@
       @pagination="getList"
     />
   </ContentWrap>
+  <!-- 表单弹窗：添加/修改 -->
+  <WorkOrderForm ref="formRef" @success="getList" />
 </template>
 
 <script setup lang="ts">
 import { dateFormatter } from '@/utils/formatTime'
 import * as WorkOrderApi from '@/api/crm/workorder'
+import WorkOrderForm from './WorkOrderForm.vue'
 
 defineOptions({ name: 'CrmWorkOrder' })
 
@@ -215,9 +218,9 @@ const handleDelete = async (id: number) => {
 }
 
 /** 添加/修改操作 */
-const openForm = (_type: string, _id?: number) => {
-  // TODO: 后续实现表单弹窗
-  message.info('功能开发中')
+const formRef = ref()
+const openForm = (type: string, id?: number) => {
+  formRef.value.open(type, id)
 }
 
 /** 初始化 **/

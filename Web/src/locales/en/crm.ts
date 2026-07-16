@@ -863,6 +863,11 @@ export default {
     priorityLow: 'Low',
     priorityNormal: 'Normal',
     priorityHigh: 'High',
-    priorityUrgent: 'Urgent'
+    priorityUrgent: 'Urgent',
+    priorityPlaceholder: 'Select priority',
+    statusPlaceholder: 'Select status',
+    contentPlaceholder: 'Enter work order content',
+    titleRequired: 'Title is required',
+    priorityRequired: 'Priority is required'
   }
 }

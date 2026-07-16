@@ -863,6 +863,11 @@ export default {
     priorityLow: '低',
     priorityNormal: '普通',
     priorityHigh: '高',
-    priorityUrgent: '紧急'
+    priorityUrgent: '紧急',
+    priorityPlaceholder: '请选择优先级',
+    statusPlaceholder: '请选择状态',
+    contentPlaceholder: '请输入工单内容描述',
+    titleRequired: '工单标题不能为空',
+    priorityRequired: '优先级不能为空'
   }
 }
