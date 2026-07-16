@@ -127,53 +127,45 @@
         min-width="180"
       />
       <el-table-column align="center" :label="t('workorder.creatorName')" prop="creatorName" min-width="100" />
-      <el-table-column :label="t('common.action')" align="center" min-width="280" fixed="right">
+      <el-table-column :label="t('common.action')" align="center" min-width="360" fixed="right">
         <template #default="scope">
           <el-button
-            link
             type="primary"
             size="small"
-            @click="openForm('update', scope.row.id)"
-            v-hasPermi="['crm:work-order:update']"
-          >
-            {{ t('common.edit') }}
-          </el-button>
-          <el-button
-            v-if="scope.row.status === '待处理'"
-            link
-            type="success"
-            size="small"
+            :disabled="scope.row.status !== '待处理'"
             @click="handleTransition(scope.row.id, '处理中')"
-            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('workorder.transitionProcess') }}
           </el-button>
           <el-button
-            v-if="scope.row.status === '处理中'"
-            link
             type="success"
             size="small"
+            :disabled="scope.row.status !== '处理中'"
             @click="handleTransition(scope.row.id, '已完结')"
-            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('workorder.transitionResolve') }}
           </el-button>
           <el-button
-            v-if="scope.row.status === '处理中'"
-            link
             type="warning"
             size="small"
+            :disabled="scope.row.status !== '处理中'"
             @click="handleTransition(scope.row.id, '已退回')"
-            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('workorder.transitionReturn') }}
           </el-button>
           <el-button
-            link
+            type="primary"
+            size="small"
+            plain
+            @click="openForm('update', scope.row.id)"
+          >
+            {{ t('common.edit') }}
+          </el-button>
+          <el-button
             type="danger"
             size="small"
+            plain
             @click="handleDelete(scope.row.id)"
-            v-hasPermi="['crm:work-order:delete']"
           >
             {{ t('common.delete') }}
           </el-button>
