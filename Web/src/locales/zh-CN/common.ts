@@ -371,6 +371,9 @@ export default {
     crmContactDetail: '联系人详情',
     crmProductDetail: '产品详情',
     crmWorkOrderDetail: '工单详情',
+    crmReimbursementDetail: '报销详情',
+    crmExpenseDetail: '费用详情',
+    crmInvoiceDetail: '发票详情',
     // AI 模块
     aiImageSquare: '绘图作品',
     aiKnowledgeDocument: '知识库文档',

@@ -254,7 +254,7 @@
             type="danger"
             @click="handleDelete(scope.row.id)"
           >
-            {{ t('common.del') }}
+            {{ t('common.delete') }}
           </el-button>
         </template>
       </el-table-column>
