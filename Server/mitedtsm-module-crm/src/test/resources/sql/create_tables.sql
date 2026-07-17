@@ -16,6 +16,8 @@ CREATE TABLE `crm_work_order` (
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '工单内容',
   `solution` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '解决方案',
   `resolved_time` datetime DEFAULT NULL COMMENT '完结时间',
+  `satisfaction_score` tinyint DEFAULT NULL COMMENT '满意度评分（1-5）',
+  `satisfaction_comment` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '满意度评价内容',
   `creator` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '创建者',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updater` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '更新者',

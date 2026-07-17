@@ -588,6 +588,27 @@ const remainingRouter: AppRouteRecordRaw[] = [
           activeMenu: '/crm/product'
         },
         component: () => import('@/views/crm/product/detail/index.vue')
+      },
+      {
+        path: 'workorder/detail/:id',
+        name: 'CrmWorkOrderDetail',
+        meta: {
+          title: '工单详情',
+          noCache: true,
+          hidden: true,
+          activeMenu: '/crm/workorder'
+        },
+        component: () => import('@/views/crm/workorder/detail/index.vue')
+      },
+      {
+        path: 'workorder/statistics',
+        name: 'CrmWorkOrderStatistics',
+        meta: {
+          title: '工单统计报表',
+          noCache: true,
+          activeMenu: '/crm/workorder'
+        },
+        component: () => import('@/views/crm/workorder/WorkOrderStatistics.vue')
       }
     ]
   },

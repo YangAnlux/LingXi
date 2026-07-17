@@ -68,6 +68,9 @@
             <el-button type="primary" @click="openForm('create')" v-hasPermi="['crm:work-order:create']">
               <Icon icon="ep:plus" class="mr-5px" /> {{ t('action.add') }}
             </el-button>
+            <el-button type="success" plain @click="handleStatistics">
+              <Icon icon="ep:data-line" class="mr-5px" /> {{ t('workorder.statisticsTitle') }}
+            </el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -80,7 +83,7 @@
       <el-table-column :label="t('workorder.id')" align="center" prop="id" width="80" />
       <el-table-column :label="t('workorder.title')" align="center" prop="title" min-width="180" fixed="left">
         <template #default="scope">
-          <el-link :underline="false" type="primary">
+          <el-link :underline="false" type="primary" @click="handleDetail(scope.row.id)">
             {{ scope.row.title }}
           </el-link>
         </template>
@@ -127,48 +130,67 @@
         min-width="180"
       />
       <el-table-column align="center" :label="t('workorder.creatorName')" prop="creatorName" min-width="100" />
-      <el-table-column :label="t('common.action')" align="center" min-width="340" fixed="right">
+      <el-table-column :label="t('workorder.satisfactionScore')" align="center" prop="satisfactionScore" min-width="100">
+        <template #default="scope">
+          <el-rate
+            v-if="scope.row.satisfactionScore"
+            v-model="scope.row.satisfactionScore"
+            disabled
+            size="small"
+          />
+          <span v-else>-</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="t('common.action')" align="center" width="420" fixed="right">
         <template #default="scope">
           <el-button
             v-if="scope.row.status === '待处理' || scope.row.status === '已退回'"
             link
+            size="small"
             type="success"
             @click="handleProcess(scope.row.id)"
-            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('workorder.actionProcess') }}
           </el-button>
           <el-button
             v-if="scope.row.status === '处理中'"
             link
+            size="small"
             type="success"
             @click="handleResolve(scope.row.id)"
-            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('workorder.actionResolve') }}
           </el-button>
           <el-button
             v-if="scope.row.status === '处理中'"
             link
+            size="small"
             type="warning"
             @click="handleReturn(scope.row.id)"
-            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('workorder.actionReturn') }}
           </el-button>
           <el-button
             link
+            size="small"
+            type="warning"
+            @click="handleAssign(scope.row)"
+          >
+            {{ t('workorder.actionAssign') }}
+          </el-button>
+          <el-button
+            link
+            size="small"
             type="primary"
             @click="openForm('update', scope.row.id)"
-            v-hasPermi="['crm:work-order:update']"
           >
             {{ t('common.edit') }}
           </el-button>
           <el-button
             link
+            size="small"
             type="danger"
             @click="handleDelete(scope.row.id)"
-            v-hasPermi="['crm:work-order:delete']"
           >
             {{ t('common.delete') }}
           </el-button>
@@ -185,11 +207,31 @@
   </ContentWrap>
   <!-- 表单弹窗：添加/修改 -->
   <WorkOrderForm ref="formRef" @success="getList" />
+  <!-- 分配处理人弹窗 -->
+  <el-dialog v-model="assignDialogVisible" :title="t('workorder.assignTitle')" width="450px">
+    <el-form :model="assignForm">
+      <el-form-item :label="t('workorder.assigneeId')">
+        <el-select v-model="assignForm.assigneeId" :placeholder="t('workorder.assignPlaceholder')" class="w-1/1" filterable>
+          <el-option
+            v-for="user in userOptions"
+            :key="user.id"
+            :label="user.nickname"
+            :value="user.id"
+          />
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <el-button type="primary" @click="submitAssign">{{ t('common.confirm') }}</el-button>
+      <el-button @click="assignDialogVisible = false">{{ t('common.cancel') }}</el-button>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { dateFormatter } from '@/utils/formatTime'
 import * as WorkOrderApi from '@/api/crm/workorder'
+import * as UserApi from '@/api/system/user'
 import WorkOrderForm from './WorkOrderForm.vue'
 
 defineOptions({ name: 'CrmWorkOrder' })
@@ -278,6 +320,52 @@ const handleReturn = async (id: number) => {
 const formRef = ref()
 const openForm = (type: string, id?: number) => {
   formRef.value.open(type, id)
+}
+
+/** 查看详情 */
+const { push } = useRouter()
+const handleDetail = (id: number) => {
+  push({ name: 'CrmWorkOrderDetail', params: { id } })
+}
+
+// 23软件工程4班蔡磊202305566515
+/** 统计报表 */
+const handleStatistics = () => {
+  push({ name: 'CrmWorkOrderStatistics' })
+}
+
+// 23软件工程4班蔡磊202305566515
+/** 分配处理人 */
+const assignDialogVisible = ref(false)
+const userOptions = ref<{ id: number; nickname: string }[]>([])
+const assigningId = ref<number>(0)
+const assignForm = reactive({
+  assigneeId: undefined as number | undefined
+})
+
+const handleAssign = async (row: any) => {
+  assigningId.value = row.id
+  assignForm.assigneeId = row.assigneeId
+  assignDialogVisible.value = true
+  if (userOptions.value.length === 0) {
+    userOptions.value = await UserApi.getSimpleUserList()
+  }
+}
+
+const submitAssign = async () => {
+  if (!assignForm.assigneeId) {
+    message.warning(t('workorder.assignPlaceholder'))
+    return
+  }
+  try {
+    await WorkOrderApi.assignWorkOrder({
+      id: assigningId.value,
+      assigneeId: assignForm.assigneeId
+    })
+    message.success(t('workorder.assignSuccess'))
+    assignDialogVisible.value = false
+    await getList()
+  } catch {}
 }
 
 /** 初始化 **/

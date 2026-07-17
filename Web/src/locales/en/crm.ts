@@ -877,6 +877,24 @@ export default {
     confirmReturn: 'Confirm to return?',
     processSuccess: 'Work order processing started',
     resolveSuccess: 'Work order resolved',
-    returnSuccess: 'Work order returned'
+    returnSuccess: 'Work order returned',
+    basicInfoTab: 'Basic Info',
+    recordTab: 'Processing Records',
+    recordFromStatus: 'From Status',
+    recordToStatus: 'To Status',
+    recordCreator: 'Operator',
+    noRecord: 'No records',
+    paramError: 'Parameter error',
+    satisfactionScore: 'Satisfaction',
+    satisfactionComment: 'Feedback',
+    satisfactionCommentPlaceholder: 'Please enter your feedback',
+    satisfactionTitle: 'Satisfaction Survey',
+    actionSatisfaction: 'Rate Service',
+    satisfactionSuccess: 'Rating submitted successfully',
+    statisticsTitle: 'Work Order Statistics',
+    statisticsByType: 'By Type',
+    statisticsByStatus: 'By Status',
+    statisticsByAssignee: 'By Assignee',
+    statisticsCount: 'Count'
   }
 }

@@ -85,4 +85,16 @@ public class CrmWorkOrderDO extends BaseDO {
      */
     private LocalDateTime resolvedTime;
 
+    /**
+     * 满意度评分（1-5）
+     */
+    // 23软件工程4班蔡磊202305566515
+    private Integer satisfactionScore;
+
+    /**
+     * 满意度评价内容
+     */
+    // 23软件工程4班蔡磊202305566515
+    private String satisfactionComment;
+
 }

@@ -367,6 +367,7 @@ export default {
     crmReceivableDetail: 'Receivable Detail',
     crmContactDetail: 'Contact Detail',
     crmProductDetail: 'Product Detail',
+    crmWorkOrderDetail: 'Work Order Detail',
     // AI module
     aiImageSquare: 'Image Gallery',
     aiKnowledgeDocument: 'Knowledge Document',

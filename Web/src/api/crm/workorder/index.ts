@@ -19,6 +19,8 @@ export interface WorkOrderVO {
   createTime: Date
   creator: string
   creatorName?: string
+  satisfactionScore?: number
+  satisfactionComment?: string
 }
 
 // 查询工单分页
@@ -59,4 +61,50 @@ export const resolveWorkOrder = async (id: number) => {
 // 退回工单（处理中 → 已退回）
 export const returnWorkOrder = async (id: number) => {
   return await request.put({ url: `/crm/work-order/return?id=` + id })
+}
+
+// 23软件工程4班蔡磊202305566515
+// 分配工单（指派处理人）
+export const assignWorkOrder = async (data: { id: number; assigneeId: number }) => {
+  return await request.put({ url: `/crm/work-order/assign`, data })
+}
+
+// 处理记录查询参数
+export interface WorkOrderRecordVO {
+  id: number
+  workOrderId: number
+  fromStatus: string
+  toStatus: string
+  creator: string
+  createTime: Date
+}
+
+// 获得工单处理记录列表
+export const getRecordList = async (workOrderId: number) => {
+  return await request.get({ url: `/crm/work-order/record-list?workOrderId=` + workOrderId })
+}
+
+// 23软件工程4班蔡磊202305566515
+// 满意度回访评分
+export const submitSatisfaction = async (data: { id: number; satisfactionScore: number; satisfactionComment?: string }) => {
+  return await request.put({ url: `/crm/work-order/satisfaction`, data })
+}
+
+// 23软件工程4班蔡磊202305566515
+export interface WorkOrderStatItem {
+  name: string
+  count: number
+}
+
+// 23软件工程4班蔡磊202305566515
+export interface WorkOrderStatisticsVO {
+  byType: WorkOrderStatItem[]
+  byStatus: WorkOrderStatItem[]
+  byAssignee: WorkOrderStatItem[]
+}
+
+// 23软件工程4班蔡磊202305566515
+// 工单统计报表（按类型/状态/处理人）
+export const getStatistics = async () => {
+  return await request.get({ url: `/crm/work-order/statistics` })
 }

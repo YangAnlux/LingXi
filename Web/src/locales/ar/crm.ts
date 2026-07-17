@@ -877,6 +877,24 @@ export default {
     confirmReturn: 'تأكيد الإعادة؟',
     processSuccess: 'بدأت معالجة أمر العمل',
     resolveSuccess: 'تم إكمال أمر العمل',
-    returnSuccess: 'تم إعادة أمر العمل'
+    returnSuccess: 'تم إعادة أمر العمل',
+    basicInfoTab: 'المعلومات الأساسية',
+    recordTab: 'سجلات المعالجة',
+    recordFromStatus: 'الحالة السابقة',
+    recordToStatus: 'الحالة الجديدة',
+    recordCreator: 'المشغل',
+    noRecord: 'لا توجد سجلات',
+    paramError: 'خطأ في المعاملات',
+    satisfactionScore: 'تقييم الرضا',
+    satisfactionComment: 'تعليق',
+    satisfactionCommentPlaceholder: 'يرجى إدخال تعليقك',
+    satisfactionTitle: 'استبيان الرضا',
+    actionSatisfaction: 'تقييم الخدمة',
+    satisfactionSuccess: 'تم تقديم التقييم بنجاح',
+    statisticsTitle: 'إحصائيات أوامر العمل',
+    statisticsByType: 'حسب النوع',
+    statisticsByStatus: 'حسب الحالة',
+    statisticsByAssignee: 'حسب المعالج',
+    statisticsCount: 'العدد'
   }
 }

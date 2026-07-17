@@ -4,8 +4,11 @@ package com.meession.etm.module.crm.service.workorder;
 import com.meession.etm.framework.common.pojo.PageResult;
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderPageReqVO;
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderSaveReqVO;
+import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderStatisticsRespVO;
 import com.meession.etm.module.crm.dal.dataobject.workorder.CrmWorkOrderDO;
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 /**
  * 工单 Service 接口
@@ -72,5 +75,46 @@ public interface CrmWorkOrderService {
      * @param id 编号
      */
     void returnWorkOrder(Long id);
+
+    // 23软件工程4班蔡磊202305566515
+    /**
+     * 分配工单（指派处理人）
+     *
+     * @param id         工单编号
+     * @param assigneeId 处理人编号
+     */
+    void assignWorkOrder(Long id, Long assigneeId);
+
+    // 23软件工程4班蔡磊202305566515
+    /**
+     * 扫描超时工单，标记 isSlaBreached
+     *
+     * @return 标记数量
+     */
+    int updateSlaBreached();
+
+    // 23软件工程4班蔡磊202305566515
+    /**
+     * 满意度回访评分
+     *
+     * @param id                 工单编号
+     * @param satisfactionScore  满意度评分（1-5）
+     * @param satisfactionComment 满意度评价内容
+     */
+    void submitSatisfaction(Long id, Integer satisfactionScore, String satisfactionComment);
+
+    // 23软件工程4班蔡磊202305566515
+    /**
+     * 工单统计报表（按类型/状态/处理人三个维度）
+     *
+     * @return 三个维度的统计数据
+     */
+    List<CrmWorkOrderStatisticsRespVO> countByType();
+
+    // 23软件工程4班蔡磊202305566515
+    List<CrmWorkOrderStatisticsRespVO> countByStatus();
+
+    // 23软件工程4班蔡磊202305566515
+    List<CrmWorkOrderStatisticsRespVO> countByAssignee();
 
 }

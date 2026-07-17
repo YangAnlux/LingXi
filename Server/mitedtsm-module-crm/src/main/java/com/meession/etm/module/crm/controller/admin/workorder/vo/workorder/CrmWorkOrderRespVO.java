@@ -73,4 +73,14 @@ public class CrmWorkOrderRespVO {
     @ExcelProperty("创建人")
     private String creator;
 
+    // 23软件工程4班蔡磊202305566515
+    @Schema(description = "满意度评分（1-5）", example = "5")
+    @ExcelProperty("满意度评分")
+    private Integer satisfactionScore;
+
+    // 23软件工程4班蔡磊202305566515
+    @Schema(description = "满意度评价内容", example = "服务很好")
+    @ExcelProperty("满意度评价")
+    private String satisfactionComment;
+
 }
