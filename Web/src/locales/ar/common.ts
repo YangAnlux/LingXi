@@ -367,6 +367,9 @@ export default {
     crmReceivableDetail: 'تفاصيل المستحق',
     crmContactDetail: 'تفاصيل جهة الاتصال',
     crmProductDetail: 'تفاصيل المنتج',
+    crmReimbursementDetail: 'تفاصيل التعويض',
+    crmExpenseDetail: 'تفاصيل المصروفات',
+    crmInvoiceDetail: 'تفاصيل الفاتورة',
     // AI module
     aiImageSquare: 'صور الذكاء الاصطناعي',
     aiKnowledgeDocument: 'مستند قاعدة المعرفة',

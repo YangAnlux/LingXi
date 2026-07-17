@@ -13,6 +13,7 @@ import com.meession.etm.module.crm.util.CrmPermissionUtils;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -85,5 +86,19 @@ public interface CrmReceivablePlanMapper extends BaseMapperX<CrmReceivablePlanDO
                 .lt(CrmReceivablePlanDO::getRemindTime, beginOfToday); // 今天开始提醒
         return selectCount(query);
     }
+
+    // [ADD START] 逾期回款计划查询 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    /**
+     * 查询所有已逾期且未回款的回款计划
+     *
+     * @param today 当天零点
+     * @return 逾期计划列表
+     */
+    default List<CrmReceivablePlanDO> selectOverduePlans(LocalDateTime today) {
+        return selectList(new MPJLambdaWrapperX<CrmReceivablePlanDO>()
+                .isNull(CrmReceivablePlanDO::getReceivableId)   // 未回款
+                .lt(CrmReceivablePlanDO::getReturnTime, today)); // 已逾期
+    }
+    // [ADD END] 逾期回款计划查询 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
 
 }
