@@ -192,3 +192,23 @@ export const completeTask = (id: number) => {
 export const cancelTask = (id: number) => {
   return request.put({ url: '/report/task/cancel', params: { id } })
 }
+
+/**
+ * 任务看板响应数据
+ */
+export interface TaskBoardRespVO {
+  todoTasks: TaskRespVO[]
+  inProgressTasks: TaskRespVO[]
+  completedTasks: TaskRespVO[]
+  upcomingExpiredCount: number
+  expiredCount: number
+}
+
+/**
+ * 获取任务看板数据
+ * 
+ * @returns 任务看板数据
+ */
+export const getTaskBoard = () => {
+  return request.get({ url: '/report/task-board/get-board' })
+}

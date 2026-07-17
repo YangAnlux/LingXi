@@ -106,6 +106,14 @@ export default {
     completeSuccess: 'Complete successfully',
     cancel: 'Cancel',
     cancelConfirm: 'Confirm to cancel this task?',
-    cancelSuccess: 'Cancel successfully'
+    cancelSuccess: 'Cancel successfully',
+    taskBoard: 'Task Board',
+    statusTodo: 'Todo',
+    noTodoTasks: 'No todo tasks',
+    noInProgressTasks: 'No in progress tasks',
+    noCompletedTasks: 'No completed tasks',
+    unassigned: 'Unassigned',
+    upcomingExpired: 'Upcoming',
+    expired: 'Expired'
   }
 }

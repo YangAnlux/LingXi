@@ -7,12 +7,15 @@ import org.springframework.validation.annotation.Validated;
 
 import com.meession.etm.framework.common.pojo.PageResult;
 import com.meession.etm.framework.common.util.object.BeanUtils;
+import com.meession.etm.module.report.controller.admin.task.vo.TaskBoardRespVO;
 import com.meession.etm.module.report.controller.admin.task.vo.TaskPageReqVO;
+import com.meession.etm.module.report.controller.admin.task.vo.TaskRespVO;
 import com.meession.etm.module.report.controller.admin.task.vo.TaskSaveReqVO;
 import com.meession.etm.module.report.dal.dataobject.task.TaskDO;
 import com.meession.etm.module.report.dal.mysql.task.TaskMapper;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.meession.etm.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static com.meession.etm.module.report.enums.ErrorCodeConstants.TASK_NOT_EXISTS;
@@ -193,6 +196,56 @@ public class TaskServiceImpl implements TaskService {
         if (taskMapper.selectById(id) == null) {
             throw exception(TASK_NOT_EXISTS);
         }
+    }
+
+    /**
+     * 获取任务看板数据
+     * 
+     * 返回待办、进行中、已完成三个状态的任务列表，以及即将到期和已逾期的任务统计。
+     * 
+     * @return 任务看板数据
+     */
+    @Override
+    public TaskBoardRespVO getTaskBoard() {
+        List<TaskDO> allTasks = taskMapper.selectList(null);
+        
+        List<TaskRespVO> todoTasks = allTasks.stream()
+            .filter(task -> task.getStatus().equals(0))
+            .map(task -> BeanUtils.toBean(task, TaskRespVO.class))
+            .toList();
+        
+        List<TaskRespVO> inProgressTasks = allTasks.stream()
+            .filter(task -> task.getStatus().equals(1))
+            .map(task -> BeanUtils.toBean(task, TaskRespVO.class))
+            .toList();
+        
+        List<TaskRespVO> completedTasks = allTasks.stream()
+            .filter(task -> task.getStatus().equals(2))
+            .map(task -> BeanUtils.toBean(task, TaskRespVO.class))
+            .toList();
+        
+        LocalDate today = LocalDate.now();
+        LocalDate threeDaysLater = today.plusDays(3);
+        
+        int upcomingExpiredCount = (int) allTasks.stream()
+            .filter(task -> task.getStatus().equals(0) || task.getStatus().equals(1))
+            .filter(task -> task.getEndDate() != null)
+            .filter(task -> !task.getEndDate().isBefore(today) && task.getEndDate().isBefore(threeDaysLater))
+            .count();
+        
+        int expiredCount = (int) allTasks.stream()
+            .filter(task -> task.getStatus().equals(0) || task.getStatus().equals(1))
+            .filter(task -> task.getEndDate() != null)
+            .filter(task -> task.getEndDate().isBefore(today))
+            .count();
+        
+        return TaskBoardRespVO.builder()
+            .todoTasks(todoTasks)
+            .inProgressTasks(inProgressTasks)
+            .completedTasks(completedTasks)
+            .upcomingExpiredCount(upcomingExpiredCount)
+            .expiredCount(expiredCount)
+            .build();
     }
 
 }

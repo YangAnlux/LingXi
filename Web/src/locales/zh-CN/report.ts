@@ -106,6 +106,14 @@ export default {
     completeSuccess: '完成成功',
     cancel: '取消',
     cancelConfirm: '确定取消此任务？',
-    cancelSuccess: '取消成功'
+    cancelSuccess: '取消成功',
+    taskBoard: '任务看板',
+    statusTodo: '待办',
+    noTodoTasks: '暂无待办任务',
+    noInProgressTasks: '暂无进行中任务',
+    noCompletedTasks: '暂无已完成任务',
+    unassigned: '未分配',
+    upcomingExpired: '即将到期',
+    expired: '已逾期'
   }
 }

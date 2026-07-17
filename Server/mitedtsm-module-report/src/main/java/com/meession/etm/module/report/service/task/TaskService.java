@@ -2,6 +2,7 @@
 package com.meession.etm.module.report.service.task;
 
 import com.meession.etm.framework.common.pojo.PageResult;
+import com.meession.etm.module.report.controller.admin.task.vo.TaskBoardRespVO;
 import com.meession.etm.module.report.controller.admin.task.vo.TaskPageReqVO;
 import com.meession.etm.module.report.controller.admin.task.vo.TaskSaveReqVO;
 import com.meession.etm.module.report.dal.dataobject.task.TaskDO;
@@ -84,5 +85,14 @@ public interface TaskService {
      * @param id 任务ID
      */
     void cancelTask(Long id);
+
+    /**
+     * 获取任务看板数据
+     * 
+     * 返回待办、进行中、已完成三个状态的任务列表，以及即将到期和已逾期的任务统计。
+     * 
+     * @return 任务看板数据
+     */
+    TaskBoardRespVO getTaskBoard();
 
 }
