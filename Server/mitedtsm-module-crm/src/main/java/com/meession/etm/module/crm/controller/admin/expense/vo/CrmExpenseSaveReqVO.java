@@ -4,12 +4,15 @@ package com.meession.etm.module.crm.controller.admin.expense.vo;
 
 import com.meession.etm.framework.common.validation.InEnum;
 import com.meession.etm.module.crm.enums.expense.CrmExpenseTypeEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import static com.meession.etm.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY;
 
 @Schema(description = "管理后台 - CRM 费用新增/修改 Request VO")
 @Data
@@ -41,6 +44,7 @@ public class CrmExpenseSaveReqVO {
     private BigDecimal amount;
 
     @Schema(description = "费用日期", example = "2026-07-16")
+    @JsonFormat(pattern = FORMAT_YEAR_MONTH_DAY)
     private LocalDate expenseDate;
 
     @Schema(description = "备注", example = "出差费用")

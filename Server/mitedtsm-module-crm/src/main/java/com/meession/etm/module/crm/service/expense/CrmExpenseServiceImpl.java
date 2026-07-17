@@ -116,7 +116,7 @@ public class CrmExpenseServiceImpl implements CrmExpenseService {
     }
 
     @Override
-    @CrmPermission(bizType = CrmBizTypeEnum.CRM_EXPENSE, bizId = "#pageReqVO.id", level = CrmPermissionLevelEnum.READ)
+    // [DELETE] CrmExpensePageReqVO无id字段，SpEL解析失败 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
     public PageResult<CrmExpenseDO> getExpensePage(CrmExpensePageReqVO pageReqVO) {
         return expenseMapper.selectPage(pageReqVO);
     }

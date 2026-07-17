@@ -504,6 +504,60 @@ export default {
     systemInfo: 'System Info'
   },
   // [ADD END] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+  // [ADD START] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  expense: {
+    title: 'Expense Management',
+    no: 'Expense No.',
+    noPlaceholder: 'Please enter expense no.',
+    noAutoGenerate: 'Auto-generated',
+    customerName: 'Customer Name',
+    contractName: 'Contract Name',
+    contractPlaceholder: 'Please select contract',
+    type: 'Expense Type',
+    typeRequired: 'Expense type is required',
+    amount: 'Amount',
+    amountPlaceholder: 'Please enter amount',
+    amountRequired: 'Amount is required',
+    expenseDate: 'Expense Date',
+    expenseDatePlaceholder: 'Please select date',
+    ownerUserName: 'Owner',
+    remark: 'Remark',
+    createTime: 'Create Time',
+    exportFileName: 'Expense',
+    paramError: 'Parameter error, expense cannot be empty!'
+  },
+  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  // [ADD START] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  reimbursement: {
+    title: 'Reimbursement',
+    no: 'Reimbursement No.',
+    noPlaceholder: 'Please enter no.',
+    noAutoGenerate: 'Auto-generated',
+    customerName: 'Customer Name',
+    contractName: 'Contract Name',
+    contractPlaceholder: 'Please select contract',
+    type: 'Type',
+    typeRequired: 'Type is required',
+    totalAmount: 'Amount',
+    totalAmountPlaceholder: 'Please enter amount',
+    totalAmountRequired: 'Amount is required',
+    status: 'Status',
+    reimbursementDate: 'Date',
+    reimbursementDatePlaceholder: 'Please select date',
+    ownerUserName: 'Owner',
+    remark: 'Remark',
+    createTime: 'Create Time',
+    exportFileName: 'Reimbursement',
+    submit: 'Submit',
+    submitConfirm: 'Confirm submit?',
+    submitSuccess: 'Submit success',
+    paramError: 'Parameter error, reimbursement cannot be empty!'
+  },
+  // [ADD END] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  receivablePlan: {
+    title: 'Receivable Plan',
+  },
+  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   receivablePlan: {
     title: 'Receivable Plan',
     period: 'Period',

@@ -125,4 +125,13 @@ public interface ErrorCodeConstants {
     ErrorCode EXPENSE_NO_EXISTS = new ErrorCode(1_020_016_001, "生成费用序列号重复，请重试");
     // [ADD END] 费用 1_020_016_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
 
+    // [ADD START] 报销 1_020_017_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    ErrorCode REIMBURSEMENT_NOT_EXISTS = new ErrorCode(1_020_017_000, "报销不存在");
+    ErrorCode REIMBURSEMENT_NO_EXISTS = new ErrorCode(1_020_017_001, "生成报销序列号重复，请重试");
+    ErrorCode REIMBURSEMENT_UPDATE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_002, "更新报销失败，原因：只有待提交状态的报销可编辑");
+    ErrorCode REIMBURSEMENT_DELETE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_003, "删除报销失败，原因：只有待提交状态的报销可删除");
+    ErrorCode REIMBURSEMENT_SUBMIT_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_004, "报销提交审核失败，原因：报销不处于待提交状态");
+    ErrorCode REIMBURSEMENT_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_017_005, "更新报销审核状态失败，原因：报销不是审核中状态");
+    // [ADD END] 报销 1_020_017_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+
 }

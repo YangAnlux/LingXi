@@ -31,6 +31,9 @@ public enum CrmBizTypeEnum implements ArrayValuable<Integer> {
     // [ADD START] 费用 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
     CRM_EXPENSE(10, "费用"),
     // [ADD END] 费用 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // [ADD START] 报销 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    CRM_REIMBURSEMENT(11, "报销"),
+    // [ADD END] 报销 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
     ;
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmBizTypeEnum::getType).toArray(Integer[]::new);

@@ -183,4 +183,17 @@ public interface LogRecordConstants {
     String CRM_EXPENSE_DELETE_SUCCESS = "删除了费用【{{#expense.no}}】";
     // [ADD END] CRM_EXPENSE 费用 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
 
+    // [ADD START] CRM_REIMBURSEMENT 报销 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // ======================= CRM_REIMBURSEMENT 报销 =======================
+    String CRM_REIMBURSEMENT_TYPE = "CRM 报销";
+    String CRM_REIMBURSEMENT_CREATE_SUB_TYPE = "创建报销";
+    String CRM_REIMBURSEMENT_CREATE_SUCCESS = "创建了报销【{{#reimbursement.no}}】，金额【{{#reimbursement.totalAmount}}】元";
+    String CRM_REIMBURSEMENT_UPDATE_SUB_TYPE = "更新报销";
+    String CRM_REIMBURSEMENT_UPDATE_SUCCESS = "更新了报销【{{#reimbursement.no}}】：{_DIFF{#updateReqVO}}";
+    String CRM_REIMBURSEMENT_DELETE_SUB_TYPE = "删除报销";
+    String CRM_REIMBURSEMENT_DELETE_SUCCESS = "删除了报销【{{#reimbursement.no}}】";
+    String CRM_REIMBURSEMENT_SUBMIT_SUB_TYPE = "提交报销审批";
+    String CRM_REIMBURSEMENT_SUBMIT_SUCCESS = "提交报销【{{#reimbursementNo}}】审批成功";
+    // [ADD END] CRM_REIMBURSEMENT 报销 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+
 }

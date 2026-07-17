@@ -506,6 +506,56 @@ export default {
     systemInfo: '系统信息'
   },
   // [ADD END] 发票国际化 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+  // [ADD START] 费用国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  expense: {
+    title: '费用管理',
+    no: '费用编号',
+    noPlaceholder: '请输入费用编号',
+    noAutoGenerate: '系统自动生成',
+    customerName: '客户名称',
+    contractName: '合同名称',
+    contractPlaceholder: '请选择合同',
+    type: '费用类型',
+    typeRequired: '费用类型不能为空',
+    amount: '费用金额',
+    amountPlaceholder: '请输入费用金额',
+    amountRequired: '费用金额不能为空',
+    expenseDate: '费用日期',
+    expenseDatePlaceholder: '请选择费用日期',
+    ownerUserName: '负责人',
+    remark: '备注',
+    createTime: '创建时间',
+    exportFileName: '费用',
+    paramError: '参数错误，费用不能为空！'
+  },
+  // [ADD END] 费用国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  // [ADD START] 报销国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  reimbursement: {
+    title: '报销管理',
+    no: '报销编号',
+    noPlaceholder: '请输入报销编号',
+    noAutoGenerate: '系统自动生成',
+    customerName: '客户名称',
+    contractName: '合同名称',
+    contractPlaceholder: '请选择合同',
+    type: '报销类型',
+    typeRequired: '报销类型不能为空',
+    totalAmount: '报销金额',
+    totalAmountPlaceholder: '请输入报销金额',
+    totalAmountRequired: '报销金额不能为空',
+    status: '状态',
+    reimbursementDate: '报销日期',
+    reimbursementDatePlaceholder: '请选择报销日期',
+    ownerUserName: '负责人',
+    remark: '备注',
+    createTime: '创建时间',
+    exportFileName: '报销',
+    submit: '提交审批',
+    submitConfirm: '确认提交审批？',
+    submitSuccess: '提交审批成功',
+    paramError: '参数错误，报销不能为空！'
+  },
+  // [ADD END] 报销国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   receivablePlan: {
     title: '回款计划',
     period: '期数',

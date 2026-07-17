@@ -504,6 +504,60 @@ export default {
     systemInfo: 'معلومات النظام'
   },
   // [ADD END] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+  // [ADD START] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  expense: {
+    title: 'إدارة المصروفات',
+    no: 'رقم المصروف',
+    noPlaceholder: 'يرجى إدخال رقم المصروف',
+    noAutoGenerate: 'يتم إنشاؤه تلقائياً',
+    customerName: 'اسم العميل',
+    contractName: 'اسم العقد',
+    contractPlaceholder: 'يرجى اختيار العقد',
+    type: 'نوع المصروف',
+    typeRequired: 'نوع المصروف مطلوب',
+    amount: 'المبلغ',
+    amountPlaceholder: 'يرجى إدخال المبلغ',
+    amountRequired: 'المبلغ مطلوب',
+    expenseDate: 'تاريخ المصروف',
+    expenseDatePlaceholder: 'يرجى اختيار التاريخ',
+    ownerUserName: 'المسؤول',
+    remark: 'ملاحظات',
+    createTime: 'وقت الإنشاء',
+    exportFileName: 'مصروفات',
+    paramError: 'خطأ في المعلمة، المصروف لا يمكن أن يكون فارغاً!'
+  },
+  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  // [ADD START] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  reimbursement: {
+    title: 'إدارة التعويضات',
+    no: 'رقم التعويض',
+    noPlaceholder: 'يرجى إدخال الرقم',
+    noAutoGenerate: 'يتم إنشاؤه تلقائياً',
+    customerName: 'اسم العميل',
+    contractName: 'اسم العقد',
+    contractPlaceholder: 'يرجى اختيار العقد',
+    type: 'النوع',
+    typeRequired: 'النوع مطلوب',
+    totalAmount: 'المبلغ',
+    totalAmountPlaceholder: 'يرجى إدخال المبلغ',
+    totalAmountRequired: 'المبلغ مطلوب',
+    status: 'الحالة',
+    reimbursementDate: 'التاريخ',
+    reimbursementDatePlaceholder: 'يرجى اختيار التاريخ',
+    ownerUserName: 'المسؤول',
+    remark: 'ملاحظات',
+    createTime: 'وقت الإنشاء',
+    exportFileName: 'تعويضات',
+    submit: 'تقديم',
+    submitConfirm: 'تأكيد التقديم؟',
+    submitSuccess: 'تم التقديم بنجاح',
+    paramError: 'خطأ في المعلمة، التعويض لا يمكن أن يكون فارغاً!'
+  },
+  // [ADD END] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  receivablePlan: {
+    title: 'خطة المستحقات',
+  },
+  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   receivablePlan: {
     title: 'خطة المستحقات',
     period: 'الفترة',
