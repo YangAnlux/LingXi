@@ -994,6 +994,8 @@ export default {
     actionAssign: 'Assign',
     assignTitle: 'Assign Handler',
     assignPlaceholder: 'Select handler',
-    assignSuccess: 'Handler assigned successfully'
+    customerIdPlaceholder: 'Select customer',
+    customerIdRequired: 'Customer is required',
+    assignSuccess: 'Handler assigned successfully',
   }
 }

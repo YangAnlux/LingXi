@@ -975,6 +975,8 @@ export default {
     assignSuccess: '分配处理人成功',
     assignTitle: '分配处理人',
     assignPlaceholder: '请选择处理人',
+    customerIdPlaceholder: '请选择客户',
+    customerIdRequired: '客户不能为空',
     basicInfoTab: '基本信息',
     recordTab: '处理记录',
     recordFromStatus: '变更前状态',

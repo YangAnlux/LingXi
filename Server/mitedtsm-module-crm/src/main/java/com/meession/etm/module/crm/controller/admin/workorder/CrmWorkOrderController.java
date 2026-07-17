@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.meession.etm.framework.common.pojo.CommonResult;
 import com.meession.etm.framework.common.pojo.PageResult;
 import com.meession.etm.framework.common.util.collection.MapUtils;
+import com.meession.etm.framework.common.util.number.NumberUtils;
 import com.meession.etm.framework.common.util.object.BeanUtils;
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderAssignReqVO;
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderPageReqVO;
@@ -13,8 +14,10 @@ import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWo
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderSatisfactionReqVO;
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderSaveReqVO;
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderStatisticsRespVO;
+import com.meession.etm.module.crm.dal.dataobject.customer.CrmCustomerDO;
 import com.meession.etm.module.crm.dal.dataobject.workorder.CrmWorkOrderDO;
 import com.meession.etm.module.crm.dal.dataobject.workorder.CrmWorkOrderRecordDO;
+import com.meession.etm.module.crm.service.customer.CrmCustomerService;
 import com.meession.etm.module.crm.service.workorder.CrmWorkOrderRecordService;
 import com.meession.etm.module.crm.service.workorder.CrmWorkOrderService;
 import com.meession.etm.module.system.api.user.AdminUserApi;
@@ -31,8 +34,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static com.meession.etm.framework.common.pojo.CommonResult.success;
+import static com.meession.etm.framework.common.util.collection.CollectionUtils.convertListByFlatMap;
 import static com.meession.etm.framework.common.util.collection.CollectionUtils.convertSet;
 
 @Tag(name = "管理后台 - CRM 工单")
@@ -49,6 +54,11 @@ public class CrmWorkOrderController {
 
     @Resource
     private AdminUserApi adminUserApi;
+
+    // [ADD START] 注入客户 Service - 2026-07-17 - Cailei
+    @Resource
+    private CrmCustomerService customerService;
+    // [ADD END] 注入客户 Service - 2026-07-17 - Cailei
 
     @PostMapping("/create")
     @Operation(summary = "创建工单")
@@ -167,17 +177,26 @@ public class CrmWorkOrderController {
         return buildWorkOrderDetailList(Collections.singletonList(workOrder)).get(0);
     }
 
+    // [MODIFY] 填充处理人名称、客户名称、创建人名称 - 2026-07-17 - Cailei
     private List<CrmWorkOrderRespVO> buildWorkOrderDetailList(List<CrmWorkOrderDO> workOrderList) {
         if (CollUtil.isEmpty(workOrderList)) {
             return Collections.emptyList();
         }
-        // 获取处理人列表
+        // 获取客户列表
+        Map<Long, CrmCustomerDO> customerMap = customerService.getCustomerMap(
+                convertSet(workOrderList, CrmWorkOrderDO::getCustomerId));
+        // 获取处理人列表 和 创建人列表
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(
-                convertSet(workOrderList, CrmWorkOrderDO::getAssigneeId));
-        // 拼接数据：填充 assigneeName
+                convertListByFlatMap(workOrderList,
+                        wo -> Stream.of(wo.getAssigneeId(), NumberUtils.parseLong(wo.getCreator()))));
+        // 拼接数据：填充 customerName、assigneeName、creatorName
         return BeanUtils.toBean(workOrderList, CrmWorkOrderRespVO.class, workOrderVO -> {
+            MapUtils.findAndThen(customerMap, workOrderVO.getCustomerId(),
+                    customer -> workOrderVO.setCustomerName(customer.getName()));
             MapUtils.findAndThen(userMap, workOrderVO.getAssigneeId(),
                     user -> workOrderVO.setAssigneeName(user.getNickname()));
+            MapUtils.findAndThen(userMap, NumberUtils.parseLong(workOrderVO.getCreator()),
+                    user -> workOrderVO.setCreatorName(user.getNickname()));
         });
     }
     // [ADD END] 填充处理人名称 - 2026-07-17 - Cailei

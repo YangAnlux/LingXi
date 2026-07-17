@@ -22,6 +22,25 @@
       </el-row>
       <el-row>
         <el-col :span="12">
+          <!-- 23软件工程4班蔡磊202305566515 -->
+          <el-form-item :label="t('workorder.customerName')" prop="customerId">
+            <el-select
+              v-model="formData.customerId"
+              :placeholder="t('workorder.customerIdPlaceholder')"
+              class="w-1/1"
+              clearable
+              filterable
+            >
+              <el-option
+                v-for="item in customerList"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
           <el-form-item :label="t('workorder.priority')" prop="priority">
             <el-select v-model="formData.priority" :placeholder="t('workorder.priorityPlaceholder')" class="w-1/1">
               <el-option value="LOW" :label="t('workorder.priorityLow')" />
@@ -31,6 +50,8 @@
             </el-select>
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-form-item :label="t('workorder.status')" prop="status">
             <el-select v-model="formData.status" :placeholder="t('workorder.statusPlaceholder')" class="w-1/1">
@@ -58,6 +79,8 @@
 </template>
 <script lang="ts" setup>
 import * as WorkOrderApi from '@/api/crm/workorder'
+// 23软件工程4班蔡磊202305566515
+import * as CustomerApi from '@/api/crm/customer'
 
 const { t } = useI18n('crm')
 const message = useMessage()
@@ -66,17 +89,21 @@ const dialogVisible = ref(false)
 const dialogTitle = ref('')
 const formLoading = ref(false)
 const formType = ref('')
+// 23软件工程4班蔡磊202305566515 - 客户列表
+const customerList = ref<CustomerApi.CustomerVO[]>([])
 const formData = ref({
   id: undefined,
   title: undefined,
   type: undefined,
   priority: 'NORMAL',
   status: '待处理',
+  customerId: undefined,
   content: undefined
 })
 const formRules = reactive({
   title: [{ required: true, message: t('workorder.titleRequired'), trigger: 'blur' }],
-  priority: [{ required: true, message: t('workorder.priorityRequired'), trigger: 'change' }]
+  priority: [{ required: true, message: t('workorder.priorityRequired'), trigger: 'change' }],
+  customerId: [{ required: true, message: t('workorder.customerIdRequired'), trigger: 'change' }]
 })
 const formRef = ref()
 
@@ -86,6 +113,8 @@ const open = async (type: string, id?: number) => {
   dialogTitle.value = t('action.' + type, { scope: 'common' })
   formType.value = type
   resetForm()
+  // 23软件工程4班蔡磊202305566515 - 加载客户列表
+  customerList.value = await CustomerApi.getCustomerSimpleList()
   if (id) {
     formLoading.value = true
     try {
@@ -128,6 +157,7 @@ const resetForm = () => {
     type: undefined,
     priority: 'NORMAL',
     status: '待处理',
+    customerId: undefined,
     content: undefined
   }
   formRef.value?.resetFields()

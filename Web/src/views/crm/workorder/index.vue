@@ -141,7 +141,7 @@
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column :label="t('common.action')" align="center" width="420" fixed="right">
+      <el-table-column :label="t('common.action')" align="center" width="280" fixed="right">
         <template #default="scope">
           <el-button
             v-if="scope.row.status === '待处理' || scope.row.status === '已退回'"

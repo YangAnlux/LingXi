@@ -73,6 +73,12 @@ public class CrmWorkOrderRespVO {
     @ExcelProperty("创建人")
     private String creator;
 
+    // [ADD START] 创建人名称 - 2026-07-17 - Cailei
+    @Schema(description = "创建人名称", example = "张三")
+    @ExcelProperty("创建人名称")
+    private String creatorName;
+    // [ADD END] 创建人名称 - 2026-07-17 - Cailei
+
     // 23软件工程4班蔡磊202305566515
     @Schema(description = "满意度评分（1-5）", example = "5")
     @ExcelProperty("满意度评分")

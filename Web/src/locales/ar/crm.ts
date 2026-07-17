@@ -556,10 +556,6 @@ export default {
   // [ADD END] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   receivablePlan: {
     title: 'خطة المستحقات',
-  },
-  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  receivablePlan: {
-    title: 'خطة المستحقات',
     period: 'الفترة',
     contractId: 'العقد',
     price: 'المبلغ المخطط',
@@ -994,6 +990,8 @@ export default {
     actionAssign: 'تعيين',
     assignTitle: 'تعيين المعالج',
     assignPlaceholder: 'يرجى اختيار المعالج',
-    assignSuccess: 'تم تعيين المعالج بنجاح'
+    customerIdPlaceholder: 'يرجى اختيار العميل',
+    customerIdRequired: 'يرجى اختيار العميل',
+    assignSuccess: 'تم تعيين المعالج بنجاح',
   }
 }
