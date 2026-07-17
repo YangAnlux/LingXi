@@ -25,8 +25,8 @@ pnpm-debug.log*
 # Frontend build output
 /Web/dist/
 /Web/dist-*/
+/Web/coverage/
 /MallFrontend/unpackage/
-**/coverage/
 # Tool caches and generated type declarations
 **/.cache/
 **/.vite/
@@ -43,9 +43,3 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 Desktop.ini
-
-/task/
-/testPhase/
-/*.md
-/WorkLogs/
-/script/

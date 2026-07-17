@@ -149,6 +149,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <mainClass>com.meession.etm.server.MitedtsmServerApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -355,9 +355,7 @@ export default {
     // Messages
     submitAuditConfirm: 'هل أنت متأكد من تقديم [{name}] للتدقيق؟',
     submitAuditSuccess: 'تم تقديم التدقيق بنجاح!',
-    paramError: 'خطأ في المعلمة، العقد لا يمكن أن يكون فارغاً!',
-    // أزرار العملية
-    save: 'حفظ',
+    paramError: 'خطأ في المعلمة، لا يمكن أن يكون العقد فارغاً!',
     // Tab labels
     followUpTab: 'سجلات المتابعة',
     basicInfoTab: 'المعلومات الأساسية',
@@ -371,7 +369,7 @@ export default {
     contractPrice: 'سعر العقد',
     contractPriceRequired: 'لا يمكن أن يكون سعر العقد فارغاً',
     // Dialog
-    // [DELETE] مفتاح مكرر موجود بالفعل - 2026-07-16 - waithooo
+    save: 'حفظ',
     // Config related
     configTitle: 'إعدادات تكوين العقد',
     notifyEnabled: 'إشعار مسبق',
@@ -462,102 +460,10 @@ export default {
     submitAuditSuccess: 'تم تقديم التدقيق بنجاح!',
     createReceivable: 'إنشاء مستحق',
     basicInfoTab: 'المعلومات الأساسية',
-    operateLogTab: 'سجل العمليات'
-  },
-  // [ADD START] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-  invoice: {
-    title: 'إدارة الفواتير',
-    no: 'رقم الفاتورة',
-    invoiceNo: 'رقم الفاتورة',
-    customerName: 'اسم العميل',
-    contractNo: 'رقم العقد',
-    contractName: 'اسم العقد',
-    amount: 'مبلغ الفاتورة',
-    type: 'نوع الفاتورة',
-    status: 'حالة الفاتورة',
-    title_field: 'عنوان الفاتورة',
-    taxNo: 'الرقم الضريبي',
-    issueDate: 'تاريخ الإصدار',
-    remark: 'ملاحظة',
-    ownerUserName: 'المالك',
-    creatorName: 'المنشئ',
-    createTime: 'وقت الإنشاء',
-    updateTime: 'وقت التحديث',
-    noPlaceholder: 'أدخل رقم الفاتورة',
-    invoiceNoPlaceholder: 'أدخل رقم الفاتورة',
-    exportFileName: 'فاتورة',
-    createInvoice: 'إنشاء فاتورة',
-    basicInfoTab: 'المعلومات الأساسية',
     operateLogTab: 'سجل العمليات',
-    noAutoGenerate: 'تم إنشاؤه تلقائياً',
-    contractPlaceholder: 'الرجاء اختيار العقد',
-    amountPlaceholder: 'الرجاء إدخال مبلغ الفاتورة',
-    invoiceNoRequired: 'رقم الفاتورة مطلوب',
-    contractIdRequired: 'العقد مطلوب',
-    typeRequired: 'نوع الفاتورة مطلوب',
-    amountRequired: 'مبلغ الفاتورة مطلوب',
-    titlePlaceholder: 'الرجاء إدخال عنوان الفاتورة',
-    taxNoPlaceholder: 'الرجاء إدخال الرقم الضريبي',
-    issueDatePlaceholder: 'الرجاء اختيار تاريخ الإصدار',
-    paramError: 'خطأ في المعلمة، الفاتورة لا يمكن أن تكون فارغة!',
     teamMemberTab: 'أعضاء الفريق',
     systemInfo: 'معلومات النظام'
   },
-  // [ADD END] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-  // [ADD START] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  expense: {
-    title: 'إدارة المصروفات',
-    no: 'رقم المصروف',
-    noPlaceholder: 'يرجى إدخال رقم المصروف',
-    noAutoGenerate: 'يتم إنشاؤه تلقائياً',
-    customerName: 'اسم العميل',
-    contractName: 'اسم العقد',
-    contractPlaceholder: 'يرجى اختيار العقد',
-    type: 'نوع المصروف',
-    typeRequired: 'نوع المصروف مطلوب',
-    amount: 'المبلغ',
-    amountPlaceholder: 'يرجى إدخال المبلغ',
-    amountRequired: 'المبلغ مطلوب',
-    expenseDate: 'تاريخ المصروف',
-    expenseDatePlaceholder: 'يرجى اختيار التاريخ',
-    ownerUserName: 'المسؤول',
-    remark: 'ملاحظات',
-    createTime: 'وقت الإنشاء',
-    exportFileName: 'مصروفات',
-    paramError: 'خطأ في المعلمة، المصروف لا يمكن أن يكون فارغاً!'
-  },
-  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  // [ADD START] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  reimbursement: {
-    title: 'إدارة التعويضات',
-    no: 'رقم التعويض',
-    noPlaceholder: 'يرجى إدخال الرقم',
-    noAutoGenerate: 'يتم إنشاؤه تلقائياً',
-    customerName: 'اسم العميل',
-    contractName: 'اسم العقد',
-    contractPlaceholder: 'يرجى اختيار العقد',
-    type: 'النوع',
-    typeRequired: 'النوع مطلوب',
-    totalAmount: 'المبلغ',
-    totalAmountPlaceholder: 'يرجى إدخال المبلغ',
-    totalAmountRequired: 'المبلغ مطلوب',
-    status: 'الحالة',
-    reimbursementDate: 'التاريخ',
-    reimbursementDatePlaceholder: 'يرجى اختيار التاريخ',
-    ownerUserName: 'المسؤول',
-    remark: 'ملاحظات',
-    createTime: 'وقت الإنشاء',
-    exportFileName: 'تعويضات',
-    submit: 'تقديم',
-    submitConfirm: 'تأكيد التقديم؟',
-    submitSuccess: 'تم التقديم بنجاح',
-    paramError: 'خطأ في المعلمة، التعويض لا يمكن أن يكون فارغاً!'
-  },
-  // [ADD END] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  receivablePlan: {
-    title: 'خطة المستحقات',
-  },
-  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   receivablePlan: {
     title: 'خطة المستحقات',
     period: 'الفترة',
@@ -589,8 +495,7 @@ export default {
     createReceivable: 'إنشاء مستحق',
     basicInfoTab: 'المعلومات الأساسية',
     operateLogTab: 'سجل العمليات',
-    teamMemberTab: 'أعضاء الفريق',
-    systemInfo: 'معلومات النظام'
+    teamMemberTab: 'أعضاء الفريق'
   },
   followUp: {
     title: 'سجل المتابعة',

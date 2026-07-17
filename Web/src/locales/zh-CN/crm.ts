@@ -356,8 +356,6 @@ export default {
     submitAuditConfirm: '您确定提交【{name}】审核吗？',
     submitAuditSuccess: '提交审核成功！',
     paramError: '参数错误，合同不能为空！',
-    // 操作按钮
-    save: '保存',
     // Tab 标签
     followUpTab: '跟进记录',
     basicInfoTab: '详细资料',
@@ -371,7 +369,7 @@ export default {
     contractPrice: '合同价格',
     contractPriceRequired: '合同价格不能为空',
     // 弹窗
-    // [DELETE] 重复键已存在 - 2026-07-16 - waithooo
+    save: '保存',
     // 配置相关
     configTitle: '合同配置设置',
     notifyEnabled: '提前提醒设置',
@@ -466,96 +464,6 @@ export default {
     teamMemberTab: '团队成员',
     systemInfo: '系统信息'
   },
-  // [ADD START] 发票国际化 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-  invoice: {
-    title: '发票管理',
-    no: '发票编号',
-    invoiceNo: '发票号码',
-    customerName: '客户名称',
-    contractNo: '合同编号',
-    contractName: '合同名称',
-    amount: '开票金额',
-    type: '发票类型',
-    status: '发票状态',
-    title_field: '发票抬头',
-    taxNo: '税号',
-    issueDate: '开票日期',
-    remark: '备注',
-    ownerUserName: '负责人',
-    creatorName: '创建人',
-    createTime: '创建时间',
-    updateTime: '更新时间',
-    noPlaceholder: '请输入发票编号',
-    invoiceNoPlaceholder: '请输入发票号码',
-    exportFileName: '发票',
-    createInvoice: '创建发票',
-    basicInfoTab: '详细资料',
-    operateLogTab: '操作日志',
-    noAutoGenerate: '系统自动生成',
-    contractPlaceholder: '请选择合同',
-    amountPlaceholder: '请输入开票金额',
-    invoiceNoRequired: '发票号码不能为空',
-    contractIdRequired: '合同不能为空',
-    typeRequired: '发票类型不能为空',
-    amountRequired: '开票金额不能为空',
-    titlePlaceholder: '请输入发票抬头',
-    taxNoPlaceholder: '请输入税号',
-    issueDatePlaceholder: '请选择开票日期',
-    paramError: '参数错误，发票不能为空！',
-    teamMemberTab: '团队成员',
-    systemInfo: '系统信息'
-  },
-  // [ADD END] 发票国际化 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-  // [ADD START] 费用国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  expense: {
-    title: '费用管理',
-    no: '费用编号',
-    noPlaceholder: '请输入费用编号',
-    noAutoGenerate: '系统自动生成',
-    customerName: '客户名称',
-    contractName: '合同名称',
-    contractPlaceholder: '请选择合同',
-    type: '费用类型',
-    typeRequired: '费用类型不能为空',
-    amount: '费用金额',
-    amountPlaceholder: '请输入费用金额',
-    amountRequired: '费用金额不能为空',
-    expenseDate: '费用日期',
-    expenseDatePlaceholder: '请选择费用日期',
-    ownerUserName: '负责人',
-    remark: '备注',
-    createTime: '创建时间',
-    exportFileName: '费用',
-    paramError: '参数错误，费用不能为空！'
-  },
-  // [ADD END] 费用国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  // [ADD START] 报销国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  reimbursement: {
-    title: '报销管理',
-    no: '报销编号',
-    noPlaceholder: '请输入报销编号',
-    noAutoGenerate: '系统自动生成',
-    customerName: '客户名称',
-    contractName: '合同名称',
-    contractPlaceholder: '请选择合同',
-    type: '报销类型',
-    typeRequired: '报销类型不能为空',
-    totalAmount: '报销金额',
-    totalAmountPlaceholder: '请输入报销金额',
-    totalAmountRequired: '报销金额不能为空',
-    status: '状态',
-    reimbursementDate: '报销日期',
-    reimbursementDatePlaceholder: '请选择报销日期',
-    ownerUserName: '负责人',
-    remark: '备注',
-    createTime: '创建时间',
-    exportFileName: '报销',
-    submit: '提交审批',
-    submitConfirm: '确认提交审批？',
-    submitSuccess: '提交审批成功',
-    paramError: '参数错误，报销不能为空！'
-  },
-  // [ADD END] 报销国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   receivablePlan: {
     title: '回款计划',
     period: '期数',
@@ -587,8 +495,7 @@ export default {
     createReceivable: '创建回款',
     basicInfoTab: '详细资料',
     operateLogTab: '操作日志',
-    teamMemberTab: '团队成员',
-    systemInfo: '系统信息'
+    teamMemberTab: '团队成员'
   },
   followUp: {
     title: '跟进记录',

@@ -4,7 +4,5 @@ export default {
   home: 'Home',
   analysis: 'Analysis',
   workplace: 'Workplace',
-  // [ADD START] Invoice detail route title - 2026-07-16 - waithooo
-  crmInvoiceDetail: 'Invoice Detail'
-  // [ADD END] Invoice detail route title - 2026-07-16 - waithooo
+  reportTask: 'Task Management'
 }

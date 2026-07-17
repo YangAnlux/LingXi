@@ -356,8 +356,6 @@ export default {
     submitAuditConfirm: 'Are you sure to submit [{name}] for audit?',
     submitAuditSuccess: 'Submit audit successfully!',
     paramError: 'Parameter error, contract cannot be empty!',
-    // Operation buttons
-    save: 'Save',
     // Tab labels
     followUpTab: 'Follow Up Records',
     basicInfoTab: 'Basic Info',
@@ -371,7 +369,7 @@ export default {
     contractPrice: 'Contract Price',
     contractPriceRequired: 'Contract price cannot be empty',
     // Dialog
-    // [DELETE] Duplicate key already exists - 2026-07-16 - waithooo
+    save: 'Save',
     // Config related
     configTitle: 'Contract Config Settings',
     notifyEnabled: 'Advance Notification',
@@ -426,7 +424,7 @@ export default {
     customerId: 'Customer',
     customerName: 'Customer Name',
     contractId: 'Contract',
-    contractNo: 'Contract No.',
+    contractNo: 'Contract No',
     contractName: 'Contract Name',
     price: 'Receivable Price',
     returnType: 'Return Type',
@@ -462,102 +460,10 @@ export default {
     submitAuditSuccess: 'Submit audit successfully!',
     createReceivable: 'Create Receivable',
     basicInfoTab: 'Basic Info',
-    operateLogTab: 'Operation Log'
-  },
-  // [ADD START] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-  invoice: {
-    title: 'Invoice Management',
-    no: 'Invoice No.',
-    invoiceNo: 'Invoice Number',
-    customerName: 'Customer Name',
-    contractNo: 'Contract No.',
-    contractName: 'Contract Name',
-    amount: 'Invoice Amount',
-    type: 'Invoice Type',
-    status: 'Invoice Status',
-    title_field: 'Invoice Title',
-    taxNo: 'Tax Number',
-    issueDate: 'Issue Date',
-    remark: 'Remark',
-    ownerUserName: 'Owner',
-    creatorName: 'Creator',
-    createTime: 'Create Time',
-    updateTime: 'Update Time',
-    noPlaceholder: 'Enter Invoice No.',
-    invoiceNoPlaceholder: 'Enter Invoice Number',
-    exportFileName: 'Invoice',
-    createInvoice: 'Create Invoice',
-    basicInfoTab: 'Basic Info',
     operateLogTab: 'Operation Log',
-    noAutoGenerate: 'Auto-generated',
-    contractPlaceholder: 'Please select contract',
-    amountPlaceholder: 'Please enter invoice amount',
-    invoiceNoRequired: 'Invoice number is required',
-    contractIdRequired: 'Contract is required',
-    typeRequired: 'Invoice type is required',
-    amountRequired: 'Invoice amount is required',
-    titlePlaceholder: 'Please enter invoice title',
-    taxNoPlaceholder: 'Please enter tax number',
-    issueDatePlaceholder: 'Please select issue date',
-    paramError: 'Parameter error, invoice cannot be empty!',
     teamMemberTab: 'Team Members',
     systemInfo: 'System Info'
   },
-  // [ADD END] Invoice i18n - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-  // [ADD START] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  expense: {
-    title: 'Expense Management',
-    no: 'Expense No.',
-    noPlaceholder: 'Please enter expense no.',
-    noAutoGenerate: 'Auto-generated',
-    customerName: 'Customer Name',
-    contractName: 'Contract Name',
-    contractPlaceholder: 'Please select contract',
-    type: 'Expense Type',
-    typeRequired: 'Expense type is required',
-    amount: 'Amount',
-    amountPlaceholder: 'Please enter amount',
-    amountRequired: 'Amount is required',
-    expenseDate: 'Expense Date',
-    expenseDatePlaceholder: 'Please select date',
-    ownerUserName: 'Owner',
-    remark: 'Remark',
-    createTime: 'Create Time',
-    exportFileName: 'Expense',
-    paramError: 'Parameter error, expense cannot be empty!'
-  },
-  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  // [ADD START] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  reimbursement: {
-    title: 'Reimbursement',
-    no: 'Reimbursement No.',
-    noPlaceholder: 'Please enter no.',
-    noAutoGenerate: 'Auto-generated',
-    customerName: 'Customer Name',
-    contractName: 'Contract Name',
-    contractPlaceholder: 'Please select contract',
-    type: 'Type',
-    typeRequired: 'Type is required',
-    totalAmount: 'Amount',
-    totalAmountPlaceholder: 'Please enter amount',
-    totalAmountRequired: 'Amount is required',
-    status: 'Status',
-    reimbursementDate: 'Date',
-    reimbursementDatePlaceholder: 'Please select date',
-    ownerUserName: 'Owner',
-    remark: 'Remark',
-    createTime: 'Create Time',
-    exportFileName: 'Reimbursement',
-    submit: 'Submit',
-    submitConfirm: 'Confirm submit?',
-    submitSuccess: 'Submit success',
-    paramError: 'Parameter error, reimbursement cannot be empty!'
-  },
-  // [ADD END] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-  receivablePlan: {
-    title: 'Receivable Plan',
-  },
-  // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   receivablePlan: {
     title: 'Receivable Plan',
     period: 'Period',
@@ -589,8 +495,7 @@ export default {
     createReceivable: 'Create Receivable',
     basicInfoTab: 'Basic Info',
     operateLogTab: 'Operation Log',
-    teamMemberTab: 'Team Members',
-    systemInfo: 'System Info'
+    teamMemberTab: 'Team Members'
   },
   followUp: {
     title: 'Follow Up Record',

@@ -103,35 +103,6 @@ public interface ErrorCodeConstants {
     ErrorCode FOLLOW_UP_RECORD_NOT_EXISTS = new ErrorCode(1_020_013_000, "跟进记录不存在");
     ErrorCode FOLLOW_UP_RECORD_DELETE_DENIED = new ErrorCode(1_020_013_001, "删除跟进记录失败，原因：没有权限");
 
-    // [ADD START] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-    // ========== 发票管理 1_020_015_000 ==========
-    ErrorCode INVOICE_NOT_EXISTS = new ErrorCode(1_020_015_000, "发票不存在");
-    ErrorCode INVOICE_NO_EXISTS = new ErrorCode(1_020_015_001, "生成发票序列号重复，请重试");
-    ErrorCode INVOICE_INVOICE_NO_EXISTS = new ErrorCode(1_020_015_002, "发票号码已存在");
-    ErrorCode INVOICE_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_003, "创建发票失败，原因：开票金额超出合同剩余可开票金额");
-    ErrorCode INVOICE_UPDATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_004, "更新发票失败，原因：开票金额超出合同剩余可开票金额");
-    ErrorCode INVOICE_DELETE_FAIL_IS_ISSUED = new ErrorCode(1_020_015_005, "删除发票失败，原因：已开票的发票不能删除");
-    // [MODIFY] 已开票发票校验用别名 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-    // 原始: INVOICE_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT, ServiceImpl 引用为 INVOICE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT
-    ErrorCode INVOICE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT = new ErrorCode(1_020_015_003, "创建发票失败，原因：开票金额超出合同剩余可开票金额");
-    // [ADD START] 发票状态不允许更新 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-    ErrorCode INVOICE_UPDATE_FAIL_STATUS_NOT_PENDING = new ErrorCode(1_020_015_006, "更新发票失败，原因：发票不是待开票状态");
-    // [ADD END] 发票状态不允许更新 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-    // [ADD END] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
-
-    // [ADD START] 费用 1_020_016_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-    // ========== 费用管理 1_020_016_000 ==========
-    ErrorCode EXPENSE_NOT_EXISTS = new ErrorCode(1_020_016_000, "费用不存在");
-    ErrorCode EXPENSE_NO_EXISTS = new ErrorCode(1_020_016_001, "生成费用序列号重复，请重试");
-    // [ADD END] 费用 1_020_016_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-
-    // [ADD START] 报销 1_020_017_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
-    ErrorCode REIMBURSEMENT_NOT_EXISTS = new ErrorCode(1_020_017_000, "报销不存在");
-    ErrorCode REIMBURSEMENT_NO_EXISTS = new ErrorCode(1_020_017_001, "生成报销序列号重复，请重试");
-    ErrorCode REIMBURSEMENT_UPDATE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_002, "更新报销失败，原因：只有待提交状态的报销可编辑");
-    ErrorCode REIMBURSEMENT_DELETE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_003, "删除报销失败，原因：只有待提交状态的报销可删除");
-    ErrorCode REIMBURSEMENT_SUBMIT_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_004, "报销提交审核失败，原因：报销不处于待提交状态");
-    ErrorCode REIMBURSEMENT_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_017_005, "更新报销审核状态失败，原因：报销不是审核中状态");
-    // [ADD END] 报销 1_020_017_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // ========== 数据统计 1_020_014_000 ==========
 
 }

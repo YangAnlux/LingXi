@@ -1,8 +1,8 @@
 allowBuilds:
-  '@parcel/watcher': false
-  '@swc/core': false
-  core-js: false
-  core-js-pure: false
-  es5-ext: false
-  esbuild: false
-  vue-demi: false
+  '@parcel/watcher': true
+  '@swc/core': true
+  core-js: true
+  core-js-pure: true
+  es5-ext: true
+  esbuild: true
+  vue-demi: true

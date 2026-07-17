@@ -568,39 +568,6 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/crm/receivable/detail/index.vue')
       },
       {
-        path: 'invoice/detail/:id',
-        name: 'CrmInvoiceDetail',
-        meta: {
-          title: t('router.crmInvoiceDetail'),
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/invoice'
-        },
-        component: () => import('@/views/crm/invoice/detail/index.vue')
-      },
-      {
-        path: 'reimbursement/detail/:id',
-        name: 'CrmReimbursementDetail',
-        meta: {
-          title: t('router.crmReimbursementDetail'),
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/reimbursement'
-        },
-        component: () => import('@/views/crm/reimbursement/detail/index.vue')
-      },
-      {
-        path: 'expense/detail/:id',
-        name: 'CrmExpenseDetail',
-        meta: {
-          title: t('router.crmExpenseDetail'),
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/expense'
-        },
-        component: () => import('@/views/crm/expense/detail/index.vue')
-      },
-      {
         path: 'contact/detail/:id',
         name: 'CrmContactDetail',
         meta: {
@@ -727,6 +694,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
       }
     ]
   },
+  
   {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/Error/404.vue'),

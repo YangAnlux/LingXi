@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,14 +22,7 @@ public class TDengineTableInitRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        try {
-            // 初始化设备消息表
-            deviceMessageService.defineDeviceMessageStable();
-        } catch (Exception ex) {
-            // 初始化失败时打印错误消息并退出系统
-            log.error("[run][TDengine初始化设备消息表结构失败，系统无法正常运行，即将退出]", ex);
-            System.exit(1);
-        }
+        log.info("[run][TDengine表初始化已跳过，本地开发环境]");
     }
 
 }
