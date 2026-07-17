@@ -895,6 +895,10 @@ export default {
     statisticsByType: 'By Type',
     statisticsByStatus: 'By Status',
     statisticsByAssignee: 'By Assignee',
-    statisticsCount: 'Count'
+    statisticsCount: 'Count',
+    actionAssign: 'Assign',
+    assignTitle: 'Assign Handler',
+    assignPlaceholder: 'Select handler',
+    assignSuccess: 'Handler assigned successfully'
   }
 }

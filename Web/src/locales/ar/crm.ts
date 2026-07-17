@@ -895,6 +895,10 @@ export default {
     statisticsByType: 'حسب النوع',
     statisticsByStatus: 'حسب الحالة',
     statisticsByAssignee: 'حسب المعالج',
-    statisticsCount: 'العدد'
+    statisticsCount: 'العدد',
+    actionAssign: 'تعيين',
+    assignTitle: 'تعيين المعالج',
+    assignPlaceholder: 'يرجى اختيار المعالج',
+    assignSuccess: 'تم تعيين المعالج بنجاح'
   }
 }
