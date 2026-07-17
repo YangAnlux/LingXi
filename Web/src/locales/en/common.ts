@@ -369,6 +369,8 @@ export default {
     crmProductDetail: 'Product Detail',
     crmReimbursementDetail: 'Reimbursement Detail',
     crmExpenseDetail: 'Expense Detail',
+    crmRefundDetail: 'Refund Detail',
+    crmFinanceStatistics: 'Financial Summary',
     crmInvoiceDetail: 'Invoice Detail',
     // AI module
     aiImageSquare: 'Image Gallery',

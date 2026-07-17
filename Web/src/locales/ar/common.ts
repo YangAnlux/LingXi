@@ -369,6 +369,8 @@ export default {
     crmProductDetail: 'تفاصيل المنتج',
     crmReimbursementDetail: 'تفاصيل التعويض',
     crmExpenseDetail: 'تفاصيل المصروفات',
+    crmRefundDetail: 'تفاصيل المبلغ المسترد',
+    crmFinanceStatistics: 'الملخص المالي',
     crmInvoiceDetail: 'تفاصيل الفاتورة',
     // AI module
     aiImageSquare: 'صور الذكاء الاصطناعي',

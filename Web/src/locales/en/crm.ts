@@ -336,6 +336,7 @@ export default {
     // Placeholder
     namePlaceholder: 'Please enter contract name',
     noPlaceholder: 'Please enter contract no',
+    contractPlaceholder: 'Please select contract',
     customerIdPlaceholder: 'Please select customer',
     businessIdPlaceholder: 'Please select business',
     orderDatePlaceholder: 'Select order date',
@@ -524,6 +525,8 @@ export default {
     remark: 'Remark',
     createTime: 'Create Time',
     exportFileName: 'Expense',
+    operateLogTab: 'Operation Log',
+    teamMemberTab: 'Team Members',
     paramError: 'Parameter error, expense cannot be empty!'
   },
   // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
@@ -548,12 +551,59 @@ export default {
     remark: 'Remark',
     createTime: 'Create Time',
     exportFileName: 'Reimbursement',
+    operateLogTab: 'Operation Log',
+    teamMemberTab: 'Team Members',
     submit: 'Submit',
     submitConfirm: 'Confirm submit?',
     submitSuccess: 'Submit success',
+    viewApproval: 'View Approval',
     paramError: 'Parameter error, reimbursement cannot be empty!'
   },
   // [ADD END] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  // [ADD START] Refund i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  refund: {
+    title: 'Refund Management',
+    no: 'Refund No',
+    noPlaceholder: 'Please enter refund no',
+    noAutoGenerate: 'Auto-generated',
+    customerName: 'Customer Name',
+    contractName: 'Contract Name',
+    contractPlaceholder: 'Please select contract',
+    ownerUserName: 'Owner',
+    refundAmount: 'Refund Amount',
+    amountPlaceholder: 'Please enter refund amount',
+    amountRequired: 'Refund amount is required',
+    refundDate: 'Refund Date',
+    refundReason: 'Refund Reason',
+    reasonPlaceholder: 'Please enter refund reason',
+    refundType: 'Refund Type',
+    refundTypeFull: 'Full Refund',
+    refundTypePartial: 'Partial Refund',
+    typeRequired: 'Refund type is required',
+    status: 'Status',
+    statusDraft: 'Draft',
+    statusProcess: 'Approving',
+    statusApprove: 'Approved',
+    statusReject: 'Rejected',
+    auditStatus: 'Audit Status',
+    remark: 'Remark',
+    ownerUserDeptName: 'Department',
+    creatorName: 'Creator',
+    createTime: 'Create Time',
+    updateTime: 'Update Time',
+    customerIdRequired: 'Customer is required',
+    contractIdRequired: 'Contract is required',
+    submit: 'Submit',
+    submitConfirm: 'Confirm submit?',
+    submitSuccess: 'Submit success',
+    viewApproval: 'View Approval',
+    basicInfoTab: 'Basic Info',
+    operateLogTab: 'Operation Log',
+    teamMemberTab: 'Team Members',
+    exportFileName: 'Refund',
+    paramError: 'Parameter error, refund cannot be empty!'
+  },
+  // [ADD END] Refund i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
   receivablePlan: {
     title: 'Receivable Plan',
   },
@@ -576,6 +626,7 @@ export default {
     customerId: 'Customer',
     customerName: 'Customer Name',
     contractNo: 'Contract No',
+    contractNoPlaceholder: 'Please enter contract no',
     contractPrice: 'Contract Price',
     ownerUserName: 'Owner',
     createTime: 'Create Time',
@@ -614,6 +665,20 @@ export default {
     contentRequired: 'Follow up content cannot be empty',
     nextTimeRequired: 'Next contact time cannot be empty'
   },
+  // [ADD START] Finance Statistics i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  finance: {
+    title: 'Financial Summary',
+    receivable: 'Receivable',
+    invoice: 'Invoice',
+    expense: 'Expense',
+    reimbursement: 'Reimbursement',
+    refund: 'Refund',
+    count: 'Count',
+    amount: 'Amount (¥)',
+    countChart: 'Count by Module',
+    amountChart: 'Amount by Module'
+  },
+  // [ADD END] Finance Statistics i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
   clue: {
     title: 'Clue Management',
     name: 'Clue Name',
@@ -690,6 +755,7 @@ export default {
     contractAudit: 'Contract Audit',
     contractRemind: 'Contract Expiring',
     receivableAudit: 'Receivable Audit',
+    refundAudit: 'Pending Refund Review',
     receivablePlanRemind: 'Receivable Plan Remind',
     today: 'Today',
     total: 'Total',

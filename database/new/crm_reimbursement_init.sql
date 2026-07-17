@@ -40,6 +40,6 @@ INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_i
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6026, '报销管理提交', 'crm:reimbursement:submit', 3, 6, 6020, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
 
 INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6020, 'zh-CN', '报销管理');
-INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6020, 'en', 'Reimbursement Management');
+INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6020, 'en', 'Reimbursement');
 
 -- [ADD END] 报销表 + 菜单注册 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16

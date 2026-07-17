@@ -134,4 +134,14 @@ public interface ErrorCodeConstants {
     ErrorCode REIMBURSEMENT_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_017_005, "更新报销审核状态失败，原因：报销不是审核中状态");
     // [ADD END] 报销 1_020_017_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
 
+    // [ADD START] 退款 1_020_018_000 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+    // ========== 退款管理 1_020_018_000 ==========
+    ErrorCode REFUND_NOT_EXISTS = new ErrorCode(1_020_018_000, "退款不存在");
+    ErrorCode REFUND_NO_EXISTS = new ErrorCode(1_020_018_001, "生成退款序列号重复，请重试");
+    ErrorCode REFUND_UPDATE_FAIL_NOT_DRAFT = new ErrorCode(1_020_018_002, "更新退款失败，原因：只有待提交状态的退款可编辑");
+    ErrorCode REFUND_DELETE_FAIL_NOT_DRAFT = new ErrorCode(1_020_018_003, "删除退款失败，原因：只有待提交状态的退款可删除");
+    ErrorCode REFUND_SUBMIT_FAIL_NOT_DRAFT = new ErrorCode(1_020_018_004, "退款提交审核失败，原因：退款不处于待提交状态");
+    ErrorCode REFUND_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_018_005, "更新退款审核状态失败，原因：退款不是审核中状态");
+    // [ADD END] 退款 1_020_018_000 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+
 }

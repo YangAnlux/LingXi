@@ -336,6 +336,7 @@ export default {
     // Placeholder
     namePlaceholder: 'الرجاء إدخال اسم العقد',
     noPlaceholder: 'الرجاء إدخال رقم العقد',
+    contractPlaceholder: 'الرجاء اختيار العقد',
     customerIdPlaceholder: 'الرجاء تحديد العميل',
     businessIdPlaceholder: 'الرجاء تحديد العمل',
     orderDatePlaceholder: 'حدد تاريخ الطلب',
@@ -524,6 +525,8 @@ export default {
     remark: 'ملاحظات',
     createTime: 'وقت الإنشاء',
     exportFileName: 'مصروفات',
+    operateLogTab: 'سجل العمليات',
+    teamMemberTab: 'أعضاء الفريق',
     paramError: 'خطأ في المعلمة، المصروف لا يمكن أن يكون فارغاً!'
   },
   // [ADD END] Expense i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
@@ -548,12 +551,59 @@ export default {
     remark: 'ملاحظات',
     createTime: 'وقت الإنشاء',
     exportFileName: 'تعويضات',
+    operateLogTab: 'سجل العمليات',
+    teamMemberTab: 'أعضاء الفريق',
     submit: 'تقديم',
     submitConfirm: 'تأكيد التقديم؟',
     submitSuccess: 'تم التقديم بنجاح',
+    viewApproval: 'عرض الموافقة',
     paramError: 'خطأ في المعلمة، التعويض لا يمكن أن يكون فارغاً!'
   },
   // [ADD END] Reimbursement i18n - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  // [ADD START] Refund i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  refund: {
+    title: 'إدارة المبالغ المستردة',
+    no: 'رقم المبلغ المسترد',
+    noPlaceholder: 'يرجى إدخال رقم المبلغ المسترد',
+    noAutoGenerate: 'يتم إنشاؤه تلقائياً',
+    customerName: 'اسم العميل',
+    contractName: 'اسم العقد',
+    contractPlaceholder: 'يرجى اختيار العقد',
+    ownerUserName: 'المالك',
+    refundAmount: 'المبلغ المسترد',
+    amountPlaceholder: 'يرجى إدخال المبلغ المسترد',
+    amountRequired: 'المبلغ المسترد مطلوب',
+    refundDate: 'تاريخ الاسترداد',
+    refundReason: 'سبب الاسترداد',
+    reasonPlaceholder: 'يرجى إدخال سبب الاسترداد',
+    refundType: 'نوع الاسترداد',
+    refundTypeFull: 'استرداد كامل',
+    refundTypePartial: 'استرداد جزئي',
+    typeRequired: 'نوع الاسترداد مطلوب',
+    status: 'الحالة',
+    statusDraft: 'مسودة',
+    statusProcess: 'قيد الموافقة',
+    statusApprove: 'موافق عليه',
+    statusReject: 'مرفوض',
+    auditStatus: 'حالة الموافقة',
+    remark: 'ملاحظات',
+    ownerUserDeptName: 'القسم',
+    creatorName: 'المنشئ',
+    createTime: 'وقت الإنشاء',
+    updateTime: 'وقت التحديث',
+    customerIdRequired: 'العميل مطلوب',
+    contractIdRequired: 'العقد مطلوب',
+    submit: 'تقديم الموافقة',
+    submitConfirm: 'تأكيد تقديم الموافقة؟',
+    submitSuccess: 'تم تقديم الموافقة بنجاح',
+    viewApproval: 'عرض الموافقة',
+    basicInfoTab: 'المعلومات الأساسية',
+    operateLogTab: 'سجل العمليات',
+    teamMemberTab: 'أعضاء الفريق',
+    exportFileName: 'المبالغ المستردة',
+    paramError: 'خطأ في المعلمة، لا يمكن أن يكون المبلغ المسترد فارغاً!'
+  },
+  // [ADD END] Refund i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
   receivablePlan: {
     title: 'خطة المستحقات',
   },
@@ -576,6 +626,7 @@ export default {
     customerId: 'العميل',
     customerName: 'اسم العميل',
     contractNo: 'رقم العقد',
+    contractNoPlaceholder: 'الرجاء إدخال رقم العقد',
     contractPrice: 'سعر العقد',
     ownerUserName: 'المالك',
     createTime: 'وقت الإنشاء',
@@ -614,6 +665,20 @@ export default {
     contentRequired: 'لا يمكن أن يكون محتوى المتابعة فارغاً',
     nextTimeRequired: 'لا يمكن أن يكون وقت الاتصال التالي فارغاً'
   },
+  // [ADD START] Finance Statistics i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  finance: {
+    title: 'الملخص المالي',
+    receivable: 'المستحقات',
+    invoice: 'الفواتير',
+    expense: 'المصروفات',
+    reimbursement: 'التعويضات',
+    refund: 'المبالغ المستردة',
+    count: 'العدد',
+    amount: 'المبلغ',
+    countChart: 'العدد حسب الوحدة',
+    amountChart: 'المبلغ حسب الوحدة'
+  },
+  // [ADD END] Finance Statistics i18n - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
   clue: {
     title: 'إدارة الدلائل',
     name: 'اسم الدليل',
@@ -690,6 +755,7 @@ export default {
     contractAudit: 'تدقيق العقد',
     contractRemind: 'عقد ينتهي قريباً',
     receivableAudit: 'تدقيق المستحق',
+    refundAudit: 'مراجعة المبالغ المستردة المعلقة',
     receivablePlanRemind: 'تذكير خطة المستحق',
     today: 'اليوم',
     total: 'الإجمالي',

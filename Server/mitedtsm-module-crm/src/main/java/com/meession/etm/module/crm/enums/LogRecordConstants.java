@@ -196,4 +196,16 @@ public interface LogRecordConstants {
     String CRM_REIMBURSEMENT_SUBMIT_SUCCESS = "提交报销【{{#reimbursementNo}}】审批成功";
     // [ADD END] CRM_REIMBURSEMENT 报销 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
 
+    // [ADD START] CRM_REFUND 退款 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+    String CRM_REFUND_TYPE = "CRM 退款";
+    String CRM_REFUND_CREATE_SUB_TYPE = "创建退款";
+    String CRM_REFUND_CREATE_SUCCESS = "创建了退款【{{#refund.no}}】，金额【{{#refund.refundAmount}}】元";
+    String CRM_REFUND_UPDATE_SUB_TYPE = "更新退款";
+    String CRM_REFUND_UPDATE_SUCCESS = "更新了退款【{{#refund.no}}】：{_DIFF{#updateReqVO}}";
+    String CRM_REFUND_DELETE_SUB_TYPE = "删除退款";
+    String CRM_REFUND_DELETE_SUCCESS = "删除了退款【{{#refund.no}}】";
+    String CRM_REFUND_SUBMIT_SUB_TYPE = "提交退款审批";
+    String CRM_REFUND_SUBMIT_SUCCESS = "提交退款【{{#refundNo}}】审批成功";
+    // [ADD END] CRM_REFUND 退款 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+
 }

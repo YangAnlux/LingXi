@@ -372,6 +372,8 @@ export default {
     crmProductDetail: '产品详情',
     crmReimbursementDetail: '报销详情',
     crmExpenseDetail: '费用详情',
+    crmRefundDetail: '退款详情',
+    crmFinanceStatistics: '财务数据汇总',
     crmInvoiceDetail: '发票详情',
     // AI 模块
     aiImageSquare: '绘图作品',

@@ -46,6 +46,7 @@ INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_i
 -- 菜单国际化
 INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6004, 'zh-CN', '发票管理');
 INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6004, 'en', 'Invoice Management');
+INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6004, 'ar', 'إدارة الفواتير');
 
 -- =============================================
 -- 3. 字典类型与数据（发票类型 / 发票状态）
