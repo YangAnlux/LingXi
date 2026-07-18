@@ -54,6 +54,8 @@ public class CrmBpmnProcessDeployer implements CommandLineRunner {
         deployIfNotExists("crm-contract-audit", "合同审批", "/crm/contract");
         deployIfNotExists("crm-receivable-audit", "回款审批", "/crm/receivable");
         deployIfNotExists("crm-refund-audit", "退款审批", "/crm/refund");
+        // [MODIFY] 补全漏掉的报销审批部署 - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
+        deployIfNotExists("crm-reimbursement-audit", "报销审批", "/crm/reimbursement");
         log.info("[CrmBpmnProcessDeployer] 所有 CRM BPMN 流程定义部署检查完成");
     }
 
