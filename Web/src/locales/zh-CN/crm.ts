@@ -633,12 +633,16 @@ export default {
     finishStatusNo: '未完成',
     finishStatusYes: '已完成',
     receivablePrice: '已回款金额',
+    // [MODIFY] 补全语义不明的标签 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+    unreceivedPrice: '剩余未回款金额',
     exportFileName: '回款计划',
     paramError: '参数错误，回款计划不能为空！',
     createReceivable: '创建回款',
     basicInfoTab: '详细资料',
     operateLogTab: '操作日志',
     teamMemberTab: '团队成员',
+    // [MODIFY] 补全语义不明的标签，指明创建回款计划的用户 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+    creatorName: '创建人',
     systemInfo: '系统信息'
   },
   followUp: {

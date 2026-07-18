@@ -635,12 +635,15 @@ export default {
     finishStatusNo: 'Not Finished',
     finishStatusYes: 'Finished',
     receivablePrice: 'Received Amount',
+    // [MODIFY] 补全语义不明的标签 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+    unreceivedPrice: 'Remaining Unreceived',
     exportFileName: 'receivable_plan',
     paramError: 'Parameter error, receivable plan cannot be empty!',
     createReceivable: 'Create Receivable',
     basicInfoTab: 'Basic Info',
     operateLogTab: 'Operation Log',
     teamMemberTab: 'Team Members',
+    creatorName: 'Creator',
     systemInfo: 'System Info'
   },
   followUp: {
