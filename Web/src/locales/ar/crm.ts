@@ -631,12 +631,15 @@ export default {
     finishStatusNo: 'غير مكتمل',
     finishStatusYes: 'مكتمل',
     receivablePrice: 'المبلغ المستلم',
+    // [MODIFY] 补全语义不明的标签 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+    unreceivedPrice: 'المبلغ المتبقي غير المستلم',
     exportFileName: 'receivable_plan',
     paramError: 'خطأ في المعلمة، لا يمكن أن تكون خطة المستحقات فارغة!',
     createReceivable: 'إنشاء مستحق',
     basicInfoTab: 'المعلومات الأساسية',
     operateLogTab: 'سجل العمليات',
     teamMemberTab: 'أعضاء الفريق',
+    creatorName: 'المنشئ',
     systemInfo: 'معلومات النظام'
   },
   followUp: {
