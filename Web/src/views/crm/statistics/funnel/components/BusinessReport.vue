@@ -56,6 +56,7 @@ import { CrmStatisticsBusinessSummaryByStatusRespVO, StatisticFunnelApi } from '
 import { EChartsOption } from 'echarts'
 import { erpPriceTableColumnFormatter } from '@/utils'
 import { Echart } from '@/components/Echart'
+import { useI18n } from 'vue-i18n'
 
 defineOptions({ name: 'BusinessReport' })
 
@@ -136,9 +137,8 @@ const formatPrice = (price: number | string) => {
 const loadData = async () => {
   loading.value = true
   try {
-    const data = (await StatisticFunnelApi.getBusinessSummaryByStatus(
-      props.queryParams
-    )) as CrmStatisticsBusinessSummaryByStatusRespVO[]
+    const result = await StatisticFunnelApi.getBusinessSummaryByStatus(props.queryParams)
+    const data = result.data as CrmStatisticsBusinessSummaryByStatusRespVO[]
     list.value = data || []
     // 更新饼图
     if (pieOption.series && pieOption.series[0]) {

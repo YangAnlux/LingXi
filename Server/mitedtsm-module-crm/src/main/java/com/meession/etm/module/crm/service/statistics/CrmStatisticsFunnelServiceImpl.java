@@ -46,7 +46,7 @@ public class CrmStatisticsFunnelServiceImpl implements CrmStatisticsFunnelServic
     public CrmStatisticFunnelSummaryRespVO getFunnelSummary(CrmStatisticsFunnelStatReqVO reqVO) {
         List<Long> userIds = getUserIds(reqVO);
         if (CollUtil.isEmpty(userIds)) {
-            return null;
+            return new CrmStatisticFunnelSummaryRespVO(0L, 0L, 0L);
         }
         reqVO.setUserIds(userIds);
 

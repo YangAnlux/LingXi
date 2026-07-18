@@ -35,6 +35,7 @@ import { CrmStatisticFunnelRespVO, CrmStatisticsBusinessSummaryByStatusRespVO, S
 import { EChartsOption } from 'echarts'
 import { DICT_TYPE } from '@/utils/dict'
 import { Echart } from '@/components/Echart'
+import { useI18n } from 'vue-i18n'
 
 defineOptions({ name: 'FunnelBusiness' })
 
@@ -117,9 +118,8 @@ const handleActive = async (val: boolean) => {
  const loadData = async () => { 
    loading.value = true 
    // 1. 加载按阶段统计数据 
-   const statusList = (await StatisticFunnelApi.getBusinessSummaryByStatus( 
-     props.queryParams 
-   )) as CrmStatisticsBusinessSummaryByStatusRespVO[] 
+   const result = await StatisticFunnelApi.getBusinessSummaryByStatus(props.queryParams)
+   const statusList = result.data as CrmStatisticsBusinessSummaryByStatusRespVO[] 
    // 2.1 更新 Echarts 数据 
    if ( 
      !!statusList && 

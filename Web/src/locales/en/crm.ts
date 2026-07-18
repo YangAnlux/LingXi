@@ -704,8 +704,13 @@ export default {
       dynamicView: 'Dynamic View',
       // Table fields
       stage: 'Stage',
+      percent: 'Percent',
       businessCount: 'Business Count',
       businessTotalPrice: 'Business Total Price',
+      avgPrice: 'Average Price',
+      stageDistribution: 'Stage Distribution',
+      amountSummary: 'Amount Summary',
+      businessReport: 'Business Report',
       // Funnel data
       customer: 'Customer',
       business: 'Business',

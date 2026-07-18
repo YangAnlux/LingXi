@@ -364,6 +364,7 @@ export default {
     // CRM 模块
     crmClueDetail: '线索详情',
     crmCustomerDetail: '客户详情',
+    crmBusiness: '商机管理',
     crmBusinessDetail: '商机详情',
     crmContractDetail: '合同详情',
     crmReceivablePlanDetail: '回款计划详情',

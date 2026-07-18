@@ -7,11 +7,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-/**
- * TDengine 表初始化的 Configuration
- *
- * @author alwayssuper
- */
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -22,12 +17,12 @@ public class TDengineTableInitRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         try {
-            // 初始化设备消息表
             deviceMessageService.defineDeviceMessageStable();
+            log.info("[run][TDengine初始化设备消息表结构成功]");
         } catch (Exception ex) {
-            // 初始化失败时打印错误消息并退出系统
-            log.error("[run][TDengine初始化设备消息表结构失败，系统无法正常运行，即将退出]", ex);
-            System.exit(1);
+            // 修改：TDengine不可用时不强制退出，只记录警告日志
+            log.warn("[run][TDengine初始化设备消息表结构失败，IoT模块设备消息功能将不可用，请检查TDengine服务是否正常启动]", ex);
+            // System.exit(1); // 删除强制退出
         }
     }
 

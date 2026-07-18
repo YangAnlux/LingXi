@@ -138,7 +138,7 @@ const formRules = reactive({
   businessPrice: [{ required: true, message: t('crm.business.businessPriceRequired'), trigger: 'blur' }],
   count: [{ required: true, message: t('crm.business.countRequired'), trigger: 'blur' }]
 })
-const formRef = ref([]) // 表单 Ref
+const formRef = ref() // 表单 Ref
 const productList = ref<ProductApi.ProductVO[]>([]) // 产品列表
 
 /** 初始化设置产品项 */

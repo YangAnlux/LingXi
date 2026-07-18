@@ -66,6 +66,12 @@ if [ -d "$SQL_NEW_DIR" ]; then
         echo "Executing: new-large-file-upload.sql"
         mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" < "${SQL_NEW_DIR}/new-large-file-upload.sql"
     fi
+
+    # 4.6 执行 business_menu.sql（工单管理菜单，ID=2800-2804）
+    if [ -f "${SQL_NEW_DIR}/business_menu.sql" ]; then
+        echo "Executing: business_menu.sql"
+        mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" < "${SQL_NEW_DIR}/business_menu.sql"
+    fi
 fi
 
 echo "MySQL initialization completed successfully!"

@@ -126,6 +126,7 @@ import BusinessSummary from './components/BusinessSummary.vue'
 import BusinessInversionRateSummary from './components/BusinessInversionRateSummary.vue'
 import BusinessReport from './components/BusinessReport.vue'
 import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
+import { useI18n } from 'vue-i18n'
 
 defineOptions({ name: 'CrmStatisticsFunnel' })
 

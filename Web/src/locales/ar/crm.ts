@@ -700,8 +700,13 @@ export default {
       dynamicView: 'عرض ديناميكي',
       // Table fields
       stage: 'المرحلة',
+      percent: 'النسبة',
       businessCount: 'عدد الأعمال',
       businessTotalPrice: 'إجمالي سعر الأعمال',
+      avgPrice: 'السعر المتوسط',
+      stageDistribution: 'توزيع المراحل',
+      amountSummary: 'ملخص المبلغ',
+      businessReport: 'تقرير الأعمال',
       // Funnel data
       customer: 'عميل',
       business: 'عمل',
