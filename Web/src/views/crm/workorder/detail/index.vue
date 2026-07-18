@@ -1,18 +1,18 @@
 // 2023级软4蔡磊202305566515,2026年7月14日
 <template>
-  <WorkOrderDetailsHeader :work-order="workOrder" :loading="loading" />
-  <el-col>
-    <el-tabs v-model="activeTab">
-      <el-tab-pane :label="t('workorder.basicInfoTab')" name="basic">
-        <WorkOrderDetailsInfo :work-order="workOrder" />
-        <ContentWrap v-if="workOrder.status === '已完结' && !workOrder.satisfactionScore" class="mt-15px">
-          <el-button type="warning" @click="openSatisfactionDialog">
-            {{ t('workorder.actionSatisfaction') }}
-          </el-button>
-        </ContentWrap>
-      </el-tab-pane>
-      <el-tab-pane :label="t('workorder.recordTab')" name="record">
-        <ContentWrap>
+  <div>
+    <WorkOrderDetailsHeader :work-order="workOrder" :loading="loading" />
+    <ContentWrap class="mt-15px">
+      <el-tabs v-model="activeTab">
+        <el-tab-pane :label="t('workorder.basicInfoTab')" name="basic">
+          <WorkOrderDetailsInfo :work-order="workOrder" />
+          <div v-if="workOrder.status === '已完结' && !workOrder.satisfactionScore" class="mt-15px">
+            <el-button type="warning" @click="openSatisfactionDialog">
+              {{ t('workorder.actionSatisfaction') }}
+            </el-button>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane :label="t('workorder.recordTab')" name="record">
           <el-table v-loading="recordLoading" :data="recordList"
             :stripe="true" :show-overflow-tooltip="true" :table-layout="'auto'">
             <el-table-column :label="t('workorder.id')" align="center" prop="id" width="80" />
@@ -48,12 +48,11 @@
             />
           </el-table>
           <el-empty v-if="!recordLoading && (!recordList || recordList.length === 0)" :description="t('workorder.noRecord')" />
-        </ContentWrap>
-      </el-tab-pane>
-    </el-tabs>
-  </el-col>
-  <!-- 23软件工程4班蔡磊202305566515 满意度回访弹窗 -->
-  <el-dialog v-model="satisfactionDialogVisible" :title="t('workorder.satisfactionTitle')" width="450px">
+        </el-tab-pane>
+      </el-tabs>
+    </ContentWrap>
+    <!-- 23软件工程4班蔡磊202305566515 满意度回访弹窗 -->
+    <el-dialog v-model="satisfactionDialogVisible" :title="t('workorder.satisfactionTitle')" width="450px">
     <el-form :model="satisfactionForm">
       <el-form-item :label="t('workorder.satisfactionScore')">
         <el-rate v-model="satisfactionForm.satisfactionScore" show-score text-color="#ff9900" />
@@ -74,6 +73,7 @@
       <el-button @click="satisfactionDialogVisible = false">{{ t('common.cancel') }}</el-button>
     </template>
   </el-dialog>
+  </div>
 </template>
 <script lang="ts" setup>
 import { useTagsViewStore } from '@/store/modules/tagsView'

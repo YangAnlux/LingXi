@@ -50,12 +50,12 @@
     <el-row :gutter="20">
       <el-col :span="12">
         <el-card>
-          <div ref="countChartRef" style="height: 350px" />
+          <div ref="countChartRef" style="height: 350px"></div>
         </el-card>
       </el-col>
       <el-col :span="12">
         <el-card>
-          <div ref="amountChartRef" style="height: 350px" />
+          <div ref="amountChartRef" style="height: 350px"></div>
         </el-card>
       </el-col>
     </el-row>
