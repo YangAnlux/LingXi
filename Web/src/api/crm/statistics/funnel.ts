@@ -18,6 +18,15 @@ export interface CrmStatisticsBusinessInversionRateSummaryByDateRespVO {
   businessWinCount: number // 赢单商机数
 }
 
+export interface CrmStatisticsBusinessSummaryByStatusRespVO {
+  statusTypeId: number // 状态类型编号
+  statusName: string // 状态名称
+  percent: number // 占比
+  sort: number // 排序
+  businessCount: number // 商机数量
+  totalPrice: number | string // 总金额
+}
+
 // 客户分析 API
 export const StatisticFunnelApi = {
   // 1. 获取销售漏斗统计数据
@@ -52,6 +61,13 @@ export const StatisticFunnelApi = {
   getBusinessPageByDate: (params: any) => {
     return request.get({
       url: '/crm/statistics-funnel/get-business-page-by-date',
+      params
+    })
+  },
+  // 6. 获取商机阶段统计
+  getBusinessSummaryByStatus: (params: any) => {
+    return request.get({
+      url: '/crm/statistics-funnel/get-business-summary-by-status',
       params
     })
   }

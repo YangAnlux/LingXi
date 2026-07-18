@@ -17,7 +17,8 @@ public enum CrmBusinessEndStatusEnum implements ArrayValuable<Integer> {
 
     WIN(1, "赢单"),
     LOSE(2, "输单"),
-    INVALID(3, "无效");
+    INVALID(3, "无效"),
+    LOST(4, "流失");
 
     public static final Integer[] ARRAYS = Arrays.stream(values()).map(CrmBusinessEndStatusEnum::getStatus).toArray(Integer[]::new);
 

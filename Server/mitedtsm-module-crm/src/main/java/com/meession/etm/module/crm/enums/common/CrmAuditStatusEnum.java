@@ -18,7 +18,8 @@ public enum CrmAuditStatusEnum implements ArrayValuable<Integer> {
     DRAFT(0, "未提交"),
     PROCESS(10, "审批中"),
     APPROVE(20, "审核通过"),
-	REJECT(30, "审核不通过"),
+    REJECT(30, "审核不通过"),
+    OVERRULED(35, "被否决"),
     CANCEL(40, "已取消");
 
     private final Integer status;

@@ -125,6 +125,7 @@ export default {
       flowDiagram: '流程图',
       flowRecord: '流转记录',
       flowComment: '流转评论',
+      flowCommentPlaceholder: '请输入评论内容（最多500字）',
       selectProcessDefinition: '请选择流程定义',
       selectProcessCategory: '请选择流程分类',
       selectProcessStatus: '请选择流程状态',

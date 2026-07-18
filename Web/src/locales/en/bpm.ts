@@ -125,6 +125,7 @@ export default {
       flowDiagram: 'Flow Diagram',
       flowRecord: 'Flow Record',
       flowComment: 'Flow Comment',
+      flowCommentPlaceholder: 'Please enter comment content (max 500 characters)',
       selectProcessDefinition: 'Please select process definition',
       selectProcessCategory: 'Please select process category',
       selectProcessStatus: 'Please select process status',

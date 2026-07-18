@@ -62,7 +62,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/Home/Index.vue'),
         name: 'Index',
         meta: {
-          title: 'common.router.home',
+          title: t('router.home'),
           icon: 'ep:home-filled',
           noCache: false,
           affix: true
@@ -99,7 +99,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           hidden: true,
           noTagsView: false,
           icon: 'ep:message',
-          title: 'common.router.myNotifyMessage'
+          title: t('router.myNotifyMessage')
         }
       }
     ]
@@ -117,7 +117,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/system/dict/data/index.vue'),
         name: 'SystemDictData',
         meta: {
-          title: 'common.router.dictData',
+          title: t('router.dictData'),
           noCache: true,
           hidden: true,
           canTo: true,
@@ -145,7 +145,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           hidden: true,
           canTo: true,
           icon: 'ep:edit',
-          title: 'common.router.codegenEdit',
+          title: t('router.codegenEdit'),
           activeMenu: 'infra/codegen/index'
         }
       }
@@ -168,7 +168,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           hidden: true,
           canTo: true,
           icon: 'ep:edit',
-          title: 'common.router.jobLog',
+          title: t('router.jobLog'),
           activeMenu: 'infra/job/index'
         }
       }
@@ -180,7 +180,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
     name: 'Login',
     meta: {
       hidden: true,
-      title: 'common.router.login',
+      title: t('router.login'),
       noTagsView: true
     }
   },
@@ -190,7 +190,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
     name: 'SSOLogin',
     meta: {
       hidden: true,
-      title: 'common.router.login',
+      title: t('router.login'),
       noTagsView: true
     }
   },
@@ -200,7 +200,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
     name: 'SocialLogin',
     meta: {
       hidden: true,
-      title: 'common.router.socialLogin',
+      title: t('router.socialLogin'),
       noTagsView: true
     }
   },
@@ -250,7 +250,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.bpmFormEditor',
+          title: t('router.bpmFormEditor'),
           activeMenu: '/bpm/manager/form'
         }
       },
@@ -262,7 +262,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.bpmProcessDefinition',
+          title: t('router.bpmProcessDefinition'),
           activeMenu: '/bpm/manager/model'
         }
       },
@@ -274,7 +274,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.bpmProcessInstanceDetail',
+          title: t('router.bpmProcessInstanceDetail'),
           activeMenu: '/bpm/task/my'
         },
         props: (route) => ({
@@ -291,7 +291,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.bpmProcessInstanceReport',
+          title: t('router.bpmProcessInstanceReport'),
           activeMenu: '/bpm/manager/model'
         }
       },
@@ -303,7 +303,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.oaLeaveCreate',
+          title: t('router.oaLeaveCreate'),
           activeMenu: '/bpm/oa/leave'
         }
       },
@@ -315,7 +315,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.oaLeaveDetail',
+          title: t('router.oaLeaveDetail'),
           activeMenu: '/bpm/oa/leave'
         }
       },
@@ -327,7 +327,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.bpmModelCreate',
+          title: t('router.bpmModelCreate'),
           activeMenu: '/bpm/manager/model'
         }
       },
@@ -339,7 +339,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.bpmModelUpdate',
+          title: t('router.bpmModelUpdate'),
           activeMenu: '/bpm/manager/model'
         }
       }
@@ -362,7 +362,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           hidden: true,
           canTo: true,
           icon: 'ep:edit',
-          title: 'common.router.productSpuAdd',
+          title: t('router.productSpuAdd'),
           activeMenu: '/mall/product/spu'
         }
       },
@@ -375,7 +375,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           hidden: true,
           canTo: true,
           icon: 'ep:edit',
-          title: 'common.router.productSpuEdit',
+          title: t('router.productSpuEdit'),
           activeMenu: '/mall/product/spu'
         }
       },
@@ -388,7 +388,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           hidden: true,
           canTo: true,
           icon: 'ep:view',
-          title: 'common.router.productSpuDetail',
+          title: t('router.productSpuDetail'),
           activeMenu: '/mall/product/spu'
         }
       },
@@ -401,7 +401,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           hidden: true,
           canTo: true,
           icon: 'ep:view',
-          title: 'common.router.productPropertyValue',
+          title: t('router.productPropertyValue'),
           activeMenu: '/product/property'
         }
       }
@@ -419,13 +419,13 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'order/detail/:id(\\d+)',
         component: () => import('@/views/mall/trade/order/detail/index.vue'),
         name: 'TradeOrderDetail',
-        meta: { title: 'common.router.tradeOrderDetail', icon: 'ep:view', activeMenu: '/mall/trade/order' }
+        meta: { title: t('router.tradeOrderDetail'), icon: 'ep:view', activeMenu: '/mall/trade/order' }
       },
       {
         path: 'after-sale/detail/:id(\\d+)',
         component: () => import('@/views/mall/trade/afterSale/detail/index.vue'),
         name: 'TradeAfterSaleDetail',
-        meta: { title: 'common.router.tradeAfterSaleDetail', icon: 'ep:view', activeMenu: '/mall/trade/after-sale' }
+        meta: { title: t('router.tradeAfterSaleDetail'), icon: 'ep:view', activeMenu: '/mall/trade/after-sale' }
       }
     ]
   },
@@ -439,7 +439,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'user/detail/:id',
         name: 'MemberUserDetail',
         meta: {
-          title: 'common.router.memberUserDetail',
+          title: t('router.memberUserDetail'),
           noCache: true,
           hidden: true
         },
@@ -457,7 +457,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'cashier',
         name: 'PayCashier',
         meta: {
-          title: 'common.router.payCashier',
+          title: t('router.payCashier'),
           noCache: true,
           hidden: true
         },
@@ -475,7 +475,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'template/decorate/:id',
         name: 'DiyTemplateDecorate',
         meta: {
-          title: 'common.router.diyTemplateDecorate',
+          title: t('router.diyTemplateDecorate'),
           noCache: false,
           hidden: true,
           activeMenu: '/mall/promotion/diy-template/diy-template'
@@ -486,7 +486,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'page/decorate/:id',
         name: 'DiyPageDecorate',
         meta: {
-          title: 'common.router.diyPageDecorate',
+          title: t('router.diyPageDecorate'),
           noCache: false,
           hidden: true,
           activeMenu: '/mall/promotion/diy-template/diy-page'
@@ -505,7 +505,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'clue/detail/:id',
         name: 'CrmClueDetail',
         meta: {
-          title: 'common.router.crmClueDetail',
+          title: t('router.crmClueDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/clue'
@@ -516,7 +516,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'customer/detail/:id',
         name: 'CrmCustomerDetail',
         meta: {
-          title: 'common.router.crmCustomerDetail',
+          title: t('router.crmCustomerDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/customer'
@@ -527,7 +527,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'business/detail/:id',
         name: 'CrmBusinessDetail',
         meta: {
-          title: 'common.router.crmBusinessDetail',
+          title: t('router.crmBusinessDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/business'
@@ -538,7 +538,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'contract/detail/:id',
         name: 'CrmContractDetail',
         meta: {
-          title: 'common.router.crmContractDetail',
+          title: t('router.crmContractDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/contract'
@@ -549,7 +549,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'receivable-plan/detail/:id',
         name: 'CrmReceivablePlanDetail',
         meta: {
-          title: 'common.router.crmReceivablePlanDetail',
+          title: t('router.crmReceivablePlanDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/receivable-plan'
@@ -560,7 +560,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'receivable/detail/:id',
         name: 'CrmReceivableDetail',
         meta: {
-          title: 'common.router.crmReceivableDetail',
+          title: t('router.crmReceivableDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/receivable'
@@ -568,56 +568,10 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/crm/receivable/detail/index.vue')
       },
       {
-        path: 'invoice/detail/:id',
-        name: 'CrmInvoiceDetail',
-        meta: {
-          title: 'common.router.crmInvoiceDetail',
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/invoice'
-        },
-        component: () => import('@/views/crm/invoice/detail/index.vue')
-      },
-      {
-        path: 'reimbursement/detail/:id',
-        name: 'CrmReimbursementDetail',
-        meta: {
-          title: 'common.router.crmReimbursementDetail',
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/reimbursement'
-        },
-        component: () => import('@/views/crm/reimbursement/detail/index.vue')
-      },
-      {
-        path: 'refund/detail/:id',
-        name: 'CrmRefundDetail',
-        props: true,
-        meta: {
-          title: 'common.router.crmRefundDetail',
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/refund'
-        },
-        component: () => import('@/views/crm/refund/detail/index.vue')
-      },
-      // [ADD END] 退款详情路由 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
-      {
-        path: 'expense/detail/:id',
-        name: 'CrmExpenseDetail',
-        meta: {
-          title: 'common.router.crmExpenseDetail',
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/expense'
-        },
-        component: () => import('@/views/crm/expense/detail/index.vue')
-      },
-      {
         path: 'contact/detail/:id',
         name: 'CrmContactDetail',
         meta: {
-          title: 'common.router.crmContactDetail',
+          title: t('router.crmContactDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/contact'
@@ -628,47 +582,13 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'product/detail/:id',
         name: 'CrmProductDetail',
         meta: {
-          title: 'common.router.crmProductDetail',
+          title: t('router.crmProductDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/crm/product'
         },
         component: () => import('@/views/crm/product/detail/index.vue')
-      },
-      {
-        path: 'workorder/detail/:id',
-        name: 'CrmWorkOrderDetail',
-        meta: {
-          title: '工单详情',
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/workorder'
-        },
-        component: () => import('@/views/crm/workorder/detail/index.vue')
-      },
-      {
-        path: 'workorder/statistics',
-        name: 'CrmWorkOrderStatistics',
-        meta: {
-          title: '工单统计报表',
-          noCache: true,
-          activeMenu: '/crm/workorder'
-        },
-        component: () => import('@/views/crm/workorder/WorkOrderStatistics.vue')
-      },
-      // [ADD START] 财务统计路由 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
-      {
-        path: 'statistics/finance',
-        name: 'CrmFinanceStatistics',
-        meta: {
-          title: 'common.router.crmFinanceStatistics',
-          noCache: true,
-          hidden: true,
-          activeMenu: '/crm/statistics/finance'
-        },
-        component: () => import('@/views/crm/statistics/finance/index.vue')
-      },
-      // [ADD END] 财务统计路由 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+      }
     ]
   },
   {
@@ -684,7 +604,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/ai/image/square/index.vue'),
         name: 'AiImageSquare',
         meta: {
-          title: 'common.router.aiImageSquare',
+          title: t('router.aiImageSquare'),
           icon: 'ep:home-filled',
           noCache: false
         }
@@ -694,7 +614,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/ai/knowledge/document/index.vue'),
         name: 'AiKnowledgeDocument',
         meta: {
-          title: 'common.router.aiKnowledgeDocument',
+          title: t('router.aiKnowledgeDocument'),
           icon: 'ep:document',
           noCache: false,
           activeMenu: '/ai/knowledge'
@@ -705,7 +625,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/ai/knowledge/document/form/index.vue'),
         name: 'AiKnowledgeDocumentCreate',
         meta: {
-          title: 'common.router.aiKnowledgeDocumentCreate',
+          title: t('router.aiKnowledgeDocumentCreate'),
           icon: 'ep:plus',
           noCache: true,
           hidden: true,
@@ -717,7 +637,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/ai/knowledge/document/form/index.vue'),
         name: 'AiKnowledgeDocumentUpdate',
         meta: {
-          title: 'common.router.aiKnowledgeDocumentUpdate',
+          title: t('router.aiKnowledgeDocumentUpdate'),
           icon: 'ep:edit',
           noCache: true,
           hidden: true,
@@ -729,7 +649,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/ai/knowledge/knowledge/retrieval/index.vue'),
         name: 'AiKnowledgeRetrieval',
         meta: {
-          title: 'common.router.aiKnowledgeRetrieval',
+          title: t('router.aiKnowledgeRetrieval'),
           icon: 'ep:search',
           noCache: true,
           hidden: true,
@@ -741,7 +661,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         component: () => import('@/views/ai/knowledge/segment/index.vue'),
         name: 'AiKnowledgeSegment',
         meta: {
-          title: 'common.router.aiKnowledgeSegment',
+          title: t('router.aiKnowledgeSegment'),
           icon: 'ep:tickets',
           noCache: true,
           hidden: true,
@@ -756,7 +676,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.aiWorkflowDesign',
+          title: t('router.aiWorkflowDesign'),
           activeMenu: '/ai/console/workflow'
         }
       },
@@ -768,7 +688,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
           noCache: true,
           hidden: true,
           canTo: true,
-          title: 'common.router.aiWorkflowDesign',
+          title: t('router.aiWorkflowDesign'),
           activeMenu: '/ai/console/workflow'
         }
       }
@@ -796,7 +716,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'product/product/detail/:id',
         name: 'IoTProductDetail',
         meta: {
-          title: 'common.router.iotProductDetail',
+          title: t('router.iotProductDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/iot/device/product'
@@ -807,7 +727,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'device/detail/:id',
         name: 'IoTDeviceDetail',
         meta: {
-          title: 'common.router.iotDeviceDetail',
+          title: t('router.iotDeviceDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/iot/device/device'
@@ -818,7 +738,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
         path: 'ota/operation/firmware/detail/:id',
         name: 'IoTOtaFirmwareDetail',
         meta: {
-          title: 'common.router.iotOtaFirmwareDetail',
+          title: t('router.iotOtaFirmwareDetail'),
           noCache: true,
           hidden: true,
           activeMenu: '/iot/operation/ota/firmware'

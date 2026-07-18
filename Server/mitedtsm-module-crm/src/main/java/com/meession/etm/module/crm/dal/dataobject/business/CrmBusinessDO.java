@@ -84,6 +84,10 @@ public class CrmBusinessDO extends BaseDO {
      * 结束时的备注
      */
     private String endRemark;
+    /**
+     * 流失原因
+     */
+    private String loseReason;
 
     /**
      * 预计成交日期
@@ -107,5 +111,10 @@ public class CrmBusinessDO extends BaseDO {
      * 备注
      */
     private String remark;
+
+    /**
+     * 竞争对手
+     */
+    private String competitor;
 
 }

@@ -116,21 +116,16 @@ public class CrmReceivableServiceImpl implements CrmReceivableService {
     }
 
     private void validateReceivablePriceExceedsLimit(CrmReceivableSaveReqVO reqVO) {
-        // 1. 计算剩余可回款金额，不包括 reqVO 自身
+        // 1. 计算剩余可退款金额，不包括 reqVO 自身
         CrmContractDO contract = contractService.validateContract(reqVO.getContractId());
         List<CrmReceivableDO> receivables = receivableMapper.selectListByContractIdAndStatus(reqVO.getContractId(),
                 Arrays.asList(CrmAuditStatusEnum.APPROVE.getStatus(), CrmAuditStatusEnum.PROCESS.getStatus()));
         if (reqVO.getId() != null) {
             receivables.removeIf(receivable -> ObjectUtil.equal(receivable.getId(), reqVO.getId()));
         }
-        BigDecimal totalReceivablePrice = CollectionUtils.getSumValue(receivables, CrmReceivableDO::getPrice, BigDecimal::add, BigDecimal.ZERO);
-        BigDecimal notReceivablePrice = contract.getTotalPrice().subtract(totalReceivablePrice);
+        BigDecimal notReceivablePrice = contract.getTotalPrice().subtract(
+                CollectionUtils.getSumValue(receivables, CrmReceivableDO::getPrice, BigDecimal::add, BigDecimal.ZERO));
         // 2. 校验金额是否超过
-        // [ADD START] 已回款金额超过合同总额时给出特殊提示 - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
-        if (notReceivablePrice.compareTo(BigDecimal.ZERO) <= 0) {
-            throw exception(RECEIVABLE_CREATE_FAIL_PRICE_EXCEEDS_TOTAL, totalReceivablePrice, contract.getTotalPrice());
-        }
-        // [ADD END] - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
         if (reqVO.getPrice().compareTo(notReceivablePrice) > 0) {
             throw exception(RECEIVABLE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT, notReceivablePrice);
         }
