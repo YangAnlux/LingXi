@@ -79,9 +79,9 @@
 
   <!-- 列表 -->
   <ContentWrap>
-    <el-table v-loading="loading" :data="list" :stripe="true" :show-overflow-tooltip="true" :table-layout="'auto'">
+    <el-table v-loading="loading" :data="list" :stripe="true" :show-overflow-tooltip="true">
       <el-table-column :label="t('workorder.id')" align="center" prop="id" width="80" />
-      <el-table-column :label="t('workorder.title')" align="center" prop="title" min-width="180" fixed="left">
+      <el-table-column :label="t('workorder.title')" align="center" prop="title" min-width="180">
         <template #default="scope">
           <el-link :underline="false" type="primary" @click="handleDetail(scope.row.id)">
             {{ scope.row.title }}
@@ -134,14 +134,14 @@
         <template #default="scope">
           <el-rate
             v-if="scope.row.satisfactionScore"
-            v-model="scope.row.satisfactionScore"
+            :model-value="scope.row.satisfactionScore"
             disabled
             size="small"
           />
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column :label="t('common.action')" align="center" width="280" fixed="right">
+            <el-table-column :label="t('common.action')" align="center" width="280" fixed="right">
         <template #default="scope">
           <el-button
             v-if="scope.row.status === '待处理' || scope.row.status === '已退回'"
