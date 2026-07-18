@@ -213,6 +213,12 @@ export enum DICT_TYPE {
   // [ADD END] 费用字典类型 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   // [ADD START] 报销字典类型 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   CRM_REIMBURSEMENT_STATUS = 'crm_reimbursement_status', // CRM 报销状态
+  // [ADD START] CRM 退款类型 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  CRM_REFUND_TYPE = 'crm_refund_type',
+  // [ADD END] CRM 退款类型 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  // [ADD START] CRM 退款状态 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  CRM_REFUND_STATUS = 'crm_refund_status',
+  // [ADD END] CRM 退款状态 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
   // [ADD END] 报销字典类型 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
   CRM_CUSTOMER_INDUSTRY = 'crm_customer_industry', // CRM 客户所属行业
   CRM_CUSTOMER_LEVEL = 'crm_customer_level', // CRM 客户级别

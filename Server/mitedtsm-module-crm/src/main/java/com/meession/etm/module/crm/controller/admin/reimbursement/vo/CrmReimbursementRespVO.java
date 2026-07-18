@@ -65,6 +65,9 @@ public class CrmReimbursementRespVO {
     @ExcelProperty("备注")
     private String remark;
 
+    @Schema(description = "工作流编号", example = "1043")
+    private String processInstanceId;
+
     @Schema(description = "创建人")
     private String creatorName;
 

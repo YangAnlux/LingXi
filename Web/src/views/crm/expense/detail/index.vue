@@ -11,10 +11,10 @@
       <el-tab-pane :label="t('customer.basicInfoTab')">
         <ExpenseDetailsInfo :expense="expense" />
       </el-tab-pane>
-      <el-tab-pane :label="t('common.operateLog')">
+      <el-tab-pane :label="t('expense.operateLogTab')">
         <OperateLogV2 :log-list="logList" />
       </el-tab-pane>
-      <el-tab-pane :label="t('receivable.teamMemberTab')">
+      <el-tab-pane :label="t('expense.teamMemberTab')">
         <PermissionList
           ref="permissionListRef"
           :biz-id="expense.id!"

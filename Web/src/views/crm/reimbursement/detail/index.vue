@@ -11,10 +11,10 @@
       <el-tab-pane :label="t('customer.basicInfoTab')">
         <ReimbursementDetailsInfo :reimbursement="reimbursement" />
       </el-tab-pane>
-      <el-tab-pane :label="t('common.operateLog')">
+      <el-tab-pane :label="t('reimbursement.operateLogTab')">
         <OperateLogV2 :log-list="logList" />
       </el-tab-pane>
-      <el-tab-pane :label="t('receivable.teamMemberTab')">
+      <el-tab-pane :label="t('reimbursement.teamMemberTab')">
         <PermissionList
           ref="permissionListRef"
           :biz-id="reimbursement.id!"

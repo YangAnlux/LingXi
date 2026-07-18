@@ -336,6 +336,7 @@ export default {
     // 占位符
     namePlaceholder: '请输入合同名称',
     noPlaceholder: '请输入合同编号',
+    contractPlaceholder: '请选择合同',
     customerIdPlaceholder: '请选择客户',
     businessIdPlaceholder: '请选择商机',
     orderDatePlaceholder: '选择下单日期',
@@ -526,6 +527,8 @@ export default {
     remark: '备注',
     createTime: '创建时间',
     exportFileName: '费用',
+    operateLogTab: '操作日志',
+    teamMemberTab: '团队成员',
     paramError: '参数错误，费用不能为空！'
   },
   // [ADD END] 费用国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
@@ -550,12 +553,59 @@ export default {
     remark: '备注',
     createTime: '创建时间',
     exportFileName: '报销',
+    operateLogTab: '操作日志',
+    teamMemberTab: '团队成员',
     submit: '提交审批',
     submitConfirm: '确认提交审批？',
     submitSuccess: '提交审批成功',
+    viewApproval: '查看审批',
     paramError: '参数错误，报销不能为空！'
   },
   // [ADD END] 报销国际化 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+  // [ADD START] 退款国际化 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  refund: {
+    title: '退款管理',
+    no: '退款编号',
+    noPlaceholder: '请输入退款编号',
+    noAutoGenerate: '系统自动生成',
+    customerName: '客户名称',
+    contractName: '合同名称',
+    contractPlaceholder: '请选择合同',
+    ownerUserName: '负责人',
+    refundAmount: '退款金额',
+    amountPlaceholder: '请输入退款金额',
+    amountRequired: '退款金额不能为空',
+    refundDate: '退款日期',
+    refundReason: '退款原因',
+    reasonPlaceholder: '请输入退款原因',
+    refundType: '退款类型',
+    refundTypeFull: '全额退款',
+    refundTypePartial: '部分退款',
+    typeRequired: '退款类型不能为空',
+    status: '退款状态',
+    statusDraft: '待提交',
+    statusProcess: '审批中',
+    statusApprove: '已通过',
+    statusReject: '已驳回',
+    auditStatus: '审批状态',
+    remark: '备注',
+    ownerUserDeptName: '所属部门',
+    creatorName: '创建人',
+    createTime: '创建时间',
+    updateTime: '更新时间',
+    customerIdRequired: '客户不能为空',
+    contractIdRequired: '合同不能为空',
+    submit: '提交审批',
+    submitConfirm: '确认提交审批？',
+    submitSuccess: '提交审批成功',
+    viewApproval: '查看审批',
+    basicInfoTab: '详细资料',
+    operateLogTab: '操作日志',
+    teamMemberTab: '团队成员',
+    exportFileName: '退款',
+    paramError: '参数错误，退款不能为空！'
+  },
+  // [ADD END] 退款国际化 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
   receivablePlan: {
     title: '回款计划',
     period: '期数',
@@ -574,6 +624,7 @@ export default {
     customerId: '客户',
     customerName: '客户名称',
     contractNo: '合同编号',
+    contractNoPlaceholder: '请输入合同编号',
     contractPrice: '合同金额',
     ownerUserName: '负责人',
     createTime: '创建时间',
@@ -612,6 +663,20 @@ export default {
     contentRequired: '跟进内容不能为空',
     nextTimeRequired: '下次联系时间不能为空'
   },
+  // [ADD START] 财务统计国际化 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+  finance: {
+    title: '财务数据汇总',
+    receivable: '回款',
+    invoice: '发票',
+    expense: '费用',
+    reimbursement: '报销',
+    refund: '退款',
+    count: '数量（笔）',
+    amount: '金额（元）',
+    countChart: '各模块笔数统计',
+    amountChart: '各模块金额统计'
+  },
+  // [ADD END] 财务统计国际化 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
   clue: {
     title: '线索管理',
     name: '线索名称',
@@ -688,6 +753,7 @@ export default {
     contractAudit: '待审核合同',
     contractRemind: '即将到期的合同',
     receivableAudit: '待审核回款',
+    refundAudit: '待审核退款',
     receivablePlanRemind: '待回款提醒',
     today: '今日',
     total: '共',
