@@ -25,8 +25,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.meession.etm.framework.common.pojo.CommonResult.success;
@@ -95,11 +97,52 @@ public class CrmWorkOrderController {
         return success(true);
     }
 
+    @GetMapping("/statistics")
+    @Operation(summary = "获得工单统计报表")
+    @PreAuthorize("@ss.hasPermission('crm:work-order:query')")
+    public CommonResult<Map<String, Object>> getWorkOrderStatistics() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("byType", workOrderService.getStatisticsByType().entrySet().stream()
+                .map(e -> Map.of("name", e.getKey(), "count", e.getValue()))
+                .collect(Collectors.toList()));
+        result.put("byStatus", workOrderService.getStatisticsByStatus().entrySet().stream()
+                .map(e -> Map.of("name", e.getKey(), "count", e.getValue()))
+                .collect(Collectors.toList()));
+        result.put("byAssignee", workOrderService.getStatisticsByAssignee().entrySet().stream()
+                .map(e -> Map.of("name", e.getKey(), "count", e.getValue()))
+                .collect(Collectors.toList()));
+        return success(result);
+    }
+
     @PutMapping("/assign")
     @Operation(summary = "分配工单")
     @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
     public CommonResult<Boolean> assignWorkOrder(@RequestParam("id") Long id, @RequestParam("assigneeId") Long assigneeId) {
         workOrderService.assignWorkOrder(id, assigneeId);
+        return success(true);
+    }
+
+    @PutMapping("/process")
+    @Operation(summary = "处理工单（待处理→处理中）")
+    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
+    public CommonResult<Boolean> processWorkOrder(@RequestParam("id") Long id) {
+        workOrderService.updateWorkOrderStatus(id, "处理中");
+        return success(true);
+    }
+
+    @PutMapping("/resolve")
+    @Operation(summary = "完结工单（处理中→已完结）")
+    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
+    public CommonResult<Boolean> resolveWorkOrder(@RequestParam("id") Long id) {
+        workOrderService.updateWorkOrderStatus(id, "已完结");
+        return success(true);
+    }
+
+    @PutMapping("/return")
+    @Operation(summary = "退回工单（处理中→已退回）")
+    @PreAuthorize("@ss.hasPermission('crm:work-order:update')")
+    public CommonResult<Boolean> returnWorkOrder(@RequestParam("id") Long id) {
+        workOrderService.updateWorkOrderStatus(id, "已退回");
         return success(true);
     }
 

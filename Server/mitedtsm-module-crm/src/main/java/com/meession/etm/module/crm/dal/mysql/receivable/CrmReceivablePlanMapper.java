@@ -13,6 +13,7 @@ import com.meession.etm.module.crm.util.CrmPermissionUtils;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -84,6 +85,12 @@ public interface CrmReceivablePlanMapper extends BaseMapperX<CrmReceivablePlanDO
                 .lt(CrmReceivablePlanDO::getReturnTime, beginOfToday) // 已逾期
                 .lt(CrmReceivablePlanDO::getRemindTime, beginOfToday); // 今天开始提醒
         return selectCount(query);
+    }
+
+    default List<CrmReceivablePlanDO> selectOverduePlans(LocalDateTime date) {
+        return selectList(new MPJLambdaWrapperX<CrmReceivablePlanDO>()
+                .isNull(CrmReceivablePlanDO::getReceivableId)
+                .lt(CrmReceivablePlanDO::getReturnTime, date));
     }
 
 }

@@ -5,7 +5,10 @@ import com.meession.etm.framework.mybatis.core.mapper.BaseMapperX;
 import com.meession.etm.framework.mybatis.core.query.MPJLambdaWrapperX;
 import com.meession.etm.module.crm.controller.admin.workorder.vo.workorder.CrmWorkOrderPageReqVO;
 import com.meession.etm.module.crm.dal.dataobject.workorder.CrmWorkOrderDO;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.time.LocalDateTime;
 
 @Mapper
 public interface CrmWorkOrderMapper extends BaseMapperX<CrmWorkOrderDO> {
@@ -19,6 +22,14 @@ public interface CrmWorkOrderMapper extends BaseMapperX<CrmWorkOrderDO> {
                 .eqIfPresent(CrmWorkOrderDO::getCustomerId, reqVO.getCustomerId())
                 .eqIfPresent(CrmWorkOrderDO::getAssigneeId, reqVO.getAssigneeId())
                 .orderByDesc(CrmWorkOrderDO::getId));
+    }
+
+    default int updateSlaBreachedStatus() {
+        return update(null, new LambdaUpdateWrapper<CrmWorkOrderDO>()
+                .set(CrmWorkOrderDO::getIsSlaBreached, true)
+                .lt(CrmWorkOrderDO::getSlaDeadline, LocalDateTime.now())
+                .eq(CrmWorkOrderDO::getIsSlaBreached, false)
+                .notIn(CrmWorkOrderDO::getStatus, "已完结", "已退回"));
     }
 
 }

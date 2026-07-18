@@ -113,4 +113,38 @@ public interface ErrorCodeConstants {
     // ========== 工单管理 1_020_016_000 ==========
     ErrorCode WORK_ORDER_NOT_EXISTS = new ErrorCode(1_020_016_000, "工单不存在");
 
+    // ========== 发票管理 1_020_002_000 ==========
+    ErrorCode INVOICE_NOT_EXISTS = new ErrorCode(1_020_002_000, "发票不存在");
+    ErrorCode INVOICE_NO_EXISTS = new ErrorCode(1_020_002_001, "生成发票编号重复，请重试");
+    ErrorCode INVOICE_UPDATE_FAIL_STATUS_NOT_PENDING = new ErrorCode(1_020_002_002, "更新发票失败，原因：只有待开票状态的发票可以编辑");
+    ErrorCode INVOICE_DELETE_FAIL_IS_ISSUED = new ErrorCode(1_020_002_003, "删除发票失败，原因：已开票的发票不能删除");
+    ErrorCode INVOICE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT = new ErrorCode(1_020_002_004, "创建发票失败，原因：超过未开票金额");
+    ErrorCode INVOICE_INVOICE_NO_EXISTS = new ErrorCode(1_020_002_005, "发票号码已存在");
+
+    // ========== 费用管理 1_020_003_000 ==========
+    ErrorCode EXPENSE_NOT_EXISTS = new ErrorCode(1_020_003_000, "费用不存在");
+    ErrorCode EXPENSE_NO_EXISTS = new ErrorCode(1_020_003_001, "生成费用编号重复，请重试");
+
+    // ========== 营销活动 1_020_018_000 ==========
+    ErrorCode CAMPAIGN_NOT_EXISTS = new ErrorCode(1_020_018_000, "营销活动不存在");
+
+    // ========== 退款管理 1_020_019_000 ==========
+    ErrorCode REFUND_NOT_EXISTS = new ErrorCode(1_020_019_000, "退款不存在");
+    ErrorCode REFUND_UPDATE_FAIL_NOT_DRAFT = new ErrorCode(1_020_019_001, "更新退款失败，原因：只有草稿状态的退款可以编辑");
+    ErrorCode REFUND_DELETE_FAIL_NOT_DRAFT = new ErrorCode(1_020_019_002, "删除退款失败，原因：只有草稿状态的退款可以删除");
+    ErrorCode REFUND_SUBMIT_FAIL_NOT_DRAFT = new ErrorCode(1_020_019_003, "提交审批失败，原因：只有草稿状态的退款可以提交");
+    ErrorCode REFUND_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_019_004, "更新审批状态失败，原因：退款不处于审批中");
+
+    // ========== 报销管理 1_020_017_000 ==========
+    ErrorCode REIMBURSEMENT_NOT_EXISTS = new ErrorCode(1_020_017_000, "报销不存在");
+    ErrorCode REIMBURSEMENT_NO_EXISTS = new ErrorCode(1_020_017_001, "生成报销编号重复，请重试");
+    ErrorCode REIMBURSEMENT_EXPENSE_NOT_EXISTS = new ErrorCode(1_020_017_002, "报销关联的费用不存在");
+    ErrorCode REIMBURSEMENT_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_017_003, "创建报销失败，原因：报销金额超出费用剩余可报金额");
+    ErrorCode REIMBURSEMENT_UPDATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_017_004, "更新报销失败，原因：报销金额超出费用剩余可报金额");
+    ErrorCode REIMBURSEMENT_DELETE_FAIL_IS_SUBMITTED = new ErrorCode(1_020_017_005, "删除报销失败，原因：已提交审批的报销不能删除");
+    ErrorCode REIMBURSEMENT_UPDATE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_006, "更新报销失败，原因：只有待提交状态的报销可以编辑");
+    ErrorCode REIMBURSEMENT_DELETE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_007, "删除报销失败，原因：只有待提交状态的报销可以删除");
+    ErrorCode REIMBURSEMENT_SUBMIT_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_008, "提交审批失败，原因：只有待提交状态的报销可以提交");
+    ErrorCode REIMBURSEMENT_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_017_009, "更新审批状态失败，原因：报销不处于审批中");
+
 }

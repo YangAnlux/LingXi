@@ -7,6 +7,8 @@ import com.meession.etm.module.crm.dal.dataobject.workorder.CrmWorkOrderDO;
 
 import jakarta.validation.Valid;
 
+import java.util.Map;
+
 public interface CrmWorkOrderService {
 
     Long createWorkOrder(@Valid CrmWorkOrderSaveReqVO reqVO);
@@ -23,4 +25,11 @@ public interface CrmWorkOrderService {
 
     void assignWorkOrder(Long id, Long assigneeId);
 
+    int updateSlaBreached();
+
+    Map<String, Long> getStatisticsByType();
+
+    Map<String, Long> getStatisticsByStatus();
+
+    Map<String, Long> getStatisticsByAssignee();
 }

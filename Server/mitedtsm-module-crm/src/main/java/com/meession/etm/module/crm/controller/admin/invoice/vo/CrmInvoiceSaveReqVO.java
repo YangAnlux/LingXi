@@ -2,6 +2,7 @@
 // [ADD START] 发票新增/修改请求VO - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
 package com.meession.etm.module.crm.controller.admin.invoice.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.meession.etm.framework.common.validation.InEnum;
 import com.meession.etm.module.crm.enums.invoice.CrmInvoiceTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,6 +12,8 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import static com.meession.etm.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY;
 
 @Schema(description = "管理后台 - CRM 发票新增/修改 Request VO")
 @Data
@@ -53,6 +56,7 @@ public class CrmInvoiceSaveReqVO {
     private String taxNo;
 
     @Schema(description = "开票日期", example = "2024-01-15")
+    @JsonFormat(pattern = FORMAT_YEAR_MONTH_DAY)
     private LocalDate issueDate;
 
     @Schema(description = "备注", example = "备注信息")

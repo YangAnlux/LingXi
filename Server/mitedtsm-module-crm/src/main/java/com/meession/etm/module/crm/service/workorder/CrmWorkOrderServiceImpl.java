@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.meession.etm.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static com.meession.etm.module.crm.enums.ErrorCodeConstants.WORK_ORDER_NOT_EXISTS;
@@ -79,6 +81,32 @@ public class CrmWorkOrderServiceImpl implements CrmWorkOrderService {
         workOrder.setAssigneeId(assigneeId);
         workOrder.setStatus("PROCESSING");
         workOrderMapper.updateById(workOrder);
+    }
+
+    @Override
+    public int updateSlaBreached() {
+        return workOrderMapper.updateSlaBreachedStatus();
+    }
+
+    @Override
+    public Map<String, Long> getStatisticsByType() {
+        return workOrderMapper.selectList().stream()
+                .filter(w -> w.getType() != null)
+                .collect(Collectors.groupingBy(CrmWorkOrderDO::getType, Collectors.counting()));
+    }
+
+    @Override
+    public Map<String, Long> getStatisticsByStatus() {
+        return workOrderMapper.selectList().stream()
+                .filter(w -> w.getStatus() != null)
+                .collect(Collectors.groupingBy(CrmWorkOrderDO::getStatus, Collectors.counting()));
+    }
+
+    @Override
+    public Map<String, Long> getStatisticsByAssignee() {
+        return workOrderMapper.selectList().stream()
+                .filter(w -> w.getAssigneeId() != null)
+                .collect(Collectors.groupingBy(w -> String.valueOf(w.getAssigneeId()), Collectors.counting()));
     }
 
     private CrmWorkOrderDO validateWorkOrderExists(Long id) {
