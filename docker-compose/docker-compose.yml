@@ -8,6 +8,8 @@ services:
     container_name: mitedtsm-mysql
     image: mysql:8.0
     restart: unless-stopped
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-mitedtsm_database}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-1234}
@@ -34,6 +36,8 @@ services:
     container_name: mitedtsm-redis
     image: redis:6-alpine
     restart: unless-stopped
+    ports:
+      - "6379:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -51,6 +55,9 @@ services:
     container_name: mitedtsm-rabbitmq
     image: rabbitmq:3-management-alpine
     restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: rabbit
       RABBITMQ_DEFAULT_PASS: rabbit
@@ -71,6 +78,11 @@ services:
     container_name: mitedtsm-tdengine
     image: tdengine/tdengine:3.3.6.0
     restart: unless-stopped
+    ports:
+      - "6030:6030"
+      - "6041:6041"
+      - "6043-6049:6043-6049"
+      - "6043-6049:6043-6049/udp"
     volumes:
       - tdengine_data:/var/lib/taos
     environment:

@@ -40,7 +40,9 @@ public interface ErrorCodeConstants {
     ErrorCode RECEIVABLE_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_004_004, "更新回款审核状态失败，原因：回款不是审核中状态");
     ErrorCode RECEIVABLE_NO_EXISTS = new ErrorCode(1_020_004_005, "生成回款序列号重复，请重试");
     ErrorCode RECEIVABLE_CREATE_FAIL_CONTRACT_NOT_APPROVE = new ErrorCode(1_020_004_006, "创建回款失败，原因：合同不是审核通过状态");
-    ErrorCode RECEIVABLE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT = new ErrorCode(1_020_004_007, "创建回款失败，原因：回款金额超出合同金额，目前剩余可退：{} 元");
+    ErrorCode RECEIVABLE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT = new ErrorCode(1_020_004_007, "创建回款失败，原因：回款金额超出合同金额，目前剩余可回款：{} 元");
+    // [ADD START] 合同已回款金额超过合同总额的特殊提示 - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
+    ErrorCode RECEIVABLE_CREATE_FAIL_PRICE_EXCEEDS_TOTAL = new ErrorCode(1_020_004_009, "创建回款失败，原因：合同已回款金额（{}元）已超过合同总额（{}元），请先调整合同金额");
     ErrorCode RECEIVABLE_DELETE_FAIL_IS_APPROVE = new ErrorCode(1_020_004_008, "删除回款失败，原因：回款审批已通过");
 
     // ========== 回款计划 1-020-005-000 ==========
@@ -96,6 +98,12 @@ public interface ErrorCodeConstants {
     ErrorCode BUSINESS_STATUS_DELETE_FAIL_USED = new ErrorCode(1_020_010_002, "已经被使用的商机状态组，无法进行删除");
     ErrorCode BUSINESS_STATUS_NOT_EXISTS = new ErrorCode(1_020_010_003, "商机状态不存在");
 
+    // ========== 工单管理 1_020_011_000 ==========
+    // 2023级软4蔡磊202305566515,2026年7月14日
+    ErrorCode WORK_ORDER_NOT_EXISTS = new ErrorCode(1_020_011_000, "工单不存在");
+    ErrorCode WORK_ORDER_DELETE_FAIL = new ErrorCode(1_020_011_001, "删除工单失败");
+    ErrorCode WORK_ORDER_STATUS_INVALID = new ErrorCode(1_020_011_002, "工单状态流转非法");
+
     // ========== 客户公海规则设置 1_020_012_000 ==========
     ErrorCode CUSTOMER_LIMIT_CONFIG_NOT_EXISTS = new ErrorCode(1_020_012_001, "客户限制配置不存在");
 
@@ -103,6 +111,45 @@ public interface ErrorCodeConstants {
     ErrorCode FOLLOW_UP_RECORD_NOT_EXISTS = new ErrorCode(1_020_013_000, "跟进记录不存在");
     ErrorCode FOLLOW_UP_RECORD_DELETE_DENIED = new ErrorCode(1_020_013_001, "删除跟进记录失败，原因：没有权限");
 
-    // ========== 数据统计 1_020_014_000 ==========
+    // [ADD START] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+    // ========== 发票管理 1_020_015_000 ==========
+    ErrorCode INVOICE_NOT_EXISTS = new ErrorCode(1_020_015_000, "发票不存在");
+    ErrorCode INVOICE_NO_EXISTS = new ErrorCode(1_020_015_001, "生成发票序列号重复，请重试");
+    ErrorCode INVOICE_INVOICE_NO_EXISTS = new ErrorCode(1_020_015_002, "发票号码已存在");
+    ErrorCode INVOICE_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_003, "创建发票失败，原因：开票金额超出合同剩余可开票金额");
+    ErrorCode INVOICE_UPDATE_FAIL_AMOUNT_EXCEEDS_LIMIT = new ErrorCode(1_020_015_004, "更新发票失败，原因：开票金额超出合同剩余可开票金额");
+    ErrorCode INVOICE_DELETE_FAIL_IS_ISSUED = new ErrorCode(1_020_015_005, "删除发票失败，原因：已开票的发票不能删除");
+    // [MODIFY] 已开票发票校验用别名 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // 原始: INVOICE_CREATE_FAIL_AMOUNT_EXCEEDS_LIMIT, ServiceImpl 引用为 INVOICE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT
+    ErrorCode INVOICE_CREATE_FAIL_PRICE_EXCEEDS_LIMIT = new ErrorCode(1_020_015_003, "创建发票失败，原因：开票金额超出合同剩余可开票金额");
+    // [ADD START] 发票状态不允许更新 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    ErrorCode INVOICE_UPDATE_FAIL_STATUS_NOT_PENDING = new ErrorCode(1_020_015_006, "更新发票失败，原因：发票不是待开票状态");
+    // [ADD END] 发票状态不允许更新 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // [ADD END] 发票 1_020_015_000 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+
+    // [ADD START] 费用 1_020_016_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    // ========== 费用管理 1_020_016_000 ==========
+    ErrorCode EXPENSE_NOT_EXISTS = new ErrorCode(1_020_016_000, "费用不存在");
+    ErrorCode EXPENSE_NO_EXISTS = new ErrorCode(1_020_016_001, "生成费用序列号重复，请重试");
+    // [ADD END] 费用 1_020_016_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+
+    // [ADD START] 报销 1_020_017_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+    ErrorCode REIMBURSEMENT_NOT_EXISTS = new ErrorCode(1_020_017_000, "报销不存在");
+    ErrorCode REIMBURSEMENT_NO_EXISTS = new ErrorCode(1_020_017_001, "生成报销序列号重复，请重试");
+    ErrorCode REIMBURSEMENT_UPDATE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_002, "更新报销失败，原因：只有待提交状态的报销可编辑");
+    ErrorCode REIMBURSEMENT_DELETE_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_003, "删除报销失败，原因：只有待提交状态的报销可删除");
+    ErrorCode REIMBURSEMENT_SUBMIT_FAIL_NOT_DRAFT = new ErrorCode(1_020_017_004, "报销提交审核失败，原因：报销不处于待提交状态");
+    ErrorCode REIMBURSEMENT_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_017_005, "更新报销审核状态失败，原因：报销不是审核中状态");
+    // [ADD END] 报销 1_020_017_000 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16
+
+    // [ADD START] 退款 1_020_018_000 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+    // ========== 退款管理 1_020_018_000 ==========
+    ErrorCode REFUND_NOT_EXISTS = new ErrorCode(1_020_018_000, "退款不存在");
+    ErrorCode REFUND_NO_EXISTS = new ErrorCode(1_020_018_001, "生成退款序列号重复，请重试");
+    ErrorCode REFUND_UPDATE_FAIL_NOT_DRAFT = new ErrorCode(1_020_018_002, "更新退款失败，原因：只有待提交状态的退款可编辑");
+    ErrorCode REFUND_DELETE_FAIL_NOT_DRAFT = new ErrorCode(1_020_018_003, "删除退款失败，原因：只有待提交状态的退款可删除");
+    ErrorCode REFUND_SUBMIT_FAIL_NOT_DRAFT = new ErrorCode(1_020_018_004, "退款提交审核失败，原因：退款不处于待提交状态");
+    ErrorCode REFUND_UPDATE_AUDIT_STATUS_FAIL_NOT_PROCESS = new ErrorCode(1_020_018_005, "更新退款审核状态失败，原因：退款不是审核中状态");
+    // [ADD END] 退款 1_020_018_000 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
 
 }

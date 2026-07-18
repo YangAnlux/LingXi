@@ -4,7 +4,7 @@
 -- =============================================
 -- 1. 创建费用表
 -- =============================================
-CREATE TABLE `crm_expense` (
+CREATE TABLE IF NOT EXISTS `crm_expense` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
   `no` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '费用编号（自动生成）',
   `customer_id` bigint NULL DEFAULT NULL COMMENT '客户ID',
@@ -31,26 +31,26 @@ CREATE TABLE `crm_expense` (
 -- =============================================
 -- 2. 菜单注册（父菜单：CRM 2397）
 -- =============================================
-INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6010, '费用管理', '', 2, 75, 2397, 'expense', 'ep:money', 'crm/expense/index', 'CrmExpense', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6011, '费用管理查询', 'crm:expense:query', 3, 1, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6012, '费用管理创建', 'crm:expense:create', 3, 2, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6013, '费用管理更新', 'crm:expense:update', 3, 3, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6014, '费用管理删除', 'crm:expense:delete', 3, 4, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6015, '费用管理导出', 'crm:expense:export', 3, 5, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6010, '费用管理', '', 2, 75, 2397, 'expense', 'ep:money', 'crm/expense/index', 'CrmExpense', 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6011, '费用管理查询', 'crm:expense:query', 3, 1, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6012, '费用管理创建', 'crm:expense:create', 3, 2, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6013, '费用管理更新', 'crm:expense:update', 3, 3, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6014, '费用管理删除', 'crm:expense:delete', 3, 4, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6015, '费用管理导出', 'crm:expense:export', 3, 5, 6010, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
 
 -- 菜单国际化
-INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6010, 'zh-CN', '费用管理');
-INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6010, 'en', 'Expense Management');
+INSERT IGNORE INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6010, 'zh-CN', '费用管理');
+INSERT IGNORE INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6010, 'en', 'Expense Management');
 
 -- =============================================
 -- 3. 字典类型与数据（费用类型）
 -- =============================================
-INSERT INTO `system_dict_type` (`id`, `name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `deleted_time`) VALUES (2014, '费用-费用类型', 'crm_expense_type', 0, '费用-费用类型', '1', NOW(), '1', NOW(), b'0', '1970-01-01 00:00:00');
+INSERT IGNORE INTO `system_dict_type` (`id`, `name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `deleted_time`) VALUES (2014, '费用-费用类型', 'crm_expense_type', 0, '费用-费用类型', '1', NOW(), '1', NOW(), b'0', '1970-01-01 00:00:00');
 
-INSERT INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3059, 1, '差旅', '1', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3060, 2, '交通', '2', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3061, 3, '餐饮', '3', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3062, 4, '办公', '4', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
-INSERT INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3063, 5, '其他', '5', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3059, 1, '差旅', '1', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3060, 2, '交通', '2', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3061, 3, '餐饮', '3', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3062, 4, '办公', '4', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3063, 5, '其他', '5', 'crm_expense_type', 0, 'default', '', '', '1', NOW(), '1', NOW(), b'0');
 
 -- [ADD END] 费用表 + 菜单注册 + 字典数据 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16

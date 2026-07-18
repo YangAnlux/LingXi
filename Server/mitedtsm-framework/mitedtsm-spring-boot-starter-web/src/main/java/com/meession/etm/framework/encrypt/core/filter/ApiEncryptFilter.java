@@ -63,35 +63,20 @@ public class ApiEncryptFilter extends ApiRequestFilter {
         this.apiEncryptProperties = apiEncryptProperties;
         this.requestMappingHandlerMapping = requestMappingHandlerMapping;
         this.globalExceptionHandler = globalExceptionHandler;
-        SymmetricDecryptor reqSymDecryptor = null;
-        AsymmetricDecryptor reqAsymDecryptor = null;
-        SymmetricEncryptor respSymEncryptor = null;
-        AsymmetricEncryptor respAsymEncryptor = null;
-        try {
-            if (StrUtil.equalsIgnoreCase(apiEncryptProperties.getAlgorithm(), "AES")) {
-                reqSymDecryptor = SecureUtil.aes(StrUtil.utf8Bytes(apiEncryptProperties.getRequestKey()));
-                reqAsymDecryptor = null;
-                respSymEncryptor = SecureUtil.aes(StrUtil.utf8Bytes(apiEncryptProperties.getResponseKey()));
-                respAsymEncryptor = null;
-            } else if (StrUtil.equalsIgnoreCase(apiEncryptProperties.getAlgorithm(), "RSA")) {
-                reqSymDecryptor = null;
-                reqAsymDecryptor = SecureUtil.rsa(apiEncryptProperties.getRequestKey(), null);
-                respSymEncryptor = null;
-                respAsymEncryptor = SecureUtil.rsa(null, apiEncryptProperties.getResponseKey());
-            } else {
-                throw new IllegalArgumentException("不支持的加密算法：" + apiEncryptProperties.getAlgorithm());
-            }
-        } catch (Exception e) {
-            log.warn("[ApiEncryptFilter][初始化加密器失败，API加密功能将被禁用]", e);
-            reqSymDecryptor = null;
-            reqAsymDecryptor = null;
-            respSymEncryptor = null;
-            respAsymEncryptor = null;
+        if (StrUtil.equalsIgnoreCase(apiEncryptProperties.getAlgorithm(), "AES")) {
+            this.requestSymmetricDecryptor = SecureUtil.aes(StrUtil.utf8Bytes(apiEncryptProperties.getRequestKey()));
+            this.requestAsymmetricDecryptor = null;
+            this.responseSymmetricEncryptor = SecureUtil.aes(StrUtil.utf8Bytes(apiEncryptProperties.getResponseKey()));
+            this.responseAsymmetricEncryptor = null;
+        } else if (StrUtil.equalsIgnoreCase(apiEncryptProperties.getAlgorithm(), "RSA")) {
+            this.requestSymmetricDecryptor = null;
+            this.requestAsymmetricDecryptor = SecureUtil.rsa(apiEncryptProperties.getRequestKey(), null);
+            this.responseSymmetricEncryptor = null;
+            this.responseAsymmetricEncryptor = SecureUtil.rsa(null, apiEncryptProperties.getResponseKey());
+        } else {
+            // 补充说明：如果要支持 SM2、SM4 等算法，可在此处增加对应实例的创建，并添加相应的 Maven 依赖即可。
+            throw new IllegalArgumentException("不支持的加密算法：" + apiEncryptProperties.getAlgorithm());
         }
-        this.requestSymmetricDecryptor = reqSymDecryptor;
-        this.requestAsymmetricDecryptor = reqAsymDecryptor;
-        this.responseSymmetricEncryptor = respSymEncryptor;
-        this.responseAsymmetricEncryptor = respAsymEncryptor;
     }
 
     @Override

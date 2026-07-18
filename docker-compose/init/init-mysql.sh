@@ -66,6 +66,23 @@ if [ -d "$SQL_NEW_DIR" ]; then
         echo "Executing: new-large-file-upload.sql"
         mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" < "${SQL_NEW_DIR}/new-large-file-upload.sql"
     fi
+
+    # [ADD START] 执行 CRM 业务模块 SQL 文件 - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
+    # 固定顺序执行，保证依赖关系（如字典表依赖基础表）
+    for crm_sql in \
+        "crm_expense_init.sql" \
+        "crm_invoice_init.sql" \
+        "crm_reimbursement_init.sql" \
+        "crm_refund_init.sql" \
+        "crm_receivable_overdue_notify_init.sql" \
+        "crm_bpmn_process_init.sql" \
+        "patch_2026-07-17_add_invoice_menu_ar_i18n.sql"; do
+        if [ -f "${SQL_NEW_DIR}/${crm_sql}" ]; then
+            echo "Executing: ${crm_sql}"
+            mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE}" < "${SQL_NEW_DIR}/${crm_sql}"
+        fi
+    done
+    # [ADD END] CRM SQL 文件 - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
 fi
 
 echo "MySQL initialization completed successfully!"

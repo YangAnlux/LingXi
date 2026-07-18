@@ -40,6 +40,14 @@ INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_i
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (6026, '报销管理提交', 'crm:reimbursement:submit', 3, 6, 6020, '', '', '', NULL, 0, b'1', b'1', b'1', '1', NOW(), '1', NOW(), b'0');
 
 INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6020, 'zh-CN', '报销管理');
-INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6020, 'en', 'Reimbursement Management');
+INSERT INTO `system_menu_i18n` (`menu_id`, `language`, `name`) VALUES (6020, 'en', 'Reimbursement');
+
+-- [ADD START] 报销状态字典数据 - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
+INSERT IGNORE INTO `system_dict_type` (`id`, `name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `deleted_time`) VALUES (2015, 'CRM 报销状态', 'crm_reimbursement_status', 0, '报销-报销状态', '1', NOW(), '1', NOW(), b'0', '1970-01-01 00:00:00');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3064, 1, '待提交', '0', 'crm_reimbursement_status', 0, 'info', '', NULL, '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3065, 2, '审批中', '1', 'crm_reimbursement_status', 0, 'warning', '', NULL, '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3066, 3, '已通过', '2', 'crm_reimbursement_status', 0, 'success', '', NULL, '1', NOW(), '1', NOW(), b'0');
+INSERT IGNORE INTO `system_dict_data` (`id`, `sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`) VALUES (3067, 4, '已驳回', '3', 'crm_reimbursement_status', 0, 'danger', '', NULL, '1', NOW(), '1', NOW(), b'0');
+-- [ADD END] 报销状态字典数据 - 2026-07-18 - 23软4胡伟-202305566535-修改于2026.07.17
 
 -- [ADD END] 报销表 + 菜单注册 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16

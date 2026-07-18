@@ -133,6 +133,15 @@
             {{ t('reimbursement.submit') }}
           </el-button>
           <el-button
+            v-if="scope.row.status !== 0"
+            v-hasPermi="['crm:reimbursement:update']"
+            link
+            type="primary"
+            @click="handleProcessDetail(scope.row)"
+          >
+            {{ t('reimbursement.viewApproval') }}
+          </el-button>
+          <el-button
             v-hasPermi="['crm:reimbursement:delete']"
             link
             type="danger"
@@ -243,10 +252,21 @@ onMounted(async () => {
   customerList.value = await CustomerApi.getCustomerSimpleList()
 })
 
+// [ADD START] 页面重新激活时刷新列表，保证审批后状态更新 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
+onActivated(() => {
+  getList()
+})
+// [ADD END]
+
 /** 打开详情页 */
 const { push } = useRouter()
 const openDetail = (id: number) => {
   push({ name: 'CrmReimbursementDetail', params: { id } })
+}
+
+/** 查看审批 */
+const handleProcessDetail = (row) => {
+  push({ name: 'BpmProcessInstanceDetail', query: { id: row.processInstanceId } })
 }
 </script>
 <!-- [ADD END] 报销列表页 - 2026-07-16 - 23软4胡伟-202305566535-修改于2026.07.16 -->

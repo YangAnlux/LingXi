@@ -52,7 +52,11 @@ public class DefaultController {
                 "[CRM 模块 mitedtsm-module-crm - 已禁用]");
     }
 
-    
+    @RequestMapping(value = { "/admin-api/report/**"})
+    public CommonResult<Boolean> report404() {
+        return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+                "[报表模块 mitedtsm-module-report - 已禁用]");
+    }
 
     @RequestMapping(value = { "/admin-api/pay/**"})
     public CommonResult<Boolean> pay404() {
