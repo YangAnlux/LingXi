@@ -46,11 +46,12 @@ public class DefaultController {
                 "[ERP 模块 mitedtsm-module-erp - 已禁用]");
     }
 
-    @RequestMapping("/admin-api/crm/**")
-    public CommonResult<Boolean> crm404() {
-        return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                "[CRM 模块 mitedtsm-module-crm - 已禁用]");
-    }
+    // CRM 模块已加载，不再需要 404 兜底，直接由 CRM Controller 处理
+    // @RequestMapping("/admin-api/crm/**")
+    // public CommonResult<Boolean> crm404() {
+    //     return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+    //             "[CRM 模块 mitedtsm-module-crm - 已禁用]");
+    // }
 
     @RequestMapping(value = { "/admin-api/report/**"})
     public CommonResult<Boolean> report404() {

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -91,6 +92,10 @@ public class CrmCustomerDO extends BaseDO {
      * email
      */
     private String email;
+    /**
+     * 生日
+     */
+    private LocalDate birthday;
     /**
      * 所在地
      *

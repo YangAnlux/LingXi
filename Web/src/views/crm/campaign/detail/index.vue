@@ -6,6 +6,9 @@
         <el-button v-hasPermi="['crm:campaign:update']" type="primary" @click="openForm">
           {{ t('common.edit') }}
         </el-button>
+        <el-button v-hasPermi="['crm:send-task:create']" type="success" @click="openSendDrawer">
+          {{ t('campaign.send.sendToCampaign') }}
+        </el-button>
         <el-button @click="close">{{ t('common.back') }}</el-button>
       </div>
 
@@ -55,11 +58,15 @@
 
   <!-- 表单弹窗 -->
   <CampaignForm ref="formRef" @success="getDetail" />
+
+  <!-- 群发抽屉 -->
+  <SendDrawer v-model="sendDrawerVisible" :campaign-id="campaignId" @success="getDetail" />
 </template>
 
 <script lang="ts" setup>
 import * as CampaignApi from '@/api/crm/campaign'
 import CampaignForm from '@/views/crm/campaign/CampaignForm.vue'
+import SendDrawer from '@/views/crm/campaign/components/SendDrawer.vue'
 import dayjs from 'dayjs'
 
 defineOptions({ name: 'CrmCampaignDetail' })
@@ -72,6 +79,11 @@ const { currentRoute } = useRouter()
 const campaignId = ref(0)
 const loading = ref(true)
 const campaign = ref<CampaignApi.CampaignVO>({} as CampaignApi.CampaignVO)
+const sendDrawerVisible = ref(false)
+
+const openSendDrawer = () => {
+  sendDrawerVisible.value = true
+}
 
 const getStatusLabel = (status: number) => {
   const labels: Record<number, string> = {

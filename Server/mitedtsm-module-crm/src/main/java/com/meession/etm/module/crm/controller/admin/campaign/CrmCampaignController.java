@@ -12,6 +12,8 @@ import com.meession.etm.module.crm.controller.admin.campaign.vo.campaign.CrmCamp
 import com.meession.etm.module.crm.controller.admin.campaign.vo.campaign.CrmCampaignRespVO;
 import com.meession.etm.module.crm.controller.admin.campaign.vo.campaign.CrmCampaignSaveReqVO;
 import com.meession.etm.module.crm.dal.dataobject.campaign.CrmCampaignDO;
+import com.meession.etm.module.crm.dal.dataobject.send.CrmSendTaskDO;
+import com.meession.etm.module.crm.dal.mysql.send.CrmSendTaskMapper;
 import com.meession.etm.module.crm.service.campaign.CrmCampaignService;
 import com.meession.etm.module.system.api.user.AdminUserApi;
 import com.meession.etm.module.system.api.user.dto.AdminUserRespDTO;
@@ -28,9 +30,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.meession.etm.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
@@ -51,6 +52,9 @@ public class CrmCampaignController {
 
     @Resource
     private AdminUserApi adminUserApi;
+
+    @Resource
+    private CrmSendTaskMapper sendTaskMapper;
 
     @PostMapping("/create")
     @Operation(summary = "创建营销活动")
@@ -116,6 +120,21 @@ public class CrmCampaignController {
         }
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(convertListByFlatMap(list,
                 campaign -> Stream.of(NumberUtils.parseLong(campaign.getCreator()), campaign.getOwnerUserId())));
+
+        // 批量查询每个活动的关联发送任务数
+        List<Long> campaignIds = list.stream().map(CrmCampaignDO::getId).toList();
+        final Map<Long, Long> taskCountMap;
+        if (!campaignIds.isEmpty()) {
+            List<CrmSendTaskDO> tasks = sendTaskMapper.selectList(
+                    new com.meession.etm.framework.mybatis.core.query.MPJLambdaWrapperX<CrmSendTaskDO>()
+                            .in(CrmSendTaskDO::getActivityId, campaignIds));
+            taskCountMap = tasks.stream()
+                    .filter(t -> t.getActivityId() != null)
+                    .collect(Collectors.groupingBy(CrmSendTaskDO::getActivityId, Collectors.counting()));
+        } else {
+            taskCountMap = Collections.emptyMap();
+        }
+
         return BeanUtils.toBean(list, CrmCampaignRespVO.class, campaignVO -> {
             // 将 epoch 0 时间（表示未设置）转为 null，避免导出/列表显示 "1970/01/01 08:00:00"
             if (campaignVO.getStartTime() != null
@@ -130,6 +149,7 @@ public class CrmCampaignController {
                     user -> campaignVO.setCreatorName(user.getNickname()));
             MapUtils.findAndThen(userMap, campaignVO.getOwnerUserId(),
                     user -> campaignVO.setOwnerUserName(user.getNickname()));
+            campaignVO.setSendTaskCount(taskCountMap.getOrDefault(campaignVO.getId(), 0L).intValue());
         });
     }
 

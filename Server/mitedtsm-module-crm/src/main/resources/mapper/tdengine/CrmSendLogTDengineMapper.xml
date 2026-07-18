@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meession.etm.module.crm.dal.tdengine.CrmSendLogTDengineMapper">
+
+    <update id="createSTable">
+        CREATE STABLE IF NOT EXISTS crm_logs.send_logs (
+            ts TIMESTAMP,
+            send_status VARCHAR(20),
+            channel VARCHAR(10),
+            fail_reason VARCHAR(500),
+            template_code VARCHAR(100)
+        ) TAGS (
+            customer_id BIGINT,
+            task_id BIGINT,
+            biz_type VARCHAR(20)
+        )
+    </update>
+
+    <select id="showSTable" resultType="int">
+        SELECT COUNT(*) FROM information_schema.ins_stables
+        WHERE db_name = 'crm_logs' AND stable_name = 'send_logs'
+    </select>
+
+    <insert id="insert">
+        INSERT INTO crm_logs.send_logs_${taskId}
+        USING crm_logs.send_logs TAGS (#{customerId}, #{taskId}, #{bizType})
+        VALUES (NOW, #{sendStatus}, #{channel}, #{failReason}, #{templateCode})
+    </insert>
+
+    <select id="selectTodayStats" resultType="map">
+        SELECT
+            biz_type AS bizType,
+            channel,
+            COUNT(*) AS totalCount,
+            SUM(CASE WHEN send_status = 'SUCCESS' THEN 1 ELSE 0 END) AS successCount,
+            SUM(CASE WHEN send_status = 'FAIL' THEN 1 ELSE 0 END) AS failCount,
+            SUM(CASE WHEN send_status = 'OPEN' THEN 1 ELSE 0 END) AS openCount
+        FROM crm_logs.send_logs
+        WHERE ts >= TODAY()
+        <if test="bizType != null and bizType != ''">
+            AND biz_type = #{bizType}
+        </if>
+        <if test="channel != null and channel != ''">
+            AND channel = #{channel}
+        </if>
+        GROUP BY biz_type, channel
+    </select>
+
+    <select id="select7DayTrend" resultType="map">
+        SELECT
+            TIMETRUNCATE(ts, 1d) AS statDay,
+            biz_type AS bizType,
+            channel,
+            COUNT(*) AS totalCount,
+            SUM(CASE WHEN send_status = 'SUCCESS' THEN 1 ELSE 0 END) AS successCount,
+            SUM(CASE WHEN send_status = 'FAIL' THEN 1 ELSE 0 END) AS failCount,
+            SUM(CASE WHEN send_status = 'OPEN' THEN 1 ELSE 0 END) AS openCount
+        FROM crm_logs.send_logs
+        WHERE ts >= #{startTime} AND ts &lt; #{endTime}
+        GROUP BY statDay, biz_type, channel
+        ORDER BY statDay
+    </select>
+
+    <select id="selectTaskStats" resultType="map">
+        SELECT
+            task_id AS taskId,
+            biz_type AS bizType,
+            channel,
+            COUNT(*) AS totalCount,
+            SUM(CASE WHEN send_status = 'SUCCESS' THEN 1 ELSE 0 END) AS successCount,
+            SUM(CASE WHEN send_status = 'FAIL' THEN 1 ELSE 0 END) AS failCount,
+            SUM(CASE WHEN send_status = 'OPEN' THEN 1 ELSE 0 END) AS openCount,
+            SUM(CASE WHEN send_status = 'CLICK' THEN 1 ELSE 0 END) AS clickCount
+        FROM crm_logs.send_logs
+        WHERE task_id = #{taskId}
+        GROUP BY task_id, biz_type, channel
+    </select>
+
+</mapper>

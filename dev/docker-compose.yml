@@ -8,8 +8,10 @@ services:
     container_name: mitedtsm-dev-mysql
     image: mysql:8.0
     restart: unless-stopped
+    mem_limit: 256m
+    memswap_limit: 512m
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-mitedtsm_database}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-1234}
@@ -36,6 +38,8 @@ services:
     container_name: mitedtsm-dev-redis
     image: redis:6-alpine
     restart: unless-stopped
+    mem_limit: 64m
+    memswap_limit: 128m
     ports:
       - "6379:6379"
     volumes:
@@ -55,6 +59,8 @@ services:
     container_name: mitedtsm-dev-rabbitmq
     image: rabbitmq:3-management-alpine
     restart: unless-stopped
+    mem_limit: 256m
+    memswap_limit: 512m
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -78,6 +84,8 @@ services:
     container_name: mitedtsm-dev-tdengine
     image: tdengine/tdengine:3.3.6.0
     restart: unless-stopped
+    mem_limit: 256m
+    memswap_limit: 512m
     ports:
       - "6030:6030"
       - "6041:6041"

@@ -149,6 +149,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <!-- 本地开发 JVM 参数：限制堆内存，避免 VM 内存耗尽 -->
+                    <jvmArguments>
+                        -Xms256m -Xmx512m -XX:+UseG1GC
+                        -XX:MaxGCPauseMillis=200
+                        -XX:+DisableExplicitGC
+                    </jvmArguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>

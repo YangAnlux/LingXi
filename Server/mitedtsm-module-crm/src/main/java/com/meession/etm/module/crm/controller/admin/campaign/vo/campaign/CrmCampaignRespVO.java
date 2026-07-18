@@ -83,4 +83,7 @@ public class CrmCampaignRespVO {
     @ExcelProperty(value = "更新时间", converter = LocalDateTimeConverter.class)
     private LocalDateTime updateTime;
 
+    @Schema(description = "关联发送任务数")
+    private Integer sendTaskCount;
+
 }

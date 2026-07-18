@@ -28,6 +28,17 @@
             </el-select>
           </el-form-item>
         </el-col>
+        <el-col :span="8">
+          <el-form-item :label="t('campaign.channel')" prop="channel">
+            <el-select v-model="queryParams.channel" :placeholder="t('common.all')" class="!w-240px" clearable>
+              <el-option :value="1" :label="t('campaign.channelOnlineAd')" />
+              <el-option :value="2" :label="t('campaign.channelOfflineEvent')" />
+              <el-option :value="3" :label="t('campaign.channelEmail')" />
+              <el-option :value="4" :label="t('campaign.channelSMS')" />
+              <el-option :value="5" :label="t('campaign.channelSocial')" />
+            </el-select>
+          </el-form-item>
+        </el-col>
       </el-row>
       <el-row :gutter="20">
         <el-col :span="8">
@@ -100,6 +111,14 @@
           </div>
         </template>
       </el-table-column>
+      <el-table-column :label="t('campaign.channel')" align="center" min-width="110">
+        <template #default="scope">
+          <el-tag v-if="scope.row.channel" :type="getChannelTagType(scope.row.channel)" size="small">
+            {{ getChannelLabel(scope.row.channel) }}
+          </el-tag>
+          <span v-else>-</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="t('campaign.startTime')" align="center" min-width="180">
         <template #default="scope">
           {{ formatDateTime(scope.row.startTime) }}
@@ -121,6 +140,14 @@
         </template>
       </el-table-column>
       <el-table-column :label="t('campaign.ownerUserName')" align="center" prop="ownerUserName" min-width="100" />
+      <el-table-column :label="t('campaign.sendTaskCount')" align="center" min-width="100">
+        <template #default="scope">
+          <el-link :underline="false" type="primary" v-if="scope.row.sendTaskCount">
+            {{ scope.row.sendTaskCount }}
+          </el-link>
+          <span v-else>0</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="t('campaign.creatorName')" align="center" prop="creatorName" min-width="100" />
       <el-table-column :label="t('campaign.createTime')" align="center" min-width="180">
         <template #default="scope">
@@ -166,6 +193,14 @@
           </el-button>
           <el-button
             link
+            type="primary"
+            @click="openSend(scope.row.id)"
+            v-hasPermi="['crm:campaign:update']"
+          >
+            {{ t('campaign.sendToCampaign') }}
+          </el-button>
+          <el-button
+            link
             type="danger"
             @click="handleDelete(scope.row.id)"
             v-hasPermi="['crm:campaign:delete']"
@@ -184,15 +219,22 @@
   </ContentWrap>
 
   <CampaignForm ref="formRef" @success="getList" />
+
+  <SendDrawer
+    v-model="sendDrawerVisible"
+    :campaign-id="selectedCampaignId"
+    @success="getList"
+  />
 </template>
 
 <script setup lang="ts">
 import download from '@/utils/download'
 import * as CampaignApi from '@/api/crm/campaign'
 import CampaignForm from './CampaignForm.vue'
+import SendDrawer from './components/SendDrawer.vue'
 import dayjs from 'dayjs'
 
-defineOptions({ name: 'CrmCampaign' })
+defineOptions({ name: 'CrmCampaignList' })
 
 const message = useMessage()
 const { t } = useI18n('crm')
@@ -204,6 +246,7 @@ const queryParams = reactive({
   pageSize: 10,
   name: null,
   status: null,
+  channel: null,
   startTime: null,
   endTime: null
 })
@@ -223,6 +266,32 @@ const getStatusLabel = (status: number) => {
 const getStatusTagType = (status: number) => {
   const types: Record<number, string> = { 1: 'info', 2: 'success', 3: 'warning', 4: 'danger' }
   return types[status] || 'info'
+}
+
+const getChannelLabel = (channel: number) => {
+  const labels: Record<number, string> = {
+    1: t('campaign.channelOnlineAd'),
+    2: t('campaign.channelOfflineEvent'),
+    3: t('campaign.channelEmail'),
+    4: t('campaign.channelSMS'),
+    5: t('campaign.channelSocial')
+  }
+  return labels[channel] || ''
+}
+
+const getChannelTagType = (channel: number) => {
+  const types: Record<number, string> = { 1: '', 2: 'success', 3: 'warning', 4: 'info', 5: 'danger' }
+  return types[channel] || 'info'
+}
+
+const { push } = useRouter()
+
+const sendDrawerVisible = ref(false)
+const selectedCampaignId = ref<number>()
+
+const openSend = (campaignId: number) => {
+  selectedCampaignId.value = campaignId
+  sendDrawerVisible.value = true
 }
 
 const formatDateTime = (value: any) => {
