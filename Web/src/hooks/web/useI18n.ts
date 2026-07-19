@@ -16,7 +16,8 @@ const topLevelNamespaces = new Set([
   'common', 'action', 'table', 'dialog', 'form', 'error', 'login',
   'permission', 'setting', 'profile', 'lock', 'captcha', 'router',
   'analysis', 'workplace', 'watermark', 'sys', 'cropper', 'size',
-  'system', 'mall', 'crm', 'erp', 'iot', 'bpm', 'ai', 'pay', 'member', 'mp', 'infra'
+  'system', 'mall', 'crm', 'erp', 'iot', 'bpm', 'ai', 'pay', 'member', 'mp', 'infra',
+  'report'
 ])
 
 const getKey = (namespace: string | undefined, key: string) => {

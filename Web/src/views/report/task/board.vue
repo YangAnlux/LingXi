@@ -234,7 +234,7 @@ const boardData = reactive({
 
 const typeOptions = [
   { value: 1, label: t('report.task.typeDaily') },
-  { value: 2, label: t('report.task.typeUrgent') },
+  { value: 2, label: t('report.task.typeEmergency') },
   { value: 3, label: t('report.task.typeProject') },
   { value: 4, label: t('report.task.typeTemporary') }
 ]

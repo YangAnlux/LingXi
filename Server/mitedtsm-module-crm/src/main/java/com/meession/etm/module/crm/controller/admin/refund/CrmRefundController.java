@@ -3,6 +3,7 @@
 package com.meession.etm.module.crm.controller.admin.refund;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.NumberUtil;
 import com.meession.etm.framework.apilog.core.annotation.ApiAccessLog;
 import com.meession.etm.framework.common.pojo.CommonResult;
 import com.meession.etm.framework.common.pojo.PageResult;
@@ -128,11 +129,12 @@ public class CrmRefundController {
         // 1.2 合同
         Map<Long, CrmContractDO> contractMap = contractService.getContractMap(
                 convertSet(list, CrmRefundDO::getContractId));
-        // 1.3 负责人 + 创建人
+        // 1.3 负责人 + 创建人（creator 可能为字符串用户名，使用 NumberUtil 安全解析）
         Set<Long> userIds = convertSet(list, CrmRefundDO::getOwnerUserId);
         for (CrmRefundDO refundDO : list) {
-            if (refundDO.getCreator() != null && !refundDO.getCreator().isEmpty()) {
-                try { userIds.add(Long.parseLong(refundDO.getCreator())); } catch (NumberFormatException ignored) {}
+            // 仅当 creator 为纯数字时才加入查询集合，避免 NumberFormatException
+            if (NumberUtil.isNumber(refundDO.getCreator())) {
+                userIds.add(Long.parseLong(refundDO.getCreator()));
             }
         }
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(userIds);
@@ -145,7 +147,8 @@ public class CrmRefundController {
             findAndThen(customerMap, refund.getCustomerId(), customer -> refund.setCustomerName(customer.getName()));
             findAndThen(contractMap, refund.getContractId(), contract -> refund.setContractName(contract.getName()));
             findAndThen(userMap, refund.getOwnerUserId(), user -> refund.setOwnerUserName(user.getNickname()));
-            if (refundDO.getCreator() != null && !refundDO.getCreator().isEmpty()) {
+            // 安全解析创建人 ID 并填充昵称
+            if (NumberUtil.isNumber(refundDO.getCreator())) {
                 Long creatorId = Long.parseLong(refundDO.getCreator());
                 findAndThen(userMap, creatorId, user -> refund.setCreatorName(user.getNickname()));
             }
@@ -176,11 +179,12 @@ public class CrmRefundController {
             findAndThen(userMap, refund.getOwnerUserId(),
                     user -> respVO.setOwnerUserName(user.getNickname()));
         }
-        // 创建人
-        if (refund.getCreator() != null && !refund.getCreator().isEmpty()) {
+        // 创建人（creator 字段可能为用户名，安全解析后再查询）
+        if (NumberUtil.isNumber(refund.getCreator())) {
+            Long creatorId = Long.parseLong(refund.getCreator());
             Map<Long, AdminUserRespDTO> creatorMap = adminUserApi.getUserMap(
-                    Collections.singleton(Long.parseLong(refund.getCreator())));
-            findAndThen(creatorMap, Long.parseLong(refund.getCreator()),
+                    Collections.singleton(creatorId));
+            findAndThen(creatorMap, creatorId,
                     user -> respVO.setCreatorName(user.getNickname()));
         }
         return respVO;

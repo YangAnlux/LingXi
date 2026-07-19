@@ -91,12 +91,17 @@ public class TaskServiceImpl implements TaskService {
     /**
      * 查询任务分页
      * 
+     * 任务状态根据完成进度计算：0为待办，1-99为进行中，100为已完成。
+     * 
      * @param pageReqVO 分页查询条件
      * @return 分页结果
      */
     @Override
     public PageResult<TaskDO> getTaskPage(TaskPageReqVO pageReqVO) {
-        return taskMapper.selectPage(pageReqVO);
+        PageResult<TaskDO> pageResult = taskMapper.selectPage(pageReqVO);
+        // 根据完成进度重新计算任务状态，确保列表展示与看板一致
+        pageResult.getList().forEach(task -> task.setStatus(getTaskStatusByProgress(task.getProgress())));
+        return pageResult;
     }
 
     /**
@@ -202,6 +207,7 @@ public class TaskServiceImpl implements TaskService {
      * 获取任务看板数据
      * 
      * 返回待办、进行中、已完成三个状态的任务列表，以及即将到期和已逾期的任务统计。
+     * 任务状态根据完成进度计算：0为待办，1-99为进行中，100为已完成。
      * 
      * @return 任务看板数据
      */
@@ -210,17 +216,17 @@ public class TaskServiceImpl implements TaskService {
         List<TaskDO> allTasks = taskMapper.selectList(null);
         
         List<TaskRespVO> todoTasks = allTasks.stream()
-            .filter(task -> task.getStatus().equals(0))
+            .filter(task -> getTaskStatusByProgress(task.getProgress()) == 0)
             .map(task -> BeanUtils.toBean(task, TaskRespVO.class))
             .toList();
         
         List<TaskRespVO> inProgressTasks = allTasks.stream()
-            .filter(task -> task.getStatus().equals(1))
+            .filter(task -> getTaskStatusByProgress(task.getProgress()) == 1)
             .map(task -> BeanUtils.toBean(task, TaskRespVO.class))
             .toList();
         
         List<TaskRespVO> completedTasks = allTasks.stream()
-            .filter(task -> task.getStatus().equals(2))
+            .filter(task -> getTaskStatusByProgress(task.getProgress()) == 2)
             .map(task -> BeanUtils.toBean(task, TaskRespVO.class))
             .toList();
         
@@ -228,13 +234,13 @@ public class TaskServiceImpl implements TaskService {
         LocalDate threeDaysLater = today.plusDays(3);
         
         int upcomingExpiredCount = (int) allTasks.stream()
-            .filter(task -> task.getStatus().equals(0) || task.getStatus().equals(1))
+            .filter(task -> getTaskStatusByProgress(task.getProgress()) != 2)
             .filter(task -> task.getEndDate() != null)
             .filter(task -> !task.getEndDate().isBefore(today) && task.getEndDate().isBefore(threeDaysLater))
             .count();
         
         int expiredCount = (int) allTasks.stream()
-            .filter(task -> task.getStatus().equals(0) || task.getStatus().equals(1))
+            .filter(task -> getTaskStatusByProgress(task.getProgress()) != 2)
             .filter(task -> task.getEndDate() != null)
             .filter(task -> task.getEndDate().isBefore(today))
             .count();
@@ -246,6 +252,24 @@ public class TaskServiceImpl implements TaskService {
             .upcomingExpiredCount(upcomingExpiredCount)
             .expiredCount(expiredCount)
             .build();
+    }
+
+    /**
+     * 根据完成进度计算任务状态
+     * 
+     * 规则：0为待办，1-99为进行中，100为已完成
+     * 
+     * @param progress 完成进度
+     * @return 0-待办，1-进行中，2-已完成
+     */
+    private int getTaskStatusByProgress(Integer progress) {
+        if (progress == null || progress == 0) {
+            return 0;
+        }
+        if (progress >= 100) {
+            return 2;
+        }
+        return 1;
     }
 
 }

@@ -1,4 +1,3 @@
-// 2023级软4蔡磊202305566515,2026年7月14日
 <template>
   <Dialog v-model="dialogVisible" :title="dialogTitle">
     <el-form
@@ -10,76 +9,84 @@
     >
       <el-row>
         <el-col :span="12">
-          <el-form-item :label="t('workorder.title')" prop="title">
-            <el-input v-model="formData.title" :placeholder="t('workorder.titlePlaceholder')" />
+          <el-form-item :label="t('workOrder.title')" prop="title">
+            <el-input v-model="formData.title" :placeholder="t('workOrder.titlePlaceholder')" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item :label="t('workorder.type')" prop="type">
-            <el-input v-model="formData.type" :placeholder="t('workorder.typePlaceholder')" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <!-- 23软件工程4班蔡磊202305566515 -->
-          <el-form-item :label="t('workorder.customerName')" prop="customerId">
-            <el-select
-              v-model="formData.customerId"
-              :placeholder="t('workorder.customerIdPlaceholder')"
-              class="w-1/1"
-              clearable
-              filterable
-            >
-              <el-option
-                v-for="item in customerList"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item :label="t('workorder.priority')" prop="priority">
-            <el-select v-model="formData.priority" :placeholder="t('workorder.priorityPlaceholder')" class="w-1/1">
-              <el-option value="LOW" :label="t('workorder.priorityLow')" />
-              <el-option value="NORMAL" :label="t('workorder.priorityNormal')" />
-              <el-option value="HIGH" :label="t('workorder.priorityHigh')" />
-              <el-option value="URGENT" :label="t('workorder.priorityUrgent')" />
+          <el-form-item :label="t('workOrder.type')" prop="type">
+            <el-select v-model="formData.type" :placeholder="t('workOrder.typePlaceholder')" class="w-1/1">
+              <el-option :value="'TECH_SUPPORT'" :label="t('workOrder.typeTechSupport')" />
+              <el-option :value="'CONSULTATION'" :label="t('workOrder.typeConsultation')" />
+              <el-option :value="'COMPLAINT'" :label="t('workOrder.typeComplaint')" />
+              <el-option :value="'OTHER'" :label="t('workOrder.typeOther')" />
             </el-select>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item :label="t('workorder.status')" prop="status">
-            <el-select v-model="formData.status" :placeholder="t('workorder.statusPlaceholder')" class="w-1/1">
-              <el-option value="待处理" :label="t('workorder.statusPending')" />
-              <el-option value="处理中" :label="t('workorder.statusProcessing')" />
-              <el-option value="已完结" :label="t('workorder.statusResolved')" />
-              <el-option value="已退回" :label="t('workorder.statusReturned')" />
+          <el-form-item :label="t('workOrder.priority')" prop="priority">
+            <el-select v-model="formData.priority" :placeholder="t('workOrder.priorityPlaceholder')" class="w-1/1">
+              <el-option :value="'LOW'" :label="t('workOrder.priorityLow')" />
+              <el-option :value="'NORMAL'" :label="t('workOrder.priorityNormal')" />
+              <el-option :value="'HIGH'" :label="t('workOrder.priorityHigh')" />
+              <el-option :value="'URGENT'" :label="t('workOrder.priorityUrgent')" />
             </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item :label="t('workOrder.customer')" prop="customerId">
+            <el-select v-model="formData.customerId" :placeholder="t('workOrder.customerPlaceholder')" class="w-1/1">
+              <el-option v-for="customer in customerOptions" :key="customer.id" :label="customer.name" :value="customer.id" />
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item :label="t('workOrder.assignee')" prop="assigneeId">
+            <el-select v-model="formData.assigneeId" :placeholder="t('workOrder.assigneePlaceholder')" class="w-1/1">
+              <el-option v-for="user in userOptions" :key="user.id" :label="user.nickname" :value="user.id" />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item :label="t('workOrder.slaDeadline')" prop="slaDeadline">
+            <el-date-picker
+              v-model="formData.slaDeadline"
+              type="datetime"
+              value-format="x"
+              class="!w-1/1"
+            />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-form-item :label="t('workorder.content')" prop="content">
-            <el-input type="textarea" v-model="formData.content" :placeholder="t('workorder.contentPlaceholder')" :rows="5" />
+          <el-form-item :label="t('workOrder.content')" prop="content">
+            <el-input type="textarea" v-model="formData.content" :placeholder="t('workOrder.contentPlaceholder')" :rows="4" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row v-if="formType === 'update'">
+        <el-col :span="24">
+          <el-form-item :label="t('workOrder.solution')" prop="solution">
+            <el-input type="textarea" v-model="formData.solution" :placeholder="t('workOrder.solutionPlaceholder')" :rows="4" />
           </el-form-item>
         </el-col>
       </el-row>
     </el-form>
     <template #footer>
-      <el-button :disabled="formLoading" type="primary" @click="submitForm">{{ t('common.confirm') }}</el-button>
+      <el-button :disabled="formLoading" type="primary" @click="submitForm">{{ t('common.ok') }}</el-button>
       <el-button @click="dialogVisible = false">{{ t('common.cancel') }}</el-button>
     </template>
   </Dialog>
 </template>
+
 <script lang="ts" setup>
 import * as WorkOrderApi from '@/api/crm/workorder'
-// 23软件工程4班蔡磊202305566515
+import * as UserApi from '@/api/system/user'
 import * as CustomerApi from '@/api/crm/customer'
 
 const { t } = useI18n('crm')
@@ -89,32 +96,34 @@ const dialogVisible = ref(false)
 const dialogTitle = ref('')
 const formLoading = ref(false)
 const formType = ref('')
-// 23软件工程4班蔡磊202305566515 - 客户列表
-const customerList = ref<CustomerApi.CustomerVO[]>([])
+
 const formData = ref({
   id: undefined,
   title: undefined,
   type: undefined,
   priority: 'NORMAL',
-  status: '待处理',
   customerId: undefined,
-  content: undefined
+  assigneeId: undefined,
+  slaDeadline: undefined,
+  content: undefined,
+  solution: undefined
 })
-const formRules = reactive({
-  title: [{ required: true, message: t('workorder.titleRequired'), trigger: 'blur' }],
-  priority: [{ required: true, message: t('workorder.priorityRequired'), trigger: 'change' }],
-  customerId: [{ required: true, message: t('workorder.customerIdRequired'), trigger: 'change' }]
-})
-const formRef = ref()
 
-/** 打开弹窗 */
+const formRules = reactive({
+  title: [{ required: true, message: t('workOrder.titleRequired'), trigger: 'blur' }],
+  content: [{ required: true, message: t('workOrder.contentRequired'), trigger: 'blur' }]
+})
+
+const formRef = ref()
+const userOptions = ref<UserApi.UserVO[]>([])
+const customerOptions = ref<CustomerApi.CustomerVO[]>([])
+
 const open = async (type: string, id?: number) => {
   dialogVisible.value = true
   dialogTitle.value = t('action.' + type, { scope: 'common' })
   formType.value = type
   resetForm()
-  // 23软件工程4班蔡磊202305566515 - 加载客户列表
-  customerList.value = await CustomerApi.getCustomerSimpleList()
+
   if (id) {
     formLoading.value = true
     try {
@@ -123,18 +132,21 @@ const open = async (type: string, id?: number) => {
       formLoading.value = false
     }
   }
+
+  userOptions.value = await UserApi.getSimpleUserList()
+  customerOptions.value = await CustomerApi.getCustomerSimpleList()
 }
 defineExpose({ open })
 
-/** 提交表单 */
 const emit = defineEmits(['success'])
 const submitForm = async () => {
-  if (!formRef) return
+  if (!formRef.value) return
   const valid = await formRef.value.validate()
   if (!valid) return
+
   formLoading.value = true
   try {
-    const data = formData.value as unknown as WorkOrderApi.WorkOrderVO
+    const data = formData.value as unknown as WorkOrderApi.WorkOrderSaveReqVO
     if (formType.value === 'create') {
       await WorkOrderApi.createWorkOrder(data)
       message.success(t('common.createSuccess'))
@@ -149,16 +161,17 @@ const submitForm = async () => {
   }
 }
 
-/** 重置表单 */
 const resetForm = () => {
   formData.value = {
     id: undefined,
     title: undefined,
     type: undefined,
     priority: 'NORMAL',
-    status: '待处理',
     customerId: undefined,
-    content: undefined
+    assigneeId: undefined,
+    slaDeadline: undefined,
+    content: undefined,
+    solution: undefined
   }
   formRef.value?.resetFields()
 }

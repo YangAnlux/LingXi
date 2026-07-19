@@ -217,6 +217,8 @@ export enum DICT_TYPE {
   CRM_REIMBURSEMENT_STATUS = 'crm_reimbursement_status', // CRM 报销状态
   CRM_CAMPAIGN_STATUS = 'crm_campaign_status', // CRM 营销活动状态
   CRM_CAMPAIGN_CHANNEL = 'crm_campaign_channel', // CRM 营销活动渠道
+  CRM_REFUND_TYPE = 'crm_refund_type', // CRM 退款类型
+  CRM_REFUND_STATUS = 'crm_refund_status', // CRM 退款状态
 
   // ========== ERP - 企业资源计划模块  ==========
   ERP_AUDIT_STATUS = 'erp_audit_status', // ERP 审批状态

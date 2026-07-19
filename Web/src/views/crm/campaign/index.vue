@@ -127,51 +127,53 @@
           {{ formatDateTime(scope.row.createTime) }}
         </template>
       </el-table-column>
-      <el-table-column :label="t('common.action')" align="center" min-width="220" fixed="right">
+      <el-table-column :label="t('common.action')" align="center" min-width="280" fixed="right">
         <template #default="scope">
-          <el-button
-            link
-            type="primary"
-            @click="openForm('update', scope.row.id)"
-            v-hasPermi="['crm:campaign:update']"
-          >
-            {{ t('common.edit') }}
-          </el-button>
-          <el-button
-            v-if="scope.row.status === 1"
-            link
-            type="success"
-            @click="handleStart(scope.row)"
-            v-hasPermi="['crm:campaign:update']"
-          >
-            {{ t('campaign.statusRunning') }}
-          </el-button>
-          <el-button
-            v-if="scope.row.status === 2"
-            link
-            type="warning"
-            @click="handleEnd(scope.row)"
-            v-hasPermi="['crm:campaign:update']"
-          >
-            {{ t('campaign.statusEnded') }}
-          </el-button>
-          <el-button
-            v-if="scope.row.status === 1 || scope.row.status === 2"
-            link
-            type="danger"
-            @click="handleCancel(scope.row)"
-            v-hasPermi="['crm:campaign:update']"
-          >
-            {{ t('campaign.statusCancelled') }}
-          </el-button>
-          <el-button
-            link
-            type="danger"
-            @click="handleDelete(scope.row.id)"
-            v-hasPermi="['crm:campaign:delete']"
-          >
-            {{ t('common.delete') }}
-          </el-button>
+          <div class="flex items-center justify-center flex-wrap gap-8px">
+            <el-button
+              link
+              type="primary"
+              @click="openForm('update', scope.row.id)"
+              v-hasPermi="['crm:campaign:update']"
+            >
+              {{ t('common.edit') }}
+            </el-button>
+            <el-button
+              v-if="scope.row.status === 1"
+              link
+              type="success"
+              @click="handleStart(scope.row)"
+              v-hasPermi="['crm:campaign:update']"
+            >
+              {{ t('campaign.statusRunning') }}
+            </el-button>
+            <el-button
+              v-if="scope.row.status === 2"
+              link
+              type="warning"
+              @click="handleEnd(scope.row)"
+              v-hasPermi="['crm:campaign:update']"
+            >
+              {{ t('campaign.statusEnded') }}
+            </el-button>
+            <el-button
+              v-if="scope.row.status === 1 || scope.row.status === 2"
+              link
+              type="danger"
+              @click="handleCancel(scope.row)"
+              v-hasPermi="['crm:campaign:update']"
+            >
+              {{ t('campaign.statusCancelled') }}
+            </el-button>
+            <el-button
+              link
+              type="danger"
+              @click="handleDelete(scope.row.id)"
+              v-hasPermi="['crm:campaign:delete']"
+            >
+              {{ t('common.delete') }}
+            </el-button>
+          </div>
         </template>
       </el-table-column>
     </el-table>

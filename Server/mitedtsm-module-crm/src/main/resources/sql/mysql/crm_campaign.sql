@@ -24,46 +24,46 @@ CREATE TABLE IF NOT EXISTS `crm_campaign` (
     INDEX `idx_tenant_id` (`tenant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='CRM 营销活动表';
 
-INSERT INTO `system_dict_type` (`id`, `name`, `type`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'CRM营销活动状态', 'crm_campaign_status', 1, '营销活动状态', NOW(), 1, NOW(), 1, 0);
+INSERT INTO `system_dict_type` (`name`, `type`, `status`, `remark`, `creator`, `updater`)
+VALUES ('CRM营销活动状态', 'crm_campaign_status', 0, '营销活动状态', '1', '1');
 
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_status', '草稿', 1, 1, 1, '草稿状态', NOW(), 1, NOW(), 1, 0);
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_status', '进行中', 2, 2, 1, '进行中', NOW(), 1, NOW(), 1, 0);
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_status', '已结束', 3, 3, 1, '已结束', NOW(), 1, NOW(), 1, 0);
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_status', '已取消', 4, 4, 1, '已取消', NOW(), 1, NOW(), 1, 0);
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_status', '草稿', '1', 1, 0, '草稿状态', '1', '1');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_status', '进行中', '2', 2, 0, '进行中', '1', '1');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_status', '已结束', '3', 3, 0, '已结束', '1', '1');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_status', '已取消', '4', 4, 0, '已取消', '1', '1');
 
-INSERT INTO `system_dict_type` (`id`, `name`, `type`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'CRM营销活动渠道', 'crm_campaign_channel', 1, '营销活动渠道', NOW(), 1, NOW(), 1, 0);
+INSERT INTO `system_dict_type` (`name`, `type`, `status`, `remark`, `creator`, `updater`)
+VALUES ('CRM营销活动渠道', 'crm_campaign_channel', 0, '营销活动渠道', '1', '1');
 
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_channel', '线上广告', 1, 1, 1, '线上广告', NOW(), 1, NOW(), 1, 0);
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_channel', '线下活动', 2, 2, 1, '线下活动', NOW(), 1, NOW(), 1, 0);
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_channel', '邮件营销', 3, 3, 1, '邮件营销', NOW(), 1, NOW(), 1, 0);
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_channel', '短信营销', 4, 4, 1, '短信营销', NOW(), 1, NOW(), 1, 0);
-INSERT INTO `system_dict_data` (`id`, `type`, `label`, `value`, `sort`, `status`, `remark`, `create_time`, `create_user`, `update_time`, `update_user`, `deleted`)
-VALUES (NULL, 'crm_campaign_channel', '社交媒体', 5, 5, 1, '社交媒体', NOW(), 1, NOW(), 1, 0);
-
-INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-VALUES (2800, '营销活动', '', 2, 15, 2397, 'campaign', 'ep:flag', 'crm/campaign/index', 'CrmCampaign', 0, b'1', b'1', b'1', '', NOW(), 1, NOW(), b'0');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_channel', '线上广告', '1', 1, 0, '线上广告', '1', '1');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_channel', '线下活动', '2', 2, 0, '线下活动', '1', '1');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_channel', '邮件营销', '3', 3, 0, '邮件营销', '1', '1');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_channel', '短信营销', '4', 4, 0, '短信营销', '1', '1');
+INSERT INTO `system_dict_data` (`dict_type`, `label`, `value`, `sort`, `status`, `remark`, `creator`, `updater`)
+VALUES ('crm_campaign_channel', '社交媒体', '5', 5, 0, '社交媒体', '1', '1');
 
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-VALUES (2801, '营销活动查询', 'crm:campaign:query', 3, 1, 2800, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
+VALUES (6130, '营销活动', '', 2, 15, 2397, 'campaign', 'ep:flag', 'crm/campaign/index', 'CrmCampaign', 0, b'1', b'1', b'1', '', NOW(), 1, NOW(), b'0');
 
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-VALUES (2802, '营销活动创建', 'crm:campaign:create', 3, 2, 2800, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
+VALUES (6131, '营销活动查询', 'crm:campaign:query', 3, 1, 6130, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
 
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-VALUES (2803, '营销活动更新', 'crm:campaign:update', 3, 3, 2800, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
+VALUES (6132, '营销活动创建', 'crm:campaign:create', 3, 2, 6130, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
 
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-VALUES (2804, '营销活动删除', 'crm:campaign:delete', 3, 4, 2800, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
+VALUES (6133, '营销活动更新', 'crm:campaign:update', 3, 3, 6130, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
 
 INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
-VALUES (2805, '营销活动导出', 'crm:campaign:export', 3, 5, 2800, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
+VALUES (6134, '营销活动删除', 'crm:campaign:delete', 3, 4, 6130, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');
+
+INSERT INTO `system_menu` (`id`, `name`, `permission`, `type`, `sort`, `parent_id`, `path`, `icon`, `component`, `component_name`, `status`, `visible`, `keep_alive`, `always_show`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES (6135, '营销活动导出', 'crm:campaign:export', 3, 5, 6130, '', '', '', NULL, 0, b'1', b'1', b'1', '', NOW(), '', NOW(), b'0');

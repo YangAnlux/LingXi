@@ -221,10 +221,10 @@ const submitForm = async () => {
     }
     if (formType.value === 'create') {
       await CampaignApi.createCampaign(data)
-      message.success(t('common.addSuccess'))
+      message.success(t('common.createSuccess'))
     } else {
       await CampaignApi.updateCampaign(data)
-      message.success(t('common.editSuccess'))
+      message.success(t('common.updateSuccess'))
     }
     dialogVisible.value = false
     emit('success')

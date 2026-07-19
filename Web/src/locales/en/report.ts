@@ -74,7 +74,7 @@ export default {
     priorityUrgent: 'Urgent',
     status: 'Status',
     statusPlaceholder: 'Please select status',
-    statusPending: 'Pending',
+    statusPending: 'Todo',
     statusInProgress: 'In Progress',
     statusCompleted: 'Completed',
     statusCancelled: 'Cancelled',

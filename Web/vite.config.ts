@@ -36,7 +36,7 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
                    changeOrigin: true,
                  },
                  '/api': {
-                   target: 'http://localhost:8080',
+                   target: env.VITE_BASE_URL,
                    changeOrigin: true,
                  },
                },
