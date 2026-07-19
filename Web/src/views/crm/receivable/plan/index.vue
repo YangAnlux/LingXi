@@ -179,7 +179,7 @@
         min-width="180"
       />
       <el-table-column align="center" :label="t('receivablePlan.creatorName')" prop="creatorName" min-width="100" />
-      <el-table-column align="center" fixed="right" :label="t('common.action')" width="280">
+      <el-table-column align="center" fixed="right" :label="t('common.action')" min-width="180">
         <template #default="scope">
           <el-button
             v-hasPermi="['crm:receivable:create']"

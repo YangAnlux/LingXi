@@ -4,8 +4,6 @@
     <!-- CONSOLE_LOG_PATTERN 相比 FILE_LOG_PATTERN 多了 highlight、cyan 等高亮 -->
     <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{50}:%L) - %msg%n"/>
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50}:%L - %msg%n"/>
-    <property name="LOG_PATH" value="D:/workspace/project/logs"/>
-    <property name="LOG_FILE" value="${LOG_PATH}/mitedtsm-server.log"/>
 
     <!-- 控制台 Appender -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">　　　　　

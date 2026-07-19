@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 --- #################### 数据库相关配置 ####################
 spring:
@@ -9,8 +9,6 @@ spring:
 #      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration # 默认 local 环境，不开启 Quartz 的自动配置
       - org.springframework.ai.vectorstore.qdrant.autoconfigure.QdrantVectorStoreAutoConfiguration # 禁用 AI 模块的 Qdrant，手动创建
       - org.springframework.ai.vectorstore.milvus.autoconfigure.MilvusVectorStoreAutoConfiguration # 禁用 AI 模块的 Milvus，手动创建
-      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration # 禁用 RabbitMQ 自动配置
-      - com.meession.etm.framework.encrypt.config.MitedtsmApiEncryptAutoConfiguration # 禁用 API 加密配置
   # 数据源配置项
   datasource:
     druid: # Druid 【监控】相关的全局配置
@@ -32,8 +30,6 @@ spring:
           config:
             multi-statement-allow: true
     dynamic: # 多数据源配置
-      auto-init: false # 禁用自动初始化所有数据源
-      strict: false # 关闭严格模式，允许数据源不存在
       druid: # Druid 【连接池】相关的全局配置
         initial-size: 1 # 初始连接数
         min-idle: 1 # 最小连接池数量
@@ -72,41 +68,32 @@ spring:
           url: jdbc:mysql://127.0.0.1:3306/mitedtsm_database?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true&nullCatalogMeansCurrent=true
           username: root
           password: 123456
+        tdengine: # IoT 数据库（需要 IoT 物联网再开启噢！）
+          lazy: true # 开启懒加载，保证启动速度
+          url: jdbc:TAOS-WS://localhost:6041/mitedtsm_database?varcharAsString=true
+          driver-class-name: com.taosdata.jdbc.ws.WebSocketDriver
+          username: root
+          password: taosdata
+          druid:
+            validation-query: SELECT SERVER_STATUS() # TDengine 数据源的有效性检查 SQL
 
   # Redis 配置。Redisson 默认的配置足够使用，一般不需要进行调优
-  cache:
-    type: NONE
+  data:
+    redis:
+      host: localhost # 地址
+      port: 6379 # 端口
+      database: 0 # 数据库索引
+#      password: 1234 # 密码，建议生产环境开启
 
 --- #################### 定时任务相关配置 ####################
 
 # Quartz 配置项，对应 QuartzProperties 配置类
 spring:
   quartz:
-    auto-startup: true # 本地开发环境，尽量不要开启 Job
+    auto-startup: false # 本地开发环境，禁用 Quartz 自动启动，避免动态数据源关闭问题
     scheduler-name: schedulerName # Scheduler 名字。默认为 schedulerName
-    job-store-type: jdbc # Job 存储器类型。默认为 memory 表示内存，可选 jdbc 使用数据库。
+    job-store-type: memory # Job 存储器类型。使用 memory 表示内存，避免数据源关闭问题
     wait-for-jobs-to-complete-on-shutdown: true # 应用关闭时，是否等待定时任务执行完成。默认为 false ，建议设置为 true
-    properties: # 添加 Quartz Scheduler 附加属性，更多可以看 http://www.quartz-scheduler.org/documentation/2.4.0-SNAPSHOT/configuration.html 文档
-      org:
-        quartz:
-          # Scheduler 相关配置
-          scheduler:
-            instanceName: schedulerName
-            instanceId: AUTO # 自动生成 instance ID
-          # JobStore 相关配置
-          jobStore:
-            # JobStore 实现类。可见博客：https://blog.csdn.net/weixin_42458219/article/details/122247162
-            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
-            isClustered: true # 是集群模式
-            clusterCheckinInterval: 15000 # 集群检查频率，单位：毫秒。默认为 15000，即 15 秒
-            misfireThreshold: 60000 # misfire 阀值，单位：毫秒。
-          # 线程池相关配置
-          threadPool:
-            threadCount: 25 # 线程池大小。默认为 10 。
-            threadPriority: 5 # 线程优先级
-            class: org.quartz.simpl.SimpleThreadPool # 线程池类型
-    jdbc: # 使用 JDBC 的 JobStore 的时候，JDBC 的配置
-      initialize-schema: NEVER # 是否自动使用 SQL 初始化 Quartz 表结构。这里设置成 never ，我们手动创建表结构。
 
 --- #################### 消息队列相关 ####################
 
@@ -159,7 +146,7 @@ spring:
 # 日志文件配置
 logging:
   file:
-    name: /tmp/${spring.application.name}.log # [MODIFY] 沙箱日志路径 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
+    name: ${user.home}/logs/${spring.application.name}.log # 日志文件名，全路径
   level:
     # 配置自己写的 MyBatis Mapper 打印日志
     com.meession.etm.module.bpm.dal.mysql: debug
@@ -220,8 +207,6 @@ wx:
 mitedtsm:
   captcha:
     enable: false # 本地环境，暂时关闭图片验证码，方便登录等接口的测试；
-  api-encrypt:
-    enable: false
   security:
     mock-enable: true
   pay:
@@ -236,6 +221,9 @@ mitedtsm:
   wxa-subscribe-message:
     miniprogram-state: developer # 跳转小程序类型：开发版为 “developer”；体验版为 “trial”为；正式版为 “formal”
   tencent-lbs-key: TVDBZ-TDILD-4ON4B-PFDZA-RNLKH-VVF6E # QQ 地图的密钥 https://lbs.qq.com/service/staticV2/staticGuide/staticDoc
+  iot:
+    quartz-enabled: false # 本地环境，禁用 IoT Quartz 调度器，避免数据源关闭问题
+    job-store-type: MEMORY # 使用内存存储模式，避免数据源关闭问题
 
 justauth:
   enabled: true
@@ -249,11 +237,12 @@ justauth:
       client-secret: 1wTb7hYxnpT2TUbIeHGXGo7T0odav1ic10mLdyyATOw
       agent-id: 1000004
       ignore-check-redirect-uri: true
+    # noinspection SpringBootApplicationYaml
     WECHAT_MINI_PROGRAM: # 微信小程序
       client-id: ${wx.miniapp.appid}
       client-secret: ${wx.miniapp.secret}
       ignore-check-redirect-uri: true
-      ignore-check-state: true
+      ignore-check-state: true # 微信小程序，不会使用到 state，所以不进行校验
     WECHAT_MP: # 微信公众号
       client-id: ${wx.mp.app-id}
       client-secret: ${wx.mp.secret}
@@ -265,6 +254,6 @@ justauth:
       ignore-check-redirect-uri: true
       ignore-check-state: true
   cache:
-    type: default
-    prefix: 'social_auth_state:'
-    timeout: 24h
+    type: REDIS
+    prefix: 'social_auth_state:' # 缓存前缀，目前只对 Redis 缓存生效，默认 JUSTAUTH::STATE::
+    timeout: 24h # 超时时长，目前只对 Redis 缓存生效，默认 3 分钟

@@ -1,6 +1,6 @@
 // 23软件工程4班蔡磊202305566515
 <template>
-  <ContentWrap :title="t('workorder.statisticsTitle')">
+  <div v-loading="loading">
     <el-row :gutter="20">
       <el-col :span="8">
         <el-card shadow="hover" v-loading="loading">
@@ -30,7 +30,7 @@
         </el-card>
       </el-col>
     </el-row>
-  </ContentWrap>
+  </div>
 </template>
 
 <script lang="ts" setup>

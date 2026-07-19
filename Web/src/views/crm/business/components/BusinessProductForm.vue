@@ -49,6 +49,22 @@
           </el-form-item>
         </template>
       </el-table-column>
+      <el-table-column :label="t('crm.business.discount')" min-width="100">
+        <template #default="{ row, $index }">
+          <el-form-item :prop="`${$index}.discount`" class="mb-0px!">
+            <el-input-number
+              v-model="row.discount"
+              controls-position="right"
+              :min="0"
+              :max="100"
+              :precision="2"
+              class="!w-100%"
+              :suffix="t('crm.business.discountUnit')"
+              @change="onChangeDiscount(row)"
+            />
+          </el-form-item>
+        </template>
+      </el-table-column>
       <el-table-column :label="t('crm.business.businessPrice')" fixed="right" min-width="140">
         <template #default="{ row, $index }">
           <el-form-item :prop="`${$index}.businessPrice`" class="mb-0px!">
@@ -101,8 +117,19 @@ import { DICT_TYPE } from '@/utils/dict'
 const { t } = useI18n() // 国际化
 
 const props = defineProps<{
-  products: undefined
-  disabled: false
+  products: Array<{
+    id: number
+    productId: number
+    productName: string
+    productNo: string
+    productUnit: number
+    productPrice: number
+    discount: number
+    businessPrice: number
+    count: number
+    totalPrice: number
+  }>
+  disabled: boolean
 }>()
 const formLoading = ref(false) // 表单的加载中
 const formData = ref([])
@@ -111,7 +138,7 @@ const formRules = reactive({
   businessPrice: [{ required: true, message: t('crm.business.businessPriceRequired'), trigger: 'blur' }],
   count: [{ required: true, message: t('crm.business.countRequired'), trigger: 'blur' }]
 })
-const formRef = ref([]) // 表单 Ref
+const formRef = ref() // 表单 Ref
 const productList = ref<ProductApi.ProductVO[]>([]) // 产品列表
 
 /** 初始化设置产品项 */
@@ -150,6 +177,7 @@ const handleAdd = () => {
     productUnit: undefined, // 产品单位
     productNo: undefined, // 产品条码
     productPrice: undefined, // 产品价格
+    discount: undefined, // 折扣
     businessPrice: undefined,
     count: 1
   }
@@ -168,7 +196,15 @@ const onChangeProduct = (productId, row) => {
     row.productUnit = product.unit
     row.productNo = product.no
     row.productPrice = product.price
-    row.businessPrice = product.price
+    row.discount = undefined
+  }
+}
+
+/** 处理折扣变化 */
+const onChangeDiscount = (row) => {
+  if (row.discount != null && row.productPrice != null) {
+    const discount = row.discount / 100
+    row.businessPrice = erpPriceMultiply(row.productPrice, discount)
   }
 }
 

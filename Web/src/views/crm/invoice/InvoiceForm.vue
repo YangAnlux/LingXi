@@ -107,7 +107,7 @@
               v-model="formData.issueDate"
               :placeholder="t('invoice.issueDatePlaceholder')"
               type="date"
-              value-format="x"
+              value-format="YYYY-MM-DD"
               class="!w-100%"
             />
           </el-form-item>

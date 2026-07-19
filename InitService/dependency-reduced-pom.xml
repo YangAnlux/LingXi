@@ -50,10 +50,10 @@
     </plugins>
   </build>
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <taos.version>3.7.9</taos.version>
     <java.version>17</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <taos.version>3.7.9</taos.version>
   </properties>
 </project>

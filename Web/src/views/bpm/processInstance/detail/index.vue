@@ -104,10 +104,12 @@
             </div>
           </el-tab-pane>
 
-          <!-- 流转评论 TODO 待开发 -->
-          <el-tab-pane :label="t('process.instance.flowComment')" name="comment" v-if="false">
+          <!-- 流转评论 -->
+          <el-tab-pane :label="t('process.instance.flowComment')" name="comment">
             <div class="form-scroll-area">
-              <el-scrollbar> {{ t('process.instance.flowComment') }} </el-scrollbar>
+              <el-scrollbar>
+                <ProcessCommentList :process-instance-id="id" />
+              </el-scrollbar>
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -146,6 +148,7 @@ import ProcessInstanceSimpleViewer from './ProcessInstanceSimpleViewer.vue'
 import ProcessInstanceTaskList from './ProcessInstanceTaskList.vue'
 import ProcessInstanceOperationButton from './ProcessInstanceOperationButton.vue'
 import ProcessInstanceTimeline from './ProcessInstanceTimeline.vue'
+import ProcessCommentList from './ProcessCommentList.vue'
 import { FieldPermissionType } from '@/components/SimpleProcessDesignerV2/src/consts'
 import { TaskStatusEnum } from '@/api/bpm/task'
 import runningSvg from '@/assets/svgs/bpm/running.svg'

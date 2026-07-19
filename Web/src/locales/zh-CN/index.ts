@@ -29,7 +29,6 @@ import pay from './pay'
 import member from './member'
 import mp from './mp'
 import infra from './infra'
-import report from './report'
 // 字典翻译
 import dict from './dict'
 
@@ -65,7 +64,6 @@ export default {
   member,
   mp,
   infra,
-  report,
   // 字典翻译
   dict,
   // 避免菜单名是 OAuth 2.0 时，一直 warn 报错

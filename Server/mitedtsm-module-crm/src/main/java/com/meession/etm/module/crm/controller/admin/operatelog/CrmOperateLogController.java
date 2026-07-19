@@ -48,12 +48,6 @@ public class CrmOperateLogController {
         BIZ_TYPE_MAP.put(CrmBizTypeEnum.CRM_PRODUCT.getType(), CRM_PRODUCT_TYPE);
         BIZ_TYPE_MAP.put(CrmBizTypeEnum.CRM_RECEIVABLE.getType(), CRM_RECEIVABLE_TYPE);
         BIZ_TYPE_MAP.put(CrmBizTypeEnum.CRM_RECEIVABLE_PLAN.getType(), CRM_RECEIVABLE_PLAN_TYPE);
-        // [ADD START] 发票/费用/报销/退款 操作日志映射 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
-        BIZ_TYPE_MAP.put(CrmBizTypeEnum.CRM_INVOICE.getType(), CRM_INVOICE_TYPE);
-        BIZ_TYPE_MAP.put(CrmBizTypeEnum.CRM_EXPENSE.getType(), CRM_EXPENSE_TYPE);
-        BIZ_TYPE_MAP.put(CrmBizTypeEnum.CRM_REIMBURSEMENT.getType(), CRM_REIMBURSEMENT_TYPE);
-        BIZ_TYPE_MAP.put(CrmBizTypeEnum.CRM_REFUND.getType(), CRM_REFUND_TYPE);
-        // [ADD END] 发票/费用/报销/退款 操作日志映射 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
     }
 
     @GetMapping("/page")

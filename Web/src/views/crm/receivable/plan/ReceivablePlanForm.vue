@@ -14,7 +14,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item :label="t('receivable.ownerUserName')" prop="ownerUserId">
+          <el-form-item :label="t('receivable.ownerUserId')" prop="ownerUserId">
             <el-select
               v-model="formData.ownerUserId"
               :disabled="formType !== 'create'"
@@ -57,7 +57,7 @@
               :disabled="formType !== 'create' || !formData.customerId"
               class="w-1/1"
               filterable
-              :placeholder="t('contract.contractPlaceholder')"
+              :placeholder="t('contract.namePlaceholder')"
             >
               <el-option
                 v-for="data in contractList"
@@ -125,8 +125,8 @@
       </el-row>
     </el-form>
     <template #footer>
-      <el-button :disabled="formLoading" type="primary" @click="submitForm">{{ t('common.confirm') }}</el-button>
-      <el-button @click="dialogVisible = false">{{ t('common.cancel') }}</el-button>
+      <el-button :disabled="formLoading" type="primary" @click="submitForm">{{ t('dialog.confirm') }}</el-button>
+      <el-button @click="dialogVisible = false">{{ t('dialog.cancel') }}</el-button>
     </template>
   </Dialog>
 </template>

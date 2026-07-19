@@ -226,6 +226,8 @@
       <el-button @click="assignDialogVisible = false">{{ t('common.cancel') }}</el-button>
     </template>
   </el-dialog>
+  <!-- 统计弹窗 -->
+  <WorkOrderStatisticsDialog v-model:visible="statisticsDialogVisible" />
 </template>
 
 <script setup lang="ts">
@@ -233,6 +235,7 @@ import { dateFormatter } from '@/utils/formatTime'
 import * as WorkOrderApi from '@/api/crm/workorder'
 import * as UserApi from '@/api/system/user'
 import WorkOrderForm from './WorkOrderForm.vue'
+import WorkOrderStatisticsDialog from './WorkOrderStatisticsDialog.vue'
 
 defineOptions({ name: 'CrmWorkOrder' })
 
@@ -240,6 +243,7 @@ const message = useMessage()
 const { t } = useI18n('crm')
 const loading = ref(true)
 const total = ref(0)
+const statisticsDialogVisible = ref(false)
 const list = ref([])
 const queryParams = reactive({
   pageNo: 1,
@@ -331,7 +335,7 @@ const handleDetail = (id: number) => {
 // 23软件工程4班蔡磊202305566515
 /** 统计报表 */
 const handleStatistics = () => {
-  push({ name: 'CrmWorkOrderStatistics' })
+  statisticsDialogVisible.value = true
 }
 
 // 23软件工程4班蔡磊202305566515

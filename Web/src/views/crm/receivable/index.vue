@@ -162,7 +162,7 @@
           <dict-tag :type="DICT_TYPE.CRM_AUDIT_STATUS" :value="scope.row.auditStatus" />
         </template>
       </el-table-column>
-      <el-table-column align="center" fixed="right" :label="t('common.action')" width="280">
+      <el-table-column align="center" fixed="right" :label="t('common.action')" min-width="180">
         <template #default="scope">
           <el-button
             v-hasPermi="['crm:receivable:update']"
@@ -341,10 +341,4 @@ onMounted(async () => {
   // 获得客户列表
   customerList.value = await CustomerApi.getCustomerSimpleList()
 })
-
-// [ADD START] 页面重新激活时刷新列表，保证审批后状态更新 - 2026-07-17 - 23软4胡伟-202305566535-修改于2026.07.17
-onActivated(() => {
-  getList()
-})
-// [ADD END]
 </script>

@@ -51,6 +51,11 @@ export const getTodayContactCustomerCount = async () => {
   return await request.get({ url: `/crm/customer/today-contact-count` })
 }
 
+// 获得今日需联系客户分页
+export const getTodayContactCustomerPage = async (params) => {
+  return await request.get({ url: `/crm/customer/today-contact-page`, params })
+}
+
 // 获得分配给我、待跟进的线索数量的客户数量
 export const getFollowCustomerCount = async () => {
   return await request.get({ url: `/crm/customer/follow-count` })
@@ -129,4 +134,9 @@ export const distributeCustomer = async (ids: any[], ownerUserId: number) => {
 // 客户放入公海
 export const putCustomerPool = async (id: number) => {
   return await request.put({ url: `/crm/customer/put-pool?id=${id}` })
+}
+
+// 客户查重
+export const checkDuplicateCustomer = async (params: { name?: string; mobile?: string; email?: string }) => {
+  return await request.get({ url: `/crm/customer/check-duplicate`, params })
 }

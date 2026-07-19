@@ -21,6 +21,12 @@ public interface ErrorCodeConstants {
 
     // ========== Coupon 相关 1-013-003-000 ============
 
+    // ========== 营销活动相关 1-013-005-000 ============
+    ErrorCode CAMPAIGN_NOT_EXISTS = new ErrorCode(1_013_005_000, "营销活动不存在");
+    ErrorCode CAMPAIGN_CLOSED_CANNOT_UPDATE = new ErrorCode(1_013_005_001, "营销活动已关闭，不能修改");
+    ErrorCode CAMPAIGN_CLOSE_FAIL_STATUS_CLOSED = new ErrorCode(1_013_005_002, "营销活动已关闭，不能重复关闭");
+    ErrorCode CAMPAIGN_DELETE_FAIL_STATUS_NOT_CLOSED = new ErrorCode(1_013_005_003, "营销活动未关闭，不能删除");
+
     // ========== 优惠劵模板 1-013-004-000 ==========
     ErrorCode COUPON_TEMPLATE_NOT_EXISTS = new ErrorCode(1_013_004_000, "优惠劵模板不存在");
     ErrorCode COUPON_TEMPLATE_TOTAL_COUNT_TOO_SMALL = new ErrorCode(1_013_004_001, "发放数量不能小于已领取数量({})");
