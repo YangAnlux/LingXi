@@ -159,7 +159,7 @@ spring:
 # 日志文件配置
 logging:
   file:
-    name: ${user.home}/logs/${spring.application.name}.log # 日志文件名，全路径
+    name: /tmp/${spring.application.name}.log # [MODIFY] 沙箱日志路径 - 2026-07-14 - 23软4胡伟-202305566535-修改于2026.07.14
   level:
     # 配置自己写的 MyBatis Mapper 打印日志
     com.meession.etm.module.bpm.dal.mysql: debug

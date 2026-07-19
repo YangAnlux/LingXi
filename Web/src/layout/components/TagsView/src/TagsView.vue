@@ -6,6 +6,7 @@ import { usePermissionStore } from '@/store/modules/permission'
 import { useTagsViewStore } from '@/store/modules/tagsView'
 import { useAppStore } from '@/store/modules/app'
 import { useI18n } from '@/hooks/web/useI18n'
+import { i18n } from '@/plugins/vueI18n'
 import { filterAffixTags } from './helper'
 import { ContextMenu, ContextMenuExpose } from '@/layout/components/ContextMenu'
 import { useDesign } from '@/hooks/web/useDesign'
@@ -22,6 +23,9 @@ const { getPrefixCls } = useDesign()
 const prefixCls = getPrefixCls('tags-view')
 
 const { t } = useI18n()
+
+// 追踪当前语言，确保标签页标题能响应语言切换
+const currentLocale = computed(() => i18n.global.locale.value)
 
 const { currentRoute, push } = useRouter()
 
@@ -300,7 +304,7 @@ watch(
         <div class="h-[var(--tags-view-height)] flex">
           <ContextMenu
             v-for="item in visitedViews"
-            :key="item.fullPath"
+            :key="`${item.fullPath}-${currentLocale}`"
             :ref="itemRefs.set"
             @auxclick="closeTabOnMouseMidClick($event, item)"
             :class="[
