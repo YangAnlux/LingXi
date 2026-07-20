@@ -17,26 +17,49 @@ docker-images/
 **/build/
 **/.npm
 **/.yarn
+**/unpackage/
 
 # ========== IDE 配置 ==========
 **/.idea/
 **/.vscode/
 **/*.iml
+**/*.iws
+**/*.ipr
+**/.classpath
+**/.project
+**/.settings
+**/.factorypath
+**/.springBeans
+**/.hbuilderx/
+**/.history
 
 # ========== 系统文件 ==========
 .DS_Store
+**/.DS_Store
 *.log
+*.tmp
+*.bak
+*.orig
+*.rej
+*.swp
+
+# ========== 运行时文件 ==========
+logs/
+*.pid
+
+# ========== 临时文件目录 ==========
+tmp/
+tmp_*
+BOOT-INF/
 
 # ========== 文档目录 ==========
 /Proj-Docs-v-6/
-*.doc
-*.docx
-*.pdf
 
-# ========== 大图片 ==========
-**/*.png
-**/*.jpg
-**/*.jpeg
-**/*.gif
+# ========== 大文件/视频 ==========
 **/*.mp4
 **/*.avi
+**/*.mov
+
+# ========== 敏感配置文件 ==========
+application-my.yaml
+*.keystore
