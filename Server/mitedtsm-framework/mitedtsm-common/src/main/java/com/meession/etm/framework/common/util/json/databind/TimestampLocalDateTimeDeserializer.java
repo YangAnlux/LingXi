@@ -20,8 +20,17 @@ public class TimestampLocalDateTimeDeserializer extends JsonDeserializer<LocalDa
 
     @Override
     public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        // null 值直接返回 null
+        if (p.getCurrentToken() == com.fasterxml.jackson.core.JsonToken.VALUE_NULL) {
+            return null;
+        }
+        long epochMilli = p.getValueAsLong();
+        // epoch 0 表示未设置时间，返回 null
+        if (epochMilli == 0) {
+            return null;
+        }
         // 将 Long 时间戳，转换为 LocalDateTime 对象
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(p.getValueAsLong()), ZoneId.systemDefault());
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMilli), ZoneId.systemDefault());
     }
 
 }
