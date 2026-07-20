@@ -116,6 +116,10 @@
               <Icon class="mr-5px" icon="ep:download" />
               {{ t('common.export') }}
             </el-button>
+            <el-button v-hasPermi="['crm:customer:query']" plain type="info" @click="handleCheckDuplicate">
+              <Icon class="mr-5px" icon="ep:search" />
+              {{ t('checkDuplicate') }}
+            </el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -235,6 +239,40 @@
   <!-- 表单弹窗：添加/修改 -->
   <CustomerForm ref="formRef" @success="getList" />
   <CustomerImportForm ref="importFormRef" @success="getList" />
+
+  <!-- 查重弹窗 -->
+  <el-dialog v-model="duplicateDialogVisible" :title="t('checkDuplicate')" width="700px" destroy-on-close>
+    <el-form :model="duplicateForm" label-width="80px">
+      <el-form-item :label="t('name')">
+        <el-input v-model="duplicateForm.name" placeholder="输入客户名称" />
+      </el-form-item>
+      <el-form-item :label="t('mobile')">
+        <el-input v-model="duplicateForm.mobile" placeholder="输入手机号" />
+      </el-form-item>
+      <el-form-item :label="t('email')">
+        <el-input v-model="duplicateForm.email" placeholder="输入邮箱" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <el-button @click="duplicateDialogVisible = false">取消</el-button>
+      <el-button type="primary" @click="doCheckDuplicate">查询</el-button>
+    </template>
+    <el-table v-if="duplicateList.length > 0" :data="duplicateList" border mt-4>
+      <el-table-column label="客户名称" prop="name" />
+      <el-table-column label="手机号" prop="mobile" />
+      <el-table-column label="邮箱" prop="email" />
+      <el-table-column label="负责人" prop="ownerUserName" />
+      <el-table-column label="创建时间" prop="createTime" :formatter="dateFormatter" />
+      <el-table-column label="操作">
+        <template #default="scope">
+          <el-button link type="primary" @click="openDetail(scope.row.id)">查看详情</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div v-else-if="duplicateChecked" class="text-center mt-8">
+      <el-empty description="未找到重复客户" />
+    </div>
+  </el-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -267,6 +305,12 @@ const queryParams = reactive({
 const queryFormRef = ref() // 搜索的表单
 const exportLoading = ref(false) // 导出的加载中
 const activeName = ref('1') // 列表 tab
+
+// 查重相关
+const duplicateDialogVisible = ref(false)
+const duplicateForm = reactive({ name: '', mobile: '', email: '' })
+const duplicateList = ref([])
+const duplicateChecked = ref(false)
 
 /** tab 切换 */
 const handleTabClick = (tab: TabsPaneContext) => {
@@ -342,6 +386,25 @@ const handleExport = async () => {
   } finally {
     exportLoading.value = false
   }
+}
+
+/** 查重按钮操作 */
+const handleCheckDuplicate = () => {
+  duplicateDialogVisible.value = true
+  duplicateForm.name = ''
+  duplicateForm.mobile = ''
+  duplicateForm.email = ''
+  duplicateList.value = []
+  duplicateChecked.value = false
+}
+
+/** 执行查重 */
+const doCheckDuplicate = async () => {
+  try {
+    const data = await CustomerApi.checkDuplicateCustomer(duplicateForm)
+    duplicateList.value = data
+    duplicateChecked.value = true
+  } catch {}
 }
 
 /** 监听路由变化更新列表 */

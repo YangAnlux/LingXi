@@ -85,6 +85,13 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-form-item :label="t('crm.business.competitor')" prop="competitor">
+            <el-input v-model="formData.competitor" :placeholder="t('crm.business.competitorPlaceholder')" />
+          </el-form-item>
+        </el-col>
+      </el-row>
       <!-- 子表的表单 -->
       <ContentWrap>
         <el-tabs v-model="subTabsName" class="-mt-15px -mb-10px">
@@ -147,6 +154,8 @@ import * as UserApi from '@/api/system/user'
 import { useUserStore } from '@/store/modules/user'
 import BusinessProductForm from './components/BusinessProductForm.vue'
 import { erpPriceMultiply, erpPriceInputFormatter } from '@/utils'
+import { useI18n } from 'vue-i18n'
+import { useMessage } from '@/hooks/web/useMessage'
 
 const { t } = useI18n() // 国际化
 const message = useMessage() // 消息弹窗
@@ -166,6 +175,7 @@ const formData = ref({
   totalProductPrice: undefined,
   totalPrice: undefined,
   remark: undefined,
+  competitor: undefined,
   products: [],
   contactId: undefined,
   customerDefault: false
@@ -249,11 +259,30 @@ const submitForm = async () => {
   if (!formRef) return
   const valid = await formRef.value.validate()
   if (!valid) return
-  await productFormRef.value.validate()
+  const productValid = await productFormRef.value.validate()
+  if (!productValid) return
   // 提交请求
   formLoading.value = true
   try {
-    const data = formData.value as unknown as BusinessApi.BusinessVO
+    const products = formData.value.products.map(item => ({
+      productId: item.productId,
+      productPrice: item.productPrice,
+      businessPrice: item.businessPrice,
+      count: item.count
+    }))
+    const data = {
+      id: formData.value.id,
+      name: formData.value.name,
+      customerId: formData.value.customerId,
+      ownerUserId: formData.value.ownerUserId,
+      statusTypeId: formData.value.statusTypeId,
+      dealTime: formData.value.dealTime,
+      discountPercent: formData.value.discountPercent,
+      remark: formData.value.remark,
+      competitor: formData.value.competitor,
+      contactId: formData.value.contactId,
+      products
+    } as unknown as BusinessApi.BusinessVO
     if (formType.value === 'create') {
       await BusinessApi.createBusiness(data)
       message.success(t('common.createSuccess'))

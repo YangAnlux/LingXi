@@ -1,45 +1,42 @@
-# Docker images exported for offline deployment (large binary archives)
-/docker-images/
-# Java / Maven build output
+# ========== Docker 镜像（最大元凶！）==========
+docker-images/
+*.tar
+*.tar.gz
+*.tgz
+
+# ========== Java 编译产物 ==========
 **/target/
-*.class
-*.jar
-*.war
-*.ear
-*.nar
-*.log
-*.xml.versionsBackup
-.flattened-pom.xml
-# Keep Maven wrapper binaries if they are added later
-!**/.mvn/wrapper/maven-wrapper.jar
-# Node.js dependencies and package-manager caches/logs
+**/*.class
+**/*.jar
+**/*.war
+**/*.ear
+
+# ========== 前端依赖 ==========
 **/node_modules/
-.pnpm-store/
-.npm/
-.yarn/cache/
-.yarn/unplugged/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-# Frontend build output
-/Web/dist/
-/Web/dist-*/
-/Web/coverage/
-/MallFrontend/unpackage/
-# Tool caches and generated type declarations
-**/.cache/
-**/.vite/
-/Web/auto-*.d.ts
-# IDE and editor-local files
-/.idea/
+**/dist/
+**/build/
+**/.npm
+**/.yarn
+
+# ========== IDE 配置 ==========
+**/.idea/
 **/.vscode/
-**/.history/
-*.iml
-*.iws
-*.ipr
-*.swp
-# OS metadata
+**/*.iml
+
+# ========== 系统文件 ==========
 .DS_Store
-Thumbs.db
-Desktop.ini
+*.log
+
+# ========== 文档目录 ==========
+/Proj-Docs-v-6/
+*.doc
+*.docx
+*.pdf
+
+# ========== 大图片 ==========
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.mp4
+**/*.avi

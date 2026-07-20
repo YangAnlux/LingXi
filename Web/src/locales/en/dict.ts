@@ -612,6 +612,18 @@ export default {
     '3': 'Visit',
     '4': 'WeChat'
   },
+  // 退款类型
+  crm_refund_type: {
+    '1': 'Full Refund',
+    '2': 'Partial Refund'
+  },
+  // 退款状态
+  crm_refund_status: {
+    '0': 'Pending',
+    '1': 'Under Review',
+    '2': 'Approved',
+    '3': 'Rejected'
+  },
 
   // ==================== ERP 模块 ====================
   // 审批状态

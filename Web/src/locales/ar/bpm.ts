@@ -125,6 +125,7 @@ export default {
       flowDiagram: 'مخطط التدفق',
       flowRecord: 'سجل التدفق',
       flowComment: 'تعليق التدفق',
+      flowCommentPlaceholder: 'الرجاء إدخال محتوى التعليق (حد أقصى 500 حرف)',
       selectProcessDefinition: 'الرجاء اختيار تعريف العملية',
       selectProcessCategory: 'الرجاء اختيار فئة العملية',
       selectProcessStatus: 'الرجاء اختيار حالة العملية',

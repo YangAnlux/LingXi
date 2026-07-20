@@ -107,6 +107,7 @@ import {
 import { EChartsOption } from 'echarts'
 import { erpPriceTableColumnFormatter } from '@/utils'
 import { dateFormatter } from '@/utils/formatTime'
+import { useI18n } from 'vue-i18n'
 
 defineOptions({ name: 'BusinessSummary' })
 
@@ -203,7 +204,8 @@ const echartsOption = reactive<EChartsOption>({
 /** 获取数据并填充图表 */
 const fetchAndFill = async () => {
   // 1. 加载统计数据
-  const businessSummaryByDate = await StatisticFunnelApi.getBusinessSummaryByDate(props.queryParams)
+  const result = await StatisticFunnelApi.getBusinessSummaryByDate(props.queryParams)
+  const businessSummaryByDate = result.data as CrmStatisticsBusinessSummaryByDateRespVO[]
   // 2.1 更新 Echarts 数据
   if (echartsOption.xAxis && echartsOption.xAxis['data']) {
     echartsOption.xAxis['data'] = businessSummaryByDate.map(

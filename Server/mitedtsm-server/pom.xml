@@ -42,31 +42,36 @@
             <version>${revision}</version>
         </dependency>
 
-        <!-- 数据报表。默认注释，保证编译速度 -->
+        <!-- 数据报表 -->
         <dependency>
             <groupId>com.meession.etm</groupId>
             <artifactId>mitedtsm-module-report</artifactId>
             <version>${revision}</version>
         </dependency>
         <!-- 工作流。默认注释，保证编译速度 -->
+        <!--
         <dependency>
             <groupId>com.meession.etm</groupId>
             <artifactId>mitedtsm-module-bpm</artifactId>
             <version>${revision}</version>
         </dependency>
+        -->
         <!-- 支付服务。默认注释，保证编译速度 -->
+        <!--
         <dependency>
             <groupId>com.meession.etm</groupId>
             <artifactId>mitedtsm-module-pay</artifactId>
             <version>${revision}</version>
         </dependency>
-
+        -->
         <!-- 微信公众号模块。默认注释，保证编译速度 -->
+        <!--
         <dependency>
             <groupId>com.meession.etm</groupId>
             <artifactId>mitedtsm-module-mp</artifactId>
             <version>${revision}</version>
         </dependency>
+        -->
 
         <!-- 商城相关模块。默认注释，保证编译速度-->
         <dependency>
@@ -74,11 +79,13 @@
             <artifactId>mitedtsm-module-product</artifactId>
             <version>${revision}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>com.meession.etm</groupId>
             <artifactId>mitedtsm-module-promotion</artifactId>
             <version>${revision}</version>
         </dependency>
+        -->
         <dependency>
             <groupId>com.meession.etm</groupId>
             <artifactId>mitedtsm-module-trade</artifactId>
@@ -90,7 +97,7 @@
             <version>${revision}</version>
         </dependency>
 
-        <!-- CRM 相关模块。默认注释，保证编译速度 -->
+        <!-- CRM 相关模块 -->
         <dependency>
             <groupId>com.meession.etm</groupId>
             <artifactId>mitedtsm-module-crm</artifactId>
@@ -149,6 +156,15 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <!-- 解决 BouncyCastle 在 fat-jar 中签名失效导致 JCE 初始化失败的问题 -->
+                    <requiresUnpack>
+                        <dependency>
+                            <groupId>org.bouncycastle</groupId>
+                            <artifactId>bcprov-jdk18on</artifactId>
+                        </dependency>
+                    </requiresUnpack>
+                </configuration>
             </plugin>
         </plugins>
     </build>

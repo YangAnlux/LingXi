@@ -122,6 +122,15 @@ public interface CrmCustomerService {
     Long getTodayContactCustomerCount(Long userId);
 
     /**
+     * 获得今日需联系客户分页
+     *
+     * @param pageReqVO 分页查询
+     * @param userId    用户编号
+     * @return 客户分页
+     */
+    PageResult<CrmCustomerDO> getTodayContactCustomerPage(CrmCustomerPageReqVO pageReqVO, Long userId);
+
+    /**
      * 获得分配给我的客户数量
      *
      * @param userId 用户编号
@@ -194,5 +203,15 @@ public interface CrmCustomerService {
      * @return 掉入公海数量
      */
     int autoPutCustomerPool();
+
+    /**
+     * 查询重复客户列表
+     *
+     * @param name   客户名称
+     * @param mobile 手机号
+     * @param email  邮箱
+     * @return 重复客户列表
+     */
+    List<CrmCustomerDO> getDuplicateCustomerList(String name, String mobile, String email);
 
 }

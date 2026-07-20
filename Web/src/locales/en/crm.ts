@@ -90,6 +90,8 @@ export default {
     contractTab: 'Contracts',
     receivableTab: 'Receivables',
     operateLogTab: 'Operation Log',
+    // Check duplicate
+    checkDuplicate: 'Check Duplicate',
     // Confirm messages
     updateDealStatusConfirm: 'Are you sure to update deal status to [{status}]?',
     updateDealStatusSuccess: 'Update deal status successfully',
@@ -325,6 +327,7 @@ export default {
     auditStatusProcess: 'Processing',
     auditStatusApprove: 'Approved',
     auditStatusReject: 'Rejected',
+    auditStatusOverruled: 'Overruled',
     remark: 'Remark',
     ownerUserId: 'Owner',
     ownerUserName: 'Owner',
@@ -440,6 +443,7 @@ export default {
     auditStatusProcess: 'Processing',
     auditStatusApprove: 'Approved',
     auditStatusReject: 'Rejected',
+    auditStatusOverruled: 'Overruled',
     remark: 'Remark',
     ownerUserName: 'Owner',
     ownerUserDeptName: 'Department',
@@ -700,8 +704,13 @@ export default {
       dynamicView: 'Dynamic View',
       // Table fields
       stage: 'Stage',
+      percent: 'Percent',
       businessCount: 'Business Count',
       businessTotalPrice: 'Business Total Price',
+      avgPrice: 'Average Price',
+      stageDistribution: 'Stage Distribution',
+      amountSummary: 'Amount Summary',
+      businessReport: 'Business Report',
       // Funnel data
       customer: 'Customer',
       business: 'Business',
@@ -832,5 +841,34 @@ export default {
     count: 'Count',
     amount: 'Amount',
     ratio: 'Ratio'
+  },
+  broadcast: {
+    title: 'Broadcast Management',
+    no: 'Broadcast No',
+    noPlaceholder: 'Please enter broadcast no',
+    typeName: 'Type',
+    typePlaceholder: 'Please select type',
+    sms: 'SMS',
+    email: 'Email',
+    titleName: 'Title',
+    titlePlaceholder: 'Please enter title',
+    content: 'Content',
+    templateCode: 'Template Code',
+    customerIds: 'Select Customers',
+    customerCount: 'Customer Count',
+    successCount: 'Success Count',
+    failCount: 'Fail Count',
+    status: 'Status',
+    statusPending: 'Pending',
+    statusSending: 'Sending',
+    statusCompleted: 'Completed',
+    statusFailed: 'Failed',
+    creatorUserName: 'Creator',
+    createTime: 'Create Time',
+    sendTime: 'Send Time',
+    remark: 'Remark',
+    action: {
+      send: 'Send'
+    }
   }
 }

@@ -2,6 +2,7 @@ package com.meession.etm.module.crm.dal.mysql.customer;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.ObjUtil;
+import cn.hutool.core.util.StrUtil;
 import com.meession.etm.framework.common.pojo.PageResult;
 import com.meession.etm.framework.mybatis.core.mapper.BaseMapperX;
 import com.meession.etm.framework.mybatis.core.query.LambdaQueryWrapperX;
@@ -88,6 +89,22 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
         return selectOne(CrmCustomerDO::getName, name);
     }
 
+    default List<CrmCustomerDO> selectDuplicateCustomerList(String name, String mobile, String email) {
+        LambdaQueryWrapper<CrmCustomerDO> query = new LambdaQueryWrapper<>();
+        query.and(q -> {
+            if (StrUtil.isNotBlank(name)) {
+                q.like(CrmCustomerDO::getName, name);
+            }
+            if (StrUtil.isNotBlank(mobile)) {
+                q.or().eq(CrmCustomerDO::getMobile, mobile);
+            }
+            if (StrUtil.isNotBlank(email)) {
+                q.or().eq(CrmCustomerDO::getEmail, email);
+            }
+        });
+        return selectList(query);
+    }
+
     default PageResult<CrmCustomerDO> selectPutPoolRemindCustomerPage(CrmCustomerPageReqVO pageReqVO,
                                                                       CrmCustomerPoolConfigDO poolConfig,
                                                                       Long ownerUserId) {
@@ -168,6 +185,25 @@ public interface CrmCustomerMapper extends BaseMapperX<CrmCustomerDO> {
         LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
         query.between(CrmCustomerDO::getContactNextTime, beginOfToday, endOfToday);
         return selectCount(query);
+    }
+
+    default PageResult<CrmCustomerDO> selectTodayContactCustomerPage(CrmCustomerPageReqVO pageReqVO, Long ownerUserId) {
+        MPJLambdaWrapperX<CrmCustomerDO> query = new MPJLambdaWrapperX<>();
+        // 我负责的 + 非公海
+        CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CUSTOMER.getType(),
+                CrmCustomerDO::getId, ownerUserId, CrmSceneTypeEnum.OWNER.getType());
+        // 今天需联系
+        LocalDateTime beginOfToday = LocalDateTimeUtil.beginOfDay(LocalDateTime.now());
+        LocalDateTime endOfToday = LocalDateTimeUtil.endOfDay(LocalDateTime.now());
+        query.between(CrmCustomerDO::getContactNextTime, beginOfToday, endOfToday);
+        // 拼接查询条件
+        query.selectAll(CrmCustomerDO.class)
+                .likeIfPresent(CrmCustomerDO::getName, pageReqVO.getName())
+                .eqIfPresent(CrmCustomerDO::getMobile, pageReqVO.getMobile())
+                .eqIfPresent(CrmCustomerDO::getIndustryId, pageReqVO.getIndustryId())
+                .eqIfPresent(CrmCustomerDO::getLevel, pageReqVO.getLevel())
+                .eqIfPresent(CrmCustomerDO::getSource, pageReqVO.getSource());
+        return selectJoinPage(pageReqVO, CrmCustomerDO.class, query);
     }
 
     default Long selectCountByFollow(Long ownerUserId) {

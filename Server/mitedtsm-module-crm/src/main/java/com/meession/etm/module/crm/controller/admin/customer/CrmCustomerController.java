@@ -180,6 +180,17 @@ public class CrmCustomerController {
         return success(customerService.getTodayContactCustomerCount(getLoginUserId()));
     }
 
+    @GetMapping("/today-contact-page")
+    @Operation(summary = "获得今日需联系客户分页")
+    @PreAuthorize("@ss.hasPermission('crm:customer:query')")
+    public CommonResult<PageResult<CrmCustomerRespVO>> getTodayContactCustomerPage(@Valid CrmCustomerPageReqVO pageVO) {
+        PageResult<CrmCustomerDO> pageResult = customerService.getTodayContactCustomerPage(pageVO, getLoginUserId());
+        if (CollUtil.isEmpty(pageResult.getList())) {
+            return success(PageResult.empty(pageResult.getTotal()));
+        }
+        return success(new PageResult<>(buildCustomerDetailList(pageResult.getList()), pageResult.getTotal()));
+    }
+
     @GetMapping("/follow-count")
     @Operation(summary = "获得分配给我、待跟进的线索数量的客户数量")
     @PreAuthorize("@ss.hasPermission('crm:customer:query')")
@@ -311,6 +322,17 @@ public class CrmCustomerController {
     public CommonResult<Boolean> distributeCustomer(@Valid @RequestBody CrmCustomerDistributeReqVO distributeReqVO) {
         customerService.receiveCustomer(distributeReqVO.getIds(), distributeReqVO.getOwnerUserId(), Boolean.FALSE);
         return success(true);
+    }
+
+    @GetMapping("/check-duplicate")
+    @Operation(summary = "客户查重")
+    @PreAuthorize("@ss.hasPermission('crm:customer:query')")
+    public CommonResult<List<CrmCustomerRespVO>> checkDuplicateCustomer(
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "mobile", required = false) String mobile,
+            @RequestParam(value = "email", required = false) String email) {
+        List<CrmCustomerDO> list = customerService.getDuplicateCustomerList(name, mobile, email);
+        return success(buildCustomerDetailList(list));
     }
 
 }

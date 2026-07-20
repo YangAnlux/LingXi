@@ -69,31 +69,10 @@ spring:
 # Quartz 配置项，对应 QuartzProperties 配置类
 spring:
   quartz:
-    auto-startup: true # 测试环境，需要开启 Job
+    auto-startup: false # dev 环境，禁用 Quartz 自动启动，避免动态数据源关闭问题
     scheduler-name: schedulerName # Scheduler 名字。默认为 schedulerName
-    job-store-type: jdbc # Job 存储器类型。默认为 memory 表示内存，可选 jdbc 使用数据库。
+    job-store-type: memory # Job 存储器类型。使用 memory 表示内存，避免数据源关闭问题
     wait-for-jobs-to-complete-on-shutdown: true # 应用关闭时，是否等待定时任务执行完成。默认为 false ，建议设置为 true
-    properties: # 添加 Quartz Scheduler 附加属性，更多可以看 http://www.quartz-scheduler.org/documentation/2.4.0-SNAPSHOT/configuration.html 文档
-      org:
-        quartz:
-          # Scheduler 相关配置
-          scheduler:
-            instanceName: schedulerName
-            instanceId: AUTO # 自动生成 instance ID
-          # JobStore 相关配置
-          jobStore:
-            # JobStore 实现类。可见博客：https://blog.csdn.net/weixin_42458219/article/details/122247162
-            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
-            isClustered: true # 是集群模式
-            clusterCheckinInterval: 15000 # 集群检查频率，单位：毫秒。默认为 15000，即 15 秒
-            misfireThreshold: 60000 # misfire 阀值，单位：毫秒。
-          # 线程池相关配置
-          threadPool:
-            threadCount: 25 # 线程池大小。默认为 10 。
-            threadPriority: 5 # 线程优先级
-            class: org.quartz.simpl.SimpleThreadPool # 线程池类型
-    jdbc: # 使用 JDBC 的 JobStore 的时候，JDBC 的配置
-      initialize-schema: NEVER # 是否自动使用 SQL 初始化 Quartz 表结构。这里设置成 never ，我们手动创建表结构。
 
 --- #################### 消息队列相关 ####################
 
@@ -177,6 +156,9 @@ mitedtsm:
     transfer-notify-url: https://yunai.natapp1.cc/admin-api/pay/notify/transfer # 支付渠道的【转账】回调地址
   demo: false # 开启演示模式
   tencent-lbs-key: TVDBZ-TDILD-4ON4B-PFDZA-RNLKH-VVF6E # QQ 地图的密钥 https://lbs.qq.com/service/staticV2/staticGuide/staticDoc
+  iot:
+    quartz-enabled: false # dev 环境，禁用 IoT Quartz 调度器，避免数据源关闭问题
+    job-store-type: MEMORY # 使用内存存储模式，避免数据源关闭问题
 
 justauth:
   enabled: true

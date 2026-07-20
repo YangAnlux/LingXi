@@ -29,6 +29,26 @@ public class CrmNoRedisDAO {
      */
     public static final String RECEIVABLE_PREFIX = "HK";
 
+    /**
+     * 发票 {@link com.meession.etm.module.crm.dal.dataobject.invoice.CrmInvoiceDO}
+     */
+    public static final String INVOICE_PREFIX = "FP";
+
+    /**
+     * 费用 {@link com.meession.etm.module.crm.dal.dataobject.expense.CrmExpenseDO}
+     */
+    public static final String EXPENSE_PREFIX = "FY";
+
+    /**
+     * 报销 {@link com.meession.etm.module.crm.dal.dataobject.reimbursement.CrmReimbursementDO}
+     */
+    public static final String REIMBURSEMENT_PREFIX = "BX";
+
+    /**
+     * 退款 {@link com.meession.etm.module.crm.dal.dataobject.refund.CrmRefundDO}
+     */
+    public static final String REFUND_PREFIX = "TK";
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

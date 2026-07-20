@@ -452,6 +452,11 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
         return count;
     }
 
+    @Override
+    public List<CrmCustomerDO> getDuplicateCustomerList(String name, String mobile, String email) {
+        return customerMapper.selectDuplicateCustomerList(name, mobile, email);
+    }
+
     @Transactional(rollbackFor = Exception.class) // 需要 protected 修饰，因为需要在事务中调用
     protected void putCustomerPool(CrmCustomerDO customer) {
         // 1. 设置负责人为 NULL
@@ -527,6 +532,11 @@ public class CrmCustomerServiceImpl implements CrmCustomerService {
     @Override
     public Long getTodayContactCustomerCount(Long userId) {
         return customerMapper.selectCountByTodayContact(userId);
+    }
+
+    @Override
+    public PageResult<CrmCustomerDO> getTodayContactCustomerPage(CrmCustomerPageReqVO pageReqVO, Long userId) {
+        return customerMapper.selectTodayContactCustomerPage(pageReqVO, userId);
     }
 
     @Override

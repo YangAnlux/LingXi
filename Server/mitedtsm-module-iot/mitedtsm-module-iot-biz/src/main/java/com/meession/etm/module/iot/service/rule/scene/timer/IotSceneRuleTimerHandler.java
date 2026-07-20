@@ -8,12 +8,13 @@ import com.meession.etm.module.iot.dal.dataobject.rule.IotSceneRuleDO;
 import com.meession.etm.module.iot.enums.rule.IotSceneRuleTriggerTypeEnum;
 import com.meession.etm.module.iot.framework.job.core.IotSchedulerManager;
 import com.meession.etm.module.iot.job.rule.IotSceneRuleJob;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.meession.etm.framework.common.util.collection.CollectionUtils.filterList;
 
@@ -26,8 +27,8 @@ import static com.meession.etm.framework.common.util.collection.CollectionUtils.
 @Slf4j
 public class IotSceneRuleTimerHandler {
 
-    @Resource(name = "iotSchedulerManager")
-    private IotSchedulerManager schedulerManager;
+    @Autowired(required = false)
+    private Optional<IotSchedulerManager> schedulerManager;
 
     /**
      * 注册场景规则的定时触发器
@@ -78,13 +79,13 @@ public class IotSceneRuleTimerHandler {
      * @param sceneRuleId 场景规则 ID
      */
     public void unregisterTimerTriggers(Long sceneRuleId) {
-        if (sceneRuleId == null) {
+        if (sceneRuleId == null || !schedulerManager.isPresent()) {
             return;
         }
 
         String jobName = buildJobName(sceneRuleId);
         try {
-            schedulerManager.deleteJob(jobName);
+            schedulerManager.get().deleteJob(jobName);
             log.info("[unregisterTimerTriggers][场景规则({}) 定时触发器注销成功]", sceneRuleId);
         } catch (SchedulerException e) {
             log.error("[unregisterTimerTriggers][场景规则({}) 定时触发器注销失败]", sceneRuleId, e);
@@ -97,13 +98,13 @@ public class IotSceneRuleTimerHandler {
      * @param sceneRuleId 场景规则 ID
      */
     public void pauseTimerTriggers(Long sceneRuleId) {
-        if (sceneRuleId == null) {
+        if (sceneRuleId == null || !schedulerManager.isPresent()) {
             return;
         }
 
         String jobName = buildJobName(sceneRuleId);
         try {
-            schedulerManager.pauseJob(jobName);
+            schedulerManager.get().pauseJob(jobName);
             log.info("[pauseTimerTriggers][场景规则({}) 定时触发器暂停成功]", sceneRuleId);
         } catch (SchedulerException e) {
             log.error("[pauseTimerTriggers][场景规则({}) 定时触发器暂停失败]", sceneRuleId, e);
@@ -118,8 +119,8 @@ public class IotSceneRuleTimerHandler {
      */
     private void registerSingleTimerTrigger(IotSceneRuleDO sceneRule, IotSceneRuleDO.Trigger trigger) {
         // 1. 参数校验
-        if (StrUtil.isBlank(trigger.getCronExpression())) {
-            log.error("[registerSingleTimerTrigger][场景规则({}) 定时触发器缺少 CRON 表达式]", sceneRule.getId());
+        if (StrUtil.isBlank(trigger.getCronExpression()) || !schedulerManager.isPresent()) {
+            log.error("[registerSingleTimerTrigger][场景规则({}) 定时触发器缺少 CRON 表达式或调度器未配置]", sceneRule.getId());
             return;
         }
 
@@ -127,7 +128,7 @@ public class IotSceneRuleTimerHandler {
             // 2.1 构建任务名称和数据
             String jobName = buildJobName(sceneRule.getId());
             // 2.2 注册定时任务
-            schedulerManager.addOrUpdateJob(
+            schedulerManager.get().addOrUpdateJob(
                     IotSceneRuleJob.class,
                     jobName,
                     trigger.getCronExpression(),

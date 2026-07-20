@@ -160,4 +160,44 @@ public interface LogRecordConstants {
     String CRM_RECEIVABLE_PLAN_DELETE_SUB_TYPE = "删除回款计划";
     String CRM_RECEIVABLE_PLAN_DELETE_SUCCESS = "删除了合同【{getContractById{#receivablePlan.contractId}}】的第【{{#receivablePlan.period}}】期回款计划";
 
+    // ======================= CRM_INVOICE 发票 =======================
+    String CRM_INVOICE_TYPE = "CRM 发票";
+    String CRM_INVOICE_CREATE_SUB_TYPE = "创建发票";
+    String CRM_INVOICE_CREATE_SUCCESS = "创建了发票{{#invoice.invoiceNo}}";
+    String CRM_INVOICE_UPDATE_SUB_TYPE = "更新发票";
+    String CRM_INVOICE_UPDATE_SUCCESS = "更新了发票【{{#invoice.invoiceNo}}】: {_DIFF{#updateReqVO}}";
+    String CRM_INVOICE_DELETE_SUB_TYPE = "删除发票";
+    String CRM_INVOICE_DELETE_SUCCESS = "删除了发票【{{#invoice.invoiceNo}}】";
+
+    // ======================= CRM_EXPENSE 费用 =======================
+    String CRM_EXPENSE_TYPE = "CRM 费用";
+    String CRM_EXPENSE_CREATE_SUB_TYPE = "创建费用";
+    String CRM_EXPENSE_CREATE_SUCCESS = "创建了费用{{#expense.no}}";
+    String CRM_EXPENSE_UPDATE_SUB_TYPE = "更新费用";
+    String CRM_EXPENSE_UPDATE_SUCCESS = "更新了费用【{{#expense.no}}】: {_DIFF{#updateReqVO}}";
+    String CRM_EXPENSE_DELETE_SUB_TYPE = "删除费用";
+    String CRM_EXPENSE_DELETE_SUCCESS = "删除了费用【{{#expense.no}}】";
+
+    // ======================= CRM_REIMBURSEMENT 报销 =======================
+    String CRM_REIMBURSEMENT_TYPE = "CRM 报销";
+    String CRM_REIMBURSEMENT_CREATE_SUB_TYPE = "创建报销";
+    String CRM_REIMBURSEMENT_CREATE_SUCCESS = "创建了报销{{#reimbursement.no}}";
+    String CRM_REIMBURSEMENT_UPDATE_SUB_TYPE = "更新报销";
+    String CRM_REIMBURSEMENT_UPDATE_SUCCESS = "更新了报销【{{#reimbursement.no}}】: {_DIFF{#updateReqVO}}";
+    String CRM_REIMBURSEMENT_DELETE_SUB_TYPE = "删除报销";
+    String CRM_REIMBURSEMENT_DELETE_SUCCESS = "删除了报销【{{#reimbursement.no}}】";
+    String CRM_REIMBURSEMENT_SUBMIT_SUB_TYPE = "提交报销审批";
+    String CRM_REIMBURSEMENT_SUBMIT_SUCCESS = "提交报销【{{#reimbursement.no}}】审批成功";
+
+    // ======================= CRM_REFUND 退款 =======================
+    String CRM_REFUND_TYPE = "CRM 退款";
+    String CRM_REFUND_CREATE_SUB_TYPE = "创建退款";
+    String CRM_REFUND_CREATE_SUCCESS = "创建了退款{{#refund.no}}";
+    String CRM_REFUND_UPDATE_SUB_TYPE = "更新退款";
+    String CRM_REFUND_UPDATE_SUCCESS = "更新了退款【{{#refund.no}}】: {_DIFF{#updateReqVO}}";
+    String CRM_REFUND_DELETE_SUB_TYPE = "删除退款";
+    String CRM_REFUND_DELETE_SUCCESS = "删除了退款【{{#refund.no}}】";
+    String CRM_REFUND_SUBMIT_SUB_TYPE = "提交退款审批";
+    String CRM_REFUND_SUBMIT_SUCCESS = "提交退款【{{#refund.no}}】审批成功";
+
 }

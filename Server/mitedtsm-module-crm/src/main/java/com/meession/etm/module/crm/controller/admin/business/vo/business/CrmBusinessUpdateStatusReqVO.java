@@ -22,6 +22,9 @@ public class CrmBusinessUpdateStatusReqVO {
     @InEnum(value = CrmBusinessEndStatusEnum.class)
     private Integer endStatus;
 
+    @Schema(description = "流失原因", example = "客户预算不足")
+    private String loseReason;
+
     @AssertTrue(message = "变更状态不正确")
     public boolean isStatusValid() {
         return statusId != null || endStatus != null;

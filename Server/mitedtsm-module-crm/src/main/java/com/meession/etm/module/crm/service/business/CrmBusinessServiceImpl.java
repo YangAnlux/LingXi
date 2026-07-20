@@ -17,6 +17,7 @@ import com.meession.etm.module.crm.dal.dataobject.business.CrmBusinessStatusDO;
 import com.meession.etm.module.crm.dal.dataobject.contact.CrmContactBusinessDO;
 import com.meession.etm.module.crm.dal.mysql.business.CrmBusinessMapper;
 import com.meession.etm.module.crm.dal.mysql.business.CrmBusinessProductMapper;
+import com.meession.etm.module.crm.enums.business.CrmBusinessEndStatusEnum;
 import com.meession.etm.module.crm.enums.common.CrmBizTypeEnum;
 import com.meession.etm.module.crm.enums.permission.CrmPermissionLevelEnum;
 import com.meession.etm.module.crm.framework.permission.core.annotations.CrmPermission;
@@ -95,7 +96,12 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
 
         // 2.1 插入商机
         CrmBusinessDO business = BeanUtils.toBean(createReqVO, CrmBusinessDO.class);
-        business.setStatusId(businessStatusService.getBusinessStatusListByTypeId(createReqVO.getStatusTypeId()).get(0).getId()); // 默认状态
+        // 设置默认状态
+        List<CrmBusinessStatusDO> statusList = businessStatusService.getBusinessStatusListByTypeId(createReqVO.getStatusTypeId());
+        if (CollUtil.isEmpty(statusList)) {
+            throw exception(BUSINESS_STATUS_TYPE_NOT_EXISTS);
+        }
+        business.setStatusId(statusList.get(0).getId());
         calculateTotalPrice(business, businessProducts);
         businessMapper.insert(business);
         // 2.2 插入商机关联商品
@@ -239,10 +245,22 @@ public class CrmBusinessServiceImpl implements CrmBusinessService {
                 || (reqVO.getEndStatus() != null && reqVO.getEndStatus().equals(business.getEndStatus()))) {
             throw exception(BUSINESS_UPDATE_STATUS_FAIL_STATUS_EQUALS);
         }
+        // 1.5 校验状态只能向前流转（不能回退）
+        if (reqVO.getStatusId() != null && business.getStatusId() != null) {
+            CrmBusinessStatusDO currentStatus = businessStatusService.getBusinessStatus(business.getStatusId());
+            if (status != null && currentStatus != null && status.getSort() < currentStatus.getSort()) {
+                throw exception(BUSINESS_UPDATE_STATUS_FAIL_BACKWARD);
+            }
+        }
+        // 1.6 校验流失原因：标记为流失时必须填写流失原因
+        if (CrmBusinessEndStatusEnum.LOST.getStatus().equals(reqVO.getEndStatus())
+                && (reqVO.getLoseReason() == null || reqVO.getLoseReason().trim().isEmpty())) {
+            throw exception(BUSINESS_UPDATE_STATUS_FAIL_LOST_REASON_REQUIRED);
+        }
 
         // 2. 更新商机状态
         businessMapper.updateById(new CrmBusinessDO().setId(reqVO.getId()).setStatusId(reqVO.getStatusId())
-                .setEndStatus(reqVO.getEndStatus()));
+                .setEndStatus(reqVO.getEndStatus()).setLoseReason(reqVO.getLoseReason()));
 
         // 3. 记录操作日志上下文
         LogRecordContext.putVariable("businessName", business.getName());

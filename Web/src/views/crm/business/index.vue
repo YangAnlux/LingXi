@@ -95,6 +95,7 @@
         min-width="180"
       />
       <el-table-column align="center" :label="t('crm.business.remark')" prop="remark" min-width="200" />
+      <el-table-column align="center" :label="t('crm.business.competitor')" prop="competitor" min-width="150" />
       <el-table-column
         :formatter="dateFormatter"
         align="center"
@@ -140,24 +141,26 @@
         prop="statusName"
         min-width="120"
       />
-      <el-table-column align="center" fixed="right" :label="t('common.action')" min-width="150">
+      <el-table-column align="center" fixed="right" :label="t('common.action')" min-width="200">
         <template #default="scope">
-          <el-button
-            v-hasPermi="['crm:business:update']"
-            link
-            type="primary"
-            @click="openForm('update', scope.row.id)"
-          >
-            {{ t('common.edit') }}
-          </el-button>
-          <el-button
-            v-hasPermi="['crm:business:delete']"
-            link
-            type="danger"
-            @click="handleDelete(scope.row.id)"
-          >
-            {{ t('common.del') }}
-          </el-button>
+          <div class="flex items-center justify-center flex-wrap gap-8px">
+            <el-button
+              v-hasPermi="['crm:business:update']"
+              link
+              type="primary"
+              @click="openForm('update', scope.row.id)"
+            >
+              {{ t('common.edit') }}
+            </el-button>
+            <el-button
+              v-hasPermi="['crm:business:delete']"
+              link
+              type="danger"
+              @click="handleDelete(scope.row.id)"
+            >
+              {{ t('common.del') }}
+            </el-button>
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -192,7 +195,7 @@ const list = ref([]) // 列表的数据
 const queryParams = reactive({
   pageNo: 1,
   pageSize: 10,
-  sceneType: '1', // 默认与 activeName 相等
+  sceneType: 1, // 默认与 activeName 相等
   name: null
 })
 const queryFormRef = ref() // 搜索的表单
@@ -225,7 +228,7 @@ const resetQuery = () => {
 
 /** tab 切换 */
 const handleTabClick = (tab: TabsPaneContext) => {
-  queryParams.sceneType = tab.paneName
+  queryParams.sceneType = parseInt(tab.paneName)
   handleQuery()
 }
 

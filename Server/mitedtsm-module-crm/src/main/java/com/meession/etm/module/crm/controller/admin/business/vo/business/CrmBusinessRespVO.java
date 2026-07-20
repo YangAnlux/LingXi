@@ -71,6 +71,10 @@ public class CrmBusinessRespVO {
     @ExcelProperty("结束时的备注")
     private String endRemark;
 
+    @Schema(description = "流失原因")
+    @ExcelProperty("流失原因")
+    private String loseReason;
+
     @Schema(description = "预计成交日期")
     @ExcelProperty("预计成交日期")
     private LocalDateTime dealTime;
@@ -90,6 +94,10 @@ public class CrmBusinessRespVO {
     @Schema(description = "备注", example = "随便")
     @ExcelProperty("备注")
     private String remark;
+
+    @Schema(description = "竞争对手", example = "竞争对手公司")
+    @ExcelProperty("竞争对手")
+    private String competitor;
 
     @Schema(description = "创建人", example = "1024")
     @ExcelProperty("创建人")

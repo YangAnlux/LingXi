@@ -10,8 +10,8 @@ export interface BusinessVO {
   contactLastTime: Date
   contactNextTime: Date
   ownerUserId: number
-  ownerUserName?: string // 负责人的用户名称
-  ownerUserDept?: string // 负责人的部门名称
+  ownerUserName?: string
+  ownerUserDeptName?: string
   statusTypeId: number
   statusTypeName?: string
   statusId: number
@@ -23,23 +23,22 @@ export interface BusinessVO {
   totalPrice: number
   discountPercent: number
   remark: string
-  creator: string // 创建人
-  creatorName?: string // 创建人名称
-  createTime: Date // 创建时间
-  updateTime: Date // 更新时间
-  products?: [
-    {
-      id: number
-      productId: number
-      productName: string
-      productNo: string
-      productUnit: number
-      productPrice: number
-      businessPrice: number
-      count: number
-      totalPrice: number
-    }
-  ]
+  competitor: string
+  creator: string
+  creatorName?: string
+  createTime: Date
+  updateTime: Date
+  products?: Array<{
+    id: number
+    productId: number
+    productName: string
+    productNo: string
+    productUnit: number
+    productPrice: number
+    businessPrice: number
+    count: number
+    totalPrice: number
+  }>
 }
 
 // 查询 CRM 商机列表
