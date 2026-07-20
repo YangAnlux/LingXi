@@ -74,6 +74,7 @@ export default {
   edit: 'Edit',
   delete: 'Delete',
   del: 'Delete',
+  complete: 'Complete',
   restore: 'Restore',
   recycle: 'Recycle',
   confirmText: 'Confirm {text}?',

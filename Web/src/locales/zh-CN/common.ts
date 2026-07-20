@@ -74,6 +74,7 @@ export default {
   edit: '编辑',
   delete: '删除',
   del: '删除',
+  complete: '完成',
   restore: '还原',
   recycle: '回收',
   confirmText: '确认{text}？',

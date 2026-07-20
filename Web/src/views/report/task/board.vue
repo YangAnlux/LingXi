@@ -28,7 +28,7 @@
               @click="openForm('create')"
               v-hasPermi="['report:task:create']"
             >
-              <Icon icon="ep:plus" /> {{ t('action.add') }}
+              <Icon icon="ep:plus" /> {{ t('common.add') }}
             </el-button>
           </div>
           <div class="space-y-12px">
@@ -72,7 +72,7 @@
                     @click.stop="openForm('update', task.id)"
                     v-hasPermi="['report:task:update']"
                   >
-                    {{ t('action.edit') }}
+                    {{ t('common.edit') }}
                   </el-button>
                 </div>
               </div>
@@ -131,7 +131,7 @@
                     @click.stop="handleComplete(task.id)"
                     v-hasPermi="['report:task:complete']"
                   >
-                    {{ t('action.complete') }}
+                    {{ t('common.complete') }}
                   </el-button>
                   <el-button
                     type="danger"
@@ -140,7 +140,7 @@
                     @click.stop="handleCancel(task.id)"
                     v-hasPermi="['report:task:cancel']"
                   >
-                    {{ t('action.cancel') }}
+                    {{ t('common.cancel') }}
                   </el-button>
                 </div>
               </div>
@@ -192,7 +192,7 @@
                     @click.stop="handleDelete(task.id)"
                     v-hasPermi="['report:task:delete']"
                   >
-                    {{ t('action.del') }}
+                    {{ t('common.del') }}
                   </el-button>
                 </div>
               </div>
